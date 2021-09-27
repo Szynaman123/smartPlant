@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput} from 'react-native';
+import Box from '../components/boxes';
+import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 
 const Registration = () =>
 {
@@ -56,6 +57,12 @@ const Registration = () =>
         placeholder="Powtórz hasło"
         keyboardType="default"
       />
+
+<View style={styles.container2}>
+        <TouchableOpacity onPress={() => {alert('Niedługo obsłużę bazę danych!');}}>
+      <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Załóż konto!"></Box>
+      </TouchableOpacity>
+      </View>
           </ScrollView>
         );
 };
