@@ -1,14 +1,47 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Box from '../components/boxes';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 
+
 const Registration = () =>
 {
-    const [name, onChangeName] = React.useState(null);
-    const [secondName, onChangeSecondName] = React.useState(null);
-    const [email, onChangeEmail] = React.useState(null);
-    const [pass, onChangePass] = React.useState(null);
-    const [pass2, onChangePass2] = React.useState(null);
+    const [name, setName] = useState('');
+    const [secondName, setSecondName] = useState('');
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+    const [pass2, setPass2] = useState('');
+
+    const nameInputHandler = (enteredName) => {
+      setName(enteredName);
+    };
+
+    const secondNameInputHandler = (enteredSecondName) => {
+      setSecondName(enteredSecondName);
+    };
+
+    const emailInputHandler = (enteredEmail) => {
+      setEmail(enteredEmail);
+    };
+
+    const passInputHandler = (enteredPass) => {
+      setPass(enteredPass);
+    };
+
+    const pass2InputHandler = (enteredPass2) => {
+      setPass2(enteredPass2);
+    };
+
+    const showData = () => {
+      if (pass2 != pass){
+        return (
+            console.log("Hasła nie są takie same")
+        )}
+      console.log(name);
+      console.log(secondName);
+      console.log(email);
+      console.log(pass);
+      console.log(pass2);
+    };
 
     return(
         <ScrollView>
@@ -18,7 +51,7 @@ const Registration = () =>
 
           <TextInput
         style={styles.input}
-        onChangeText={onChangeName}
+        onChangeText={nameInputHandler}
         value={name}
         placeholder="Imię"
         keyboardType="default"
@@ -26,7 +59,7 @@ const Registration = () =>
 
 <TextInput
         style={styles.input}
-        onChangeText={onChangeSecondName}
+        onChangeText={secondNameInputHandler}
         value={secondName}
         placeholder="Nazwisko"
         keyboardType="default"
@@ -34,7 +67,7 @@ const Registration = () =>
 
 <TextInput
         style={styles.input}
-        onChangeText={onChangeEmail}
+        onChangeText={emailInputHandler}
         value={email}
         placeholder="Adres e-mail"
         keyboardType="email-address"
@@ -43,7 +76,7 @@ const Registration = () =>
 <TextInput
         style={styles.input}
         secureTextEntry={true}
-        onChangeText={onChangePass}
+        onChangeText={passInputHandler}
         value={pass}
         placeholder="Hasło"
         keyboardType="default"
@@ -52,14 +85,14 @@ const Registration = () =>
 <TextInput
         style={styles.input}
         secureTextEntry={true}
-        onChangeText={onChangePass2}
+        onChangeText={pass2InputHandler}
         value={pass2}
         placeholder="Powtórz hasło"
         keyboardType="default"
       />
 
       <View style={styles.container2}>
-        <TouchableOpacity onPress={() => {alert('Niedługo obsłużę bazę danych!');}}>
+        <TouchableOpacity onPress={showData}>
       <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Załóż konto!"></Box>
       </TouchableOpacity>
       </View>
