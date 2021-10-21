@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Box from '../components/boxes';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 
-
 const Registration = () =>
 {
     const [name, setName] = useState('');
