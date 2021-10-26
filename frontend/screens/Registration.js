@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import Box from '../components/boxes';
+import post from 'axios';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
+
 
 const Registration = () =>
 {
@@ -30,17 +32,42 @@ const Registration = () =>
       setPass2(enteredPass2);
     };
 
+    const showErrorAlert = () =>
+  Alert.alert(
+    "Hasła nie są takie same!",
+    "Hasła muszą być takie same.",
+  );
+
+  const showSuccessAlert = () =>
+  Alert.alert(
+    "Utworzono konto",
+    "Konto zostało utworzone! Możesz teraz przejść do panelu logowania.",
+  );
+
     const showData = () => {
       if (pass2 != pass){
         return (
-            console.log("Hasła nie są takie same")
+            showErrorAlert()
         )}
+      showSuccessAlert();  
       console.log(name);
       console.log(secondName);
       console.log(email);
       console.log(pass);
       console.log(pass2);
+
+      const axios = require('axios');
+
+      const newUser = {
+        imie: name,
+        nazwisko: secondName,
+        e_mail: email,
+        password: pass,
+      };
+  
+      axios.post('mongodb://localhost/smartPlant_database/users', newUser)
     };
+
 
     return(
         <ScrollView>
