@@ -9,11 +9,14 @@ const ObjectId = Schema.ObjectId;
 const UserSchema = new Schema({
   firstname: String,
   surname: String,
+  mail: String,
+  password: String,
 });
 
 const User = mongoose.model("User", UserSchema);
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/hello-world", function (req, res) {
   res.send("Siemano");
@@ -24,14 +27,19 @@ app.post("/plants", (req, res) => {
   res.json(plants);
 });
 
-app.post("/users", async (req, res) => {
-  //const firstname = req.body.firstname;
-  //const surname = req.body.surname;
+app.post("/users",  (req, res) => {
+  const firstname = req.body.firstname;
+  const surname = req.body.surname;
+  const mail= req.body.mail;
+  const password= req.body.password;
   const user = new User();
-  // user.firstname = "firstname";
-  // user.surname = "surname";
-  user.save({firstname:"Szymon",surname:"Wzietek"});
-  res.json(user);
+  user.firstname = firstname;
+  user.surname = surname;
+  user.mail = mail;
+  user.password = password;
+  
+  user.save();
+  res.json(req.body);
 });
 
 app.get("/users", async (req, res) => {

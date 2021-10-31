@@ -43,8 +43,8 @@ const Registration = () =>
     "Utworzono konto",
     "Konto zostało utworzone! Możesz teraz przejść do panelu logowania.",
   );
-
-    const showData = () => {
+  
+    const showData = async () => {
       if (pass2 != pass){
         return (
             showErrorAlert()
@@ -56,16 +56,16 @@ const Registration = () =>
       console.log(pass);
       console.log(pass2);
 
-      const axios = require('axios');
+      const axios = require('axios').default;
 
       const newUser = {
-        imie: name,
-        nazwisko: secondName,
-        e_mail: email,
+        firstname: name,
+        surname: secondName,
+        mail: email,
         password: pass,
       };
   
-      axios.post('mongodb://localhost/smartPlant_database/users', newUser)
+      const res = await axios.post("http://192.168.1.6:3000/users", newUser);
     };
 
 
