@@ -50,7 +50,17 @@ const App = () => {
           fontWeight: 'bold',
         },
       }}/>
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Login" component={Login}
+                    options={{
+                      title: 'Logowanie',
+                      headerStyle: {
+                        backgroundColor: '#98BF63',
+                      },
+                      headerTintColor: '#fff',
+                      headerTitleStyle: {
+                        fontWeight: 'bold',
+                      },
+                    }}/>
     </Stack.Navigator>
   </NavigationContainer>
   );
