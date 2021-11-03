@@ -80,8 +80,10 @@ const Registration = () =>
 
       const res = await axios.post('http://192.168.1.20:3000/users', newUser)
       .then((response) => {
-        showSuccessAlert();  
+        showSuccessAlert(); 
+        console.log(response); 
       }, (error) => {
+        console.log(error);
         showErrorAlert();
       });
       }

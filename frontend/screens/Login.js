@@ -113,7 +113,7 @@ const Login = ({navigation}) =>
                 />
             </View>
             <View style = {styles.buttonOnTop} >
-                <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <TouchableOpacity onPress={() => navigation.navigate('notificationscreen')}>
                     <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Zaloguj" width={100}></Box>
                 </TouchableOpacity>
             </View>
