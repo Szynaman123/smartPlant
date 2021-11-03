@@ -32,10 +32,17 @@ const Registration = () =>
       setPass2(enteredPass2);
     };
 
-    const showErrorAlert = () =>
+    const showPassAlert = () =>
   Alert.alert(
     "Hasła nie są takie same!",
     "Hasła muszą być takie same.",
+  );
+
+  const showEmailAlert = () =>
+  Alert.alert(
+    "Wprowadzono niepoprawny mail",
+    "Jesteś pewny, że wpisałeś odpowiedni adres email?",
+
   );
 
   const showSuccessAlert = () =>
@@ -43,18 +50,24 @@ const Registration = () =>
     "Utworzono konto",
     "Konto zostało utworzone! Możesz teraz przejść do panelu logowania.",
   );
+
+  const showErrorAlert = () =>
+  Alert.alert(
+    "Błąd",
+    "Konto nie zostało utworzone. Spróbuj ponownie.",
+  );
   
     const showData = async () => {
       if (pass2 != pass){
         return (
-            showErrorAlert()
+            showPassAlert()
         )}
-      showSuccessAlert();  
-      console.log(name);
-      console.log(secondName);
-      console.log(email);
-      console.log(pass);
-      console.log(pass2);
+        if (email.includes("@")==false)
+        {
+          return(
+            showEmailAlert()
+          )
+        }
 
       const axios = require('axios').default;
 
@@ -64,9 +77,15 @@ const Registration = () =>
         mail: email,
         password: pass,
       };
-  
-      const res = await axios.post("http://192.168.1.6:3000/users", newUser);
-    };
+
+      const res = await axios.post('http://192.168.1.20:3000/users', newUser)
+      .then((response) => {
+        showSuccessAlert();  
+      }, (error) => {
+        showErrorAlert();
+      });
+      }
+
 
 
     return(
