@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/Home';
 import Registration from './screens/Registration';
 import Login from './screens/Login';
+import notificationscreen from './screens/notificationscreen';
 
 const COLORS = [
   { colorname: 'DarkGreen', hexCode: '#608844', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "1. Monitoruj wilgotność ziemi"},
@@ -61,6 +62,17 @@ const App = () => {
                         fontWeight: 'bold',
                       },
                     }}/>
+    <Stack.Screen name="notificationscreen" component={notificationscreen}
+      options={{
+        title: 'Smart Plant',
+        headerStyle: {
+          backgroundColor: '#98BF63',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}/>
     </Stack.Navigator>
   </NavigationContainer>
   );
