@@ -78,7 +78,7 @@ const Registration = () =>
         password: pass,
       };
 
-      const res = await axios.post('http://192.168.1.20:3000/users', newUser)
+      const res = await axios.post('http://192.168.0.21:3000/users', newUser)
       .then((response) => {
         showSuccessAlert(); 
         console.log(response); 
@@ -86,6 +86,7 @@ const Registration = () =>
         console.log(error);
         showErrorAlert();
       });
+
       }
 
 
