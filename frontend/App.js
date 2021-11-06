@@ -8,87 +8,24 @@ import Registration from './screens/Registration';
 import Login from './screens/Login';
 import MojeRosliny from './screens/MojeRosliny';
 import notificationscreen from './screens/notificationscreen';
+import Navigator from './routes/drawer';
 
 const COLORS = [
-  { colorname: 'DarkGreen', hexCode: '#608844', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "1. Monitoruj wilgotność ziemi"},
-  { colorname: 'Green', hexCode: '#98BF63', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "2. Czytaj wskazówki na temat pielęgnacji roślin"},
-  { colorname: 'LightGreen', hexCode: '#EAF2E0', colortextname: 'Green', textHexCode: '#98BF63', txtInside: "3"},
-  { colorname: 'DarkGrey', hexCode: '#777777', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "4"},
-  { colorname: 'Grey', hexCode: '#B9B9B9', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "5"},
-  { colorname: 'VeryLightGrey', hexCode: '#F9F9F9', colortextname: 'DarkGrey', textHexCode: '#777777', txtInside: "6"},
+    { colorname: 'DarkGreen', hexCode: '#608844', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "1. Monitoruj wilgotność ziemi"},
+    { colorname: 'Green', hexCode: '#98BF63', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "2. Czytaj wskazówki na temat pielęgnacji roślin"},
+    { colorname: 'LightGreen', hexCode: '#EAF2E0', colortextname: 'Green', textHexCode: '#98BF63', txtInside: "3"},
+    { colorname: 'DarkGrey', hexCode: '#777777', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "4"},
+    { colorname: 'Grey', hexCode: '#B9B9B9', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "5"},
+    { colorname: 'VeryLightGrey', hexCode: '#F9F9F9', colortextname: 'DarkGrey', textHexCode: '#777777', txtInside: "6"},
 ]
 const MyTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: 'white'
-  },
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        background: 'white'
+    },
 };
-const Stack = createStackNavigator();
 
 const App = () => {
-  return(
-    <NavigationContainer theme={MyTheme}>
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home}
-      options={{
-        title: 'Hello!',
-        headerStyle: {
-          backgroundColor: '#98BF63',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}/>
-      <Stack.Screen name="Registration" component={Registration}
-       options={{
-        title: 'Rejestracja',
-        headerStyle: {
-          backgroundColor: '#98BF63',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}/>
-      <Stack.Screen name="Login" component={Login}
-                    options={{
-                      title: 'Logowanie',
-                      headerStyle: {
-                        backgroundColor: '#98BF63',
-                      },
-                      headerTintColor: '#fff',
-                      headerTitleStyle: {
-                        fontWeight: 'bold',
-                      },
-                    }}/>
-    <Stack.Screen name="notificationscreen" component={notificationscreen}
-      options={{
-        title: 'Smart Plant',
-        headerStyle: {
-          backgroundColor: '#98BF63',
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}/>
-        <Stack.Screen name="MojeRosliny" component={MojeRosliny}
-                      options={{
-                          title: 'Moje Rosliny',
-                          headerStyle: {
-                              backgroundColor: '#98BF63',
-                          },
-                          headerTintColor: '#fff',
-                          headerTitleStyle: {
-                              fontWeight: 'bold',
-                          },
-                      }}/>
-    </Stack.Navigator>
-  </NavigationContainer>
-  );
+    return <Navigator />
 };
-
-
- export default App;
