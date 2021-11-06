@@ -35,39 +35,60 @@ const Login = ({navigation}) =>
         Alert.alert(
             "Logowanie zakonczone sukcesem",
             "Zostales przekierowany do swojego konta",
-            navigation.navigate('MojeRosliny'),
+            navigation.navigate('notificationscreen'),
         );
 
     const onPress = async () => {
         const axios = require('axios').default;
         const res = await axios.get("http://192.168.1.20:3000/users").then(resp => {
 
-            console.log(resp.data);// laduje surowe dane
-            console.log(typeof resp.data);//dane sa typu obiekt
+           // console.log(resp.data);// laduje surowe dane
+            //console.log(typeof resp.data);//dane sa typu obiekt
             const arr =[{},{}]=resp.data;//tablica obiektow zaincludowama zwracanymi danymi
-            console.log(typeof arr); //dane sa nadal typu obiekt
-            console.log(arr[0].firstname);//natalia
-            console.log(arr[0].mail);//porczynska..
-            console.log(arr[0].password);
-            console.log({email});//wprowadzony mail obiekt
-            console.log({haslo});//wprowadzony pass obiekt
+           // console.log(typeof arr); //dane sa nadal typu obiekt
+           // console.log(arr[0].firstname);//natalia
+           // console.log(arr[0].mail);//porczynska..
+           // console.log(arr[0].password);
+           // console.log({email});//wprowadzony mail obiekt
+           // console.log({haslo});//wprowadzony pass obiekt
             const mailObject = {} ={email};//nowy obiekt zaincludowany obiektem mail
             const hasloObject ={}={haslo};
 
             const wprowadzonyMail =mailObject.email;
-            console.log(wprowadzonyMail);//wprowadzony mail string
+           // console.log(wprowadzonyMail);//wprowadzony mail string
 
             const wprowadzoneHaslo= hasloObject.haslo;
-            console.log(wprowadzoneHaslo);//wprowadzone haslo string
+            // console.log(wprowadzoneHaslo);//wprowadzone haslo string
+
+            let zalogowany = {};
 
             let czyzaloguje = false;
             for (let i=0; i<arr.length; i++)
             {
-                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo)) czyzaloguje = true;
+                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo))
+                {
+                    czyzaloguje = true;
+                    zalogowany = arr[i].firstname;
+                    zalogowanyEmail = arr[i].mail;
+                    //navigation.navigate('notificationscreen', {paramKey: zalogowany})
+
+                }
             }
             if(czyzaloguje) {showSuccessAlert()} else {showErrorAlert()};
         });
+
+        //const ktoZalogowany = () =>
+       // {
+        //    const name = {} ={zalogowany};
+       //     return name;
+    //
+      //  }
+      //  console.log(ktoZalogowany())
     };
+
+   
+
+
         return(
         <ScrollView>
             <View style = {styles.container2}>
@@ -79,11 +100,12 @@ const Login = ({navigation}) =>
                 onChangeText={emailInputHandler}
                 value={email}
                 placeholder="Adres e-mail"
-                keyboardType="default"
+                keyboardType="email-address"
             />
 
             <TextInput
                 style={styles.input}
+                secureTextEntry={true}
                 onChangeText={passInputHandler}
                 value={haslo}
                 placeholder="Haslo"

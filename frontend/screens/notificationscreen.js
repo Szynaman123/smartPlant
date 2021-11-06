@@ -3,13 +3,13 @@ import Box from '../components/boxes';
 import post from 'axios';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 
-const notificationscreen = () =>
+const notificationscreen = ({route}) =>
 {
     return(
         <ScrollView>
             <View style={styles.flexbox}>
             <View style={styles.helloView}>
-            <Text style={styles.txtHello}>Witaj 'name'!</Text>
+            <Text style={styles.txtHello}>Witaj {/*route.params.paramKey*/}!</Text>
             <Image style={styles.hello} source={require('../assets/hello4.png')}/>
             <Image style={styles.hello} source={require('../assets/brakczynnosci.png')}/>
             </View>
