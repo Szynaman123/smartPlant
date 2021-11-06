@@ -4,7 +4,7 @@ import post, {default as axios} from 'axios';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 
 
-const Registration = () =>
+const Registration = ({navigation}) =>
 {
     const [name, setName] = useState('');
     const [secondName, setSecondName] = useState('');
