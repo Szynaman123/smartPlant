@@ -45,8 +45,14 @@ const styles = StyleSheet.create({
         marginBottom: -130,
         zIndex: 2,
         fontSize: 18,
-        color: '#98BF63',        
-
+        color: '#98BF63',
+    },
+    menu:    {
+        padding:10,
+        marginBottom:0,
+        zIndex: 3,
+        fontSize: 18,
+        color: '#98BF63',
     }
 });
 

@@ -35,7 +35,7 @@ const Login = ({navigation}) =>
         Alert.alert(
             "Logowanie zakonczone sukcesem",
             "Zostales przekierowany do swojego konta",
-            navigation.navigate('Registration'),
+            navigation.navigate('MojeRosliny'),
         );
 
     const onPress = async () => {
