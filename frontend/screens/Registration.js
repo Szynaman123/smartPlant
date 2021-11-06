@@ -48,7 +48,8 @@ const Registration = () =>
   const showSuccessAlert = () =>
   Alert.alert(
     "Utworzono konto",
-    "Konto zostało utworzone! Możesz teraz przejść do panelu logowania.",
+    "Konto zostało utworzone! Możesz się zalogować.",
+    navigation.navigate('Login'),
   );
 
   const showErrorAlert = () =>
@@ -62,6 +63,13 @@ const Registration = () =>
             "Błąd",
             "Konto o podanym adresie e-mail juz istnieje.",
         );
+
+        const emptyInputsError = () =>
+        Alert.alert(
+          "Nie uzupełniono wszystkich danych",
+          "Należy uzupełnić wszystkie pola.",
+        );
+        
     const createAccount = async () =>{
         const newUser = {
         firstname: name,
@@ -70,7 +78,7 @@ const Registration = () =>
         password: pass,
     };
 
-        const res = await axios.post('http://192.168.1.18:3000/users', newUser)
+        const res = await axios.post('http://192.168.1.20:3000/users', newUser)
             .then((response) => {
                 showSuccessAlert();
                 console.log(response);
@@ -89,28 +97,16 @@ const Registration = () =>
             showEmailAlert()
           )
         }
+        if(name == "" || secondName == "" || email =="" || pass=="")
+        {
+          return(
+            emptyInputsError()
+          )
+        }
 
       const axios = require('axios').default;
-<<<<<<< HEAD
 
-      const newUser = {
-        firstname: name,
-        surname: secondName,
-        mail: email,
-        password: pass,
-      };
-
-      const res = await axios.post('http://192.168.0.21:3000/users', newUser)
-      .then((response) => {
-        showSuccessAlert(); 
-        console.log(response); 
-      }, (error) => {
-        console.log(error);
-        showErrorAlert();
-      });
-
-=======
-        const re = await axios.get("http://192.168.1.18:3000/users").then(resp => {
+        const re = await axios.get("http://192.168.1.20:3000/users").then(resp => {
 
             console.log(resp.data);// laduje surowe dane
             //console.log(typeof resp.data);//dane sa typu obiekt
@@ -131,9 +127,8 @@ const Registration = () =>
             {
                 if (arr[i].mail === wprowadzonyMail) czymailistnieje = true;
             }
-            if(czymailistnieje) {showMailErrorAlert()} else {createAccount()};
+            if(czymailistnieje) {showMailErrorAlert()} else {createAccount()} ;
         });
->>>>>>> f02f40ea5c1a531dd8412c30f1ad89ab8e649f7c
       }
 
 
