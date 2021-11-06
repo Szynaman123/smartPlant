@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Box from '../components/boxes';
-import post from 'axios';
+import post, {default as axios} from 'axios';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 
 
@@ -56,7 +56,28 @@ const Registration = () =>
     "Błąd",
     "Konto nie zostało utworzone. Spróbuj ponownie.",
   );
-  
+
+    const showMailErrorAlert = () =>
+        Alert.alert(
+            "Błąd",
+            "Konto o podanym adresie e-mail juz istnieje.",
+        );
+    const createAccount = async () =>{
+        const newUser = {
+        firstname: name,
+        surname: secondName,
+        mail: email,
+        password: pass,
+    };
+
+        const res = await axios.post('http://192.168.1.18:3000/users', newUser)
+            .then((response) => {
+                showSuccessAlert();
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+                showErrorAlert();
+            });}
     const showData = async () => {
       if (pass2 != pass){
         return (
@@ -70,6 +91,7 @@ const Registration = () =>
         }
 
       const axios = require('axios').default;
+<<<<<<< HEAD
 
       const newUser = {
         firstname: name,
@@ -87,6 +109,31 @@ const Registration = () =>
         showErrorAlert();
       });
 
+=======
+        const re = await axios.get("http://192.168.1.18:3000/users").then(resp => {
+
+            //console.log(resp.data);// laduje surowe dane
+            //console.log(typeof resp.data);//dane sa typu obiekt
+            const arr =[{},{}]=resp.data;//tablica obiektow zaincludowama zwracanymi danymi
+            //console.log(typeof arr); //dane sa nadal typu obiekt
+            //console.log(arr[0].firstname);//natalia
+            //console.log(arr[0].mail);//porczynska..
+            //console.log(arr[0].password);
+            //console.log({email});//wprowadzony mail obiekt
+
+            const inp = {} ={email};//nowy obiekt zaincludowany obiektem mail
+
+            const y =inp.email;
+            //console.log(y);//wprowadzony mail string
+
+            let czymailistnieje = false;
+            for (let i=0; i<arr.length; i++)
+            {
+                if (arr[i].mail === y) czymailistnieje = true;
+            }
+            if(czymailistnieje) {showMailErrorAlert()} else {createAccount()};
+        });
+>>>>>>> f02f40ea5c1a531dd8412c30f1ad89ab8e649f7c
       }
 
 
