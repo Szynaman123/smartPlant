@@ -93,24 +93,24 @@ const Registration = () =>
       const axios = require('axios').default;
         const re = await axios.get("http://192.168.1.18:3000/users").then(resp => {
 
-            //console.log(resp.data);// laduje surowe dane
+            console.log(resp.data);// laduje surowe dane
             //console.log(typeof resp.data);//dane sa typu obiekt
             const arr =[{},{}]=resp.data;//tablica obiektow zaincludowama zwracanymi danymi
             //console.log(typeof arr); //dane sa nadal typu obiekt
             //console.log(arr[0].firstname);//natalia
             //console.log(arr[0].mail);//porczynska..
             //console.log(arr[0].password);
-            //console.log({email});//wprowadzony mail obiekt
+            console.log({email});//wprowadzony mail obiekt
 
-            const inp = {} ={email};//nowy obiekt zaincludowany obiektem mail
+            const mailObject = {} ={email};//nowy obiekt zaincludowany obiektem mail
 
-            const y =inp.email;
-            //console.log(y);//wprowadzony mail string
+            const wprowadzonyMail =mailObject.email;
+            //console.log(wprowadzonyMail);//wprowadzony mail string
 
             let czymailistnieje = false;
             for (let i=0; i<arr.length; i++)
             {
-                if (arr[i].mail === y) czymailistnieje = true;
+                if (arr[i].mail === wprowadzonyMail) czymailistnieje = true;
             }
             if(czymailistnieje) {showMailErrorAlert()} else {createAccount()};
         });

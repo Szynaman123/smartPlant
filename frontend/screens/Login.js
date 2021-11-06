@@ -51,19 +51,19 @@ const Login = ({navigation}) =>
             console.log(arr[0].password);
             console.log({email});//wprowadzony mail obiekt
             console.log({haslo});//wprowadzony pass obiekt
-            const inp = {} ={email};//nowy obiekt zaincludowany obiektem mail
-            const mpm ={}={haslo};
+            const mailObject = {} ={email};//nowy obiekt zaincludowany obiektem mail
+            const hasloObject ={}={haslo};
 
-            const r =inp.email;
-            console.log(r);//wprowadzony mail string
+            const wprowadzonyMail =mailObject.email;
+            console.log(wprowadzonyMail);//wprowadzony mail string
 
-            const e= mpm.haslo;
-            console.log(e);//wprowadzone haslo string
+            const wprowadzoneHaslo= hasloObject.haslo;
+            console.log(wprowadzoneHaslo);//wprowadzone haslo string
 
             let czyzaloguje = false;
             for (let i=0; i<arr.length; i++)
             {
-                if ((arr[i].mail === r)&&(arr[i].password === e)) czyzaloguje = true;
+                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo)) czyzaloguje = true;
             }
             if(czyzaloguje) {showSuccessAlert()} else {showErrorAlert()};
         });
