@@ -2,7 +2,8 @@ import React from 'react';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert} from 'react-native';
 import Box from './components/boxes';
 import { NavigationContainer, DefaultTheme  } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import {createStackNavigator} from '@react-navigation/stack';
 import Home from './screens/Home';
 import Registration from './screens/Registration';
 import Login from './screens/Login';
@@ -24,13 +25,13 @@ const MyTheme = {
     background: 'white'
   },
 };
-const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const App = () => {
   return(
     <NavigationContainer theme={MyTheme}>
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={Home}
+    <Drawer.Navigator>
+      <Drawer.Screen name="Home" component={Home}
       options={{
         title: 'Hello!',
         headerStyle: {
@@ -41,7 +42,7 @@ const App = () => {
           fontWeight: 'bold',
         },
       }}/>
-      <Stack.Screen name="Registration" component={Registration}
+      <Drawer.Screen name="Registration" component={Registration}
        options={{
         title: 'Rejestracja',
         headerStyle: {
@@ -52,7 +53,7 @@ const App = () => {
           fontWeight: 'bold',
         },
       }}/>
-      <Stack.Screen name="Login" component={Login}
+      <Drawer.Screen name="Login" component={Login}
                     options={{
                       title: 'Logowanie',
                       headerStyle: {
@@ -63,7 +64,7 @@ const App = () => {
                         fontWeight: 'bold',
                       },
                     }}/>
-    <Stack.Screen name="notificationscreen" component={notificationscreen}
+    <Drawer.Screen name="notificationscreen" component={notificationscreen}
       options={{
         title: 'Smart Plant',
         headerStyle: {
@@ -74,7 +75,7 @@ const App = () => {
           fontWeight: 'bold',
         },
       }}/>
-        <Stack.Screen name="MojeRosliny" component={MojeRosliny}
+        <Drawer.Screen name="MojeRosliny" component={MojeRosliny}
                       options={{
                           title: 'Moje Rosliny',
                           headerStyle: {
@@ -85,7 +86,7 @@ const App = () => {
                               fontWeight: 'bold',
                           },
                       }}/>
-    </Stack.Navigator>
+    </Drawer.Navigator>
   </NavigationContainer>
   );
 };
