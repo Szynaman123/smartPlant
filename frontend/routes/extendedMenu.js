@@ -1,12 +1,9 @@
-import { createStackNavigator } from 'react-navigation-stack';
-import About from '../screens/about';
 import MyTheme from '../App';
-
 import notificationscreen from "../screens/notificationscreen";
 import MojeRosliny from "../screens/MojeRosliny";
 import React from "react";
 import { NavigationContainer, DefaultTheme  } from 'react-navigation';
-import {createStackNavigator} from "@react-navigation/stack";
+import {createStackNavigator} from "react-navigation-stack";
 
 
 

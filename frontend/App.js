@@ -8,7 +8,7 @@ import Registration from './screens/Registration';
 import Login from './screens/Login';
 import MojeRosliny from './screens/MojeRosliny';
 import notificationscreen from './screens/notificationscreen';
-import Navigator from './routes/drawer';
+import RootDrawerNavigator from './routes/drawer';
 
 const COLORS = [
     { colorname: 'DarkGreen', hexCode: '#608844', colortextname: 'VeryLightGrey', textHexCode: '#F9F9F9', txtInside: "1. Monitoruj wilgotność ziemi"},
@@ -27,5 +27,5 @@ const MyTheme = {
 };
 
 const App = () => {
-    return <Navigator />
+    return <RootDrawerNavigator/>
 };

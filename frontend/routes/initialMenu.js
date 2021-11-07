@@ -1,8 +1,6 @@
 import Home from "../screens/Home";
 import Registration from "../screens/Registration";
 import Login from "../screens/Login";
-import notificationscreen from "../screens/notificationscreen";
-import MojeRosliny from "../screens/MojeRosliny";
 import React from "react";
 import { NavigationContainer, DefaultTheme  } from 'react-navigation';
 import {createStackNavigator} from "react-navigation-stack";
