@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '../components/boxes';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TouchableOpacity} from 'react-native';
 
-const Home = ( {navigation} ) =>
+const Home = props =>
 {
     return(
 
@@ -24,13 +24,13 @@ const Home = ( {navigation} ) =>
     
           <View>
              <View>
-             <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+             <TouchableOpacity onPress={() => props.navigation.navigate('Rejestracja')}>
                  <Box colorHex="#EAF2E0" colorTextHex="#98BF63" TextInside="Rejestracja"></Box>
                  </TouchableOpacity>
          </View>
 
          <View>
-         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+         <TouchableOpacity onPress={() => props.navigation.navigate('Logowanie')}>
                  <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Logowanie"></Box>
                  </TouchableOpacity>
          </View>

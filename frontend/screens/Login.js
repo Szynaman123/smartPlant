@@ -40,7 +40,7 @@ const Login = ({navigation}) =>
 
     const onPress = async () => {
         const axios = require('axios').default;
-        const res = await axios.get("http://192.168.0.21:3000/users").then(resp => {
+        const res = await axios.get("http://192.168.1.20:3000/users").then(resp => {
 
            // console.log(resp.data);// laduje surowe dane
             //console.log(typeof resp.data);//dane sa typu obiekt
