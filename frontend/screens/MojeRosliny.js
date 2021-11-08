@@ -23,6 +23,7 @@ const MojeRosliny = () =>
                         <Text style={styles.text2}>Gatunek</Text>
                     </View>
                 </View>
+                <Text style={styles.dash}>_____________________________________________________________________</Text>
                 <View style={styles.dash}></View>
             </View>
         </ScrollView>
@@ -35,14 +36,15 @@ const styles =StyleSheet.create({
     {
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        padding: 20,
+
     },
 
     flexbox2:
     {
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
+        margin: 15,
 
     },
 
@@ -68,11 +70,12 @@ const styles =StyleSheet.create({
 
     },
 
-    dash:
-        {
-            backgroundColor: '#B9B9B9',
-            height:1,
-    },
+    dash: {
+        flex:1,
+        borderTopWidth: 1,
+        borderColor: "#B9B9B9",
+        color: '#ffffff',
+      },
 
     logo: {
         borderRadius: 25,
