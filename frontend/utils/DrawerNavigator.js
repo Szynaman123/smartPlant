@@ -22,7 +22,7 @@ const CustomDrawer = props => {
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         padding: 20,
-                        backgroundColor: '#f6f6f6',
+                        backgroundColor: '#EAF2E0',
                         marginBottom: 20,
                     }}
                 >
@@ -31,7 +31,8 @@ const CustomDrawer = props => {
                         <Text>{profile.mail}</Text>
                     </View>
                 </View>
-                <DrawerItemList {...props} />
+                <DrawerItemList {...props}
+                />
             </DrawerContentScrollView>
             <TouchableOpacity
                 style={{
@@ -39,7 +40,7 @@ const CustomDrawer = props => {
                     right: 0,
                     left: 0,
                     bottom: 50,
-                    backgroundColor: '#f6f6f6',
+                    backgroundColor: '#EAF2E0',
                     padding: 20,
                 }}
                 onPress={() => setIsLoggedIn(false)}
@@ -67,7 +68,7 @@ const DrawerNavigator = () => {
         >
             <Drawer.Screen name="notificationscreen" component={notificationscreen}
                            options={{
-                               title: 'Smart Plant',
+                               title: 'Powiadomienia',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
                                },

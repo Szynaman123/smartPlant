@@ -64,7 +64,7 @@ const Login = () =>
             let czyzaloguje = false;
             for (let i=0; i<arr.length; i++)
             {
-                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo)) {setProfile(arr[arr.length-1]);czyzaloguje = true;}
+                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo)) {setProfile(arr[i]);czyzaloguje = true;}
 
             }
             if(czyzaloguje) {
