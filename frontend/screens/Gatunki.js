@@ -11,12 +11,36 @@ import {
 } from 'react-native';
 import {default as axios} from "axios";
 
+
 const Gatunki = () =>
 {
+        const newGatunek = {
+        nazwapolska: 'dupa',
+        nazwalacina: 'dupa2',
+        idgatunku: 1234,
+        nawozenie: 'nawozenie',
+        podlewanie: 'podlewanie',
+        stanowisko:  'stanowsiko',
+        szkodniki:  'szkodniki',
+        temperatura: 'tempertura',
+        wilgotnosc_lato: 0.3,
+        wilgotnosc_zima: 0.2,
+        przesadzanie: 'przesadzanie'
+    };
+
+
+    const DodajGatunek = async () =>  {
+        const axios = require('axios').default;
+        const res = await axios.post('http://192.168.0.21:3000/Plants', newGatunek).then((response) => {
+            console.log(response);
+        ;})}
+
     const onLoad = async () => {
     const axios = require('axios').default;
+
         const res = await axios.get("http://192.168.0.21:3000/Plants").then(resp => {
         console.log(resp.data);
+        console.log(typeof resp.data);
         ;})}
 
     return(
@@ -30,6 +54,9 @@ const Gatunki = () =>
         <Text style={styles.dash}>________________________________________________________________________</Text>
         <TouchableOpacity onPress={onLoad}>
                     <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Pokaz gatunki" width={100}></Box>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={DodajGatunek}>
+                    <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Dodaj" width={100}></Box>
                 </TouchableOpacity>
     </View>
     </ScrollView>
