@@ -27,8 +27,8 @@ const CustomDrawer = props => {
                     }}
                 >
                     <View>
-                        <Text>{profile.name}</Text>
-                        <Text>{profile.email}</Text>
+                        <Text>{profile.firstname} {profile.surname}</Text>
+                        <Text>{profile.mail}</Text>
                     </View>
                 </View>
                 <DrawerItemList {...props} />

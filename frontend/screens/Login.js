@@ -42,7 +42,7 @@ const Login = () =>
 
     const onPress = async () => {
         const axios = require('axios').default;
-        const res = await axios.get("http://192.168.1.20:3000/users").then(resp => {
+        const res = await axios.get("http://192.168.1.18:3000/users").then(resp => {
 
             console.log(resp.data);// laduje surowe dane
             console.log(typeof resp.data);//dane sa typu obiekt
@@ -55,7 +55,6 @@ const Login = () =>
             console.log({haslo});//wprowadzony pass obiekt
             const mailObject = {} ={email};//nowy obiekt zaincludowany obiektem mail
             const hasloObject ={}={haslo};
-
             const wprowadzonyMail =mailObject.email;
             console.log(wprowadzonyMail);//wprowadzony mail string
 
@@ -65,11 +64,11 @@ const Login = () =>
             let czyzaloguje = false;
             for (let i=0; i<arr.length; i++)
             {
-                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo)) czyzaloguje = true;
+                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo)) {setProfile(arr[arr.length-1]);czyzaloguje = true;}
+
             }
             if(czyzaloguje) {
                 showSuccessAlert();
-                //setProfile(resp.data.user);
                 setIsLoggedIn(true);
             } else {showErrorAlert()};
         });

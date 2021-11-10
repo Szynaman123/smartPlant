@@ -4,8 +4,6 @@ import { NavigationContainer} from '@react-navigation/native';
 import InitialStack from './utils/InitialNavigator';
 import LoginProvider from './context/LoginProvider';
 
-
-
 const App = () => {
   return (
       <LoginProvider>
