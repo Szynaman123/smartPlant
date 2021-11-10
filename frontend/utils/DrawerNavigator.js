@@ -1,5 +1,7 @@
 import notificationscreen from "../screens/notificationscreen";
 import MojeRosliny from "../screens/MojeRosliny";
+import Gatunki from "../screens/Gatunki";
+import PrzegladGatunku from "../screens/PrzegladGatunku";
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import {
@@ -80,6 +82,28 @@ const DrawerNavigator = () => {
             <Drawer.Screen name="MojeRosliny" component={MojeRosliny}
                            options={{
                                title: 'Moje Rosliny',
+                               headerStyle: {
+                                   backgroundColor: '#98BF63',
+                               },
+                               headerTintColor: '#fff',
+                               headerTitleStyle: {
+                                   fontWeight: 'bold',
+                               },
+                           }}/>
+                           <Drawer.Screen name="Gatunki" component={Gatunki}
+                           options={{
+                               title: 'Gatunki',
+                               headerStyle: {
+                                   backgroundColor: '#98BF63',
+                               },
+                               headerTintColor: '#fff',
+                               headerTitleStyle: {
+                                   fontWeight: 'bold',
+                               },
+                           }}/>
+                           <Drawer.Screen name="PrzegladGatunku" component={PrzegladGatunku}
+                           options={{
+                               title: 'Przegląd gatunku',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
                                },

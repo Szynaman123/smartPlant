@@ -78,7 +78,7 @@ const Registration = ({navigation}) =>
         password: pass,
     };
 
-        const res = await axios.post('http://192.168.1.20:3000/users', newUser)
+        const res = await axios.post('http://192.168.0.21:3000/users', newUser)
             .then((response) => {
                 showSuccessAlert();
                 console.log(response);
@@ -106,7 +106,7 @@ const Registration = ({navigation}) =>
 
       const axios = require('axios').default;
 
-        const re = await axios.get("http://192.168.1.20:3000/users").then(resp => {
+        const re = await axios.get("http://192.168.0.21:3000/users").then(resp => {
 
             console.log(resp.data);// laduje surowe dane
             //console.log(typeof resp.data);//dane sa typu obiekt
