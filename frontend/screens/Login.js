@@ -10,9 +10,12 @@ import {
     TouchableOpacity, Alert
 } from 'react-native';
 import {default as axios} from "axios";
+import { useLogin } from '../context/LoginProvider';
 
-const Login = ({navigation}) =>
+
+const Login = () =>
 {
+    const { setIsLoggedIn, setProfile } = useLogin();
     const [data, setData] = React.useState([]);
     const [email, onChangeEmail] = React.useState(null);
     const [haslo, onChangeHaslo] = React.useState(null);
@@ -35,7 +38,6 @@ const Login = ({navigation}) =>
         Alert.alert(
             "Logowanie zakonczone sukcesem",
             "Zostales przekierowany do swojego konta",
-            navigation.navigate('MojeRosliny'),
         );
 
     const onPress = async () => {
@@ -65,7 +67,11 @@ const Login = ({navigation}) =>
             {
                 if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo)) czyzaloguje = true;
             }
-            if(czyzaloguje) {showSuccessAlert()} else {showErrorAlert()};
+            if(czyzaloguje) {
+                showSuccessAlert();
+                //setProfile(resp.data.user);
+                setIsLoggedIn(true);
+            } else {showErrorAlert()};
         });
     };
         return(
