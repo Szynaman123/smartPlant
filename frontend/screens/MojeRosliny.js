@@ -18,7 +18,7 @@ const MojeRosliny = () =>
         <ScrollView>
             <View style={styles.flexbox1}>
                 <View style={styles.flexbox2}>
-                    <Image style = {styles.logo} source={require('../assets/pic.png')}/>
+                    <Image style = {styles.pic} source={require('../assets/pic.png')}/>
                     <View style={styles.flexbox3}>
                         <Text style={styles.text1}>Roślina</Text>
                         <Text style={styles.text2}>Gatunek</Text>
@@ -75,15 +75,11 @@ const styles =StyleSheet.create({
         height: 1,
       },
 
-    logo: {
+    pic: {
         borderRadius: 25,
         width: Dimensions.get('window').width*0.3,
         height: Dimensions.get('window').width*0.3,
-        paddingHorizontal: 0,
-        paddingTop:0,
-        marginBottom: 0,
         backgroundColor: '#7722',
-
     },
 
 

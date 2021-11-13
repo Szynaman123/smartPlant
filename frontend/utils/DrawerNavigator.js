@@ -11,6 +11,7 @@ import {
 } from '@react-navigation/drawer';
 import { useLogin } from './../context/LoginProvider';
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import Roslina from "../screens/Roslina";
 
 const MyTheme = {
     ...DefaultTheme,
@@ -128,6 +129,23 @@ const DrawerNavigator = () => {
                             drawerActiveTintColor:'#777777',
                             drawerInactiveTintColor: '#777777',
                                title: 'Przegląd gatunku',
+                               headerStyle: {
+                                   backgroundColor: '#98BF63',
+                               },
+                               cardStyle: {
+                                backgroundColor: "#ffffff",
+                            },
+                               headerTintColor: '#fff',
+                               headerTitleStyle: {
+                                   fontWeight: 'bold',
+                               },
+                           }}/>
+                           <Drawer.Screen name="Roslina" component={Roslina}
+                           options={{
+                            drawerActiveBackgroundColor:'#F9F9F9',
+                            drawerActiveTintColor:'#777777',
+                            drawerInactiveTintColor: '#777777',
+                               title: 'Twoja roślina',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
                                },
