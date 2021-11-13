@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const json=require("./Plants.json")
 const app = express();
 
 const Schema = mongoose.Schema;
@@ -13,23 +14,22 @@ const UserSchema = new Schema({
   password: String,
 });
 
-const GatunekSchema = new Schema({
-  nazwapolska: String,
-  nazwalacina: String,
+const PlantSchema = new Schema({
+  Nazwapolska: String,
+  Nazwalacina: String,
   idgatunku: Number,
   nawozenie: String,
   podlewanie: String,
   stanowisko: String,
   szkodniki: String,
   temperatura: String,
-  wilgotnosc_lato: Number,
-  wilgotnosc_zima: Number,
+  wilgotnosc_lato: String,
+  wilgotnosc_zima: String,
   przesadzanie: String,
-  gatunek: String,
 });
 
 const User = mongoose.model("User", UserSchema);
-const Gatunek = mongoose.model("Gatunek", GatunekSchema);
+const Plant = mongoose.model("Plant", PlantSchema);
 
 
 app.use(bodyParser.json());
@@ -94,14 +94,25 @@ app.get("/users", async (req, res) => {
   res.json(users);
 });
 
-app.get("/Plants", async (req, res) => {
-  const gatunek = await Gatunek.find();
-  res.json(gatunek);
+app.get("/plants/:idgatunku", async (req, res) => {
+  const plant = await Plant.find({idgatunku: req.params.idgatunku});
+  res.json(plant);
+});
+app.get("/plants", async (req, res) => {
+  const plant = await Plant.find();
+  res.json(plant);
 });
 
 const start = async () => {
   await mongoose.connect("mongodb://localhost/smartPlant_database");
+//   Plant.insertMany(json).then(function(){
+//     console.log("Data inserted")  // Success
+// }).catch(function(error){
+//     console.log(error)      // Failure
+// });
   app.listen(3000);
+  console.log(await Plant.find({ Nazwapolska: 'Adiantum' }).exec());
+  console.log(await User.find({ firstname: 'Natalia' }).exec());
 };
 
 start();
