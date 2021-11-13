@@ -7,7 +7,7 @@ import {
     ScrollView,
     Image,
     TextInput,
-    TouchableOpacity, Alert
+    TouchableOpacity, Alert, Dimensions,
 } from 'react-native';
 import {default as axios} from "axios";
 import { useLogin } from '../context/LoginProvider';
@@ -96,35 +96,28 @@ const Login = () =>
                 keyboardType="default"
             />
             <View style = {styles.mountaincontainer} >
-                <Image style = {styles.logo}
-                       source={require('../assets/pic.png')}
+                <Image style = {styles.pic}
+                       source={require('../assets/loginpic.png')}
                 />
-            </View>
-            <View style = {styles.buttonOnTop} >
-                <TouchableOpacity onPress={onPress}>
+                <TouchableOpacity style={styles.loginbox} onPress={onPress}>
                     <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Zaloguj" width={100}></Box>
                 </TouchableOpacity>
-            </View>
+                <Image style = {styles.background}
+                       source={require('../assets/background.png')}
+                />
+                </View>
+
+            
         </ScrollView>
     );
 };
 
 const styles =StyleSheet.create({
 
-    container: {
-        paddingHorizontal: 30,
-        paddingTop:30,
-        marginBottom: 10,
-    },
     container2: {
         paddingHorizontal: 10,
         paddingTop:20,
         marginBottom: 10,
-    },
-
-    container_background: {
-        backgroundColor: 'white',
-        marginBottom: 100,
     },
 
     input: {
@@ -136,48 +129,40 @@ const styles =StyleSheet.create({
         borderRadius: 10,
     },
 
+    intro_text:
+    {
+        textAlign: 'center',
+        color: '#98BF63',
+        fontSize: 20,
+        lineHeight:22,
+        letterSpacing: 0.05,
+    },
+
     mountaincontainer:
         {
-            marginTop: 80,
             justifyContent: 'center',
             alignItems: 'center',
-            marginHorizontal: 20,
         },
 
-    text_intro:
-        {
-            textAlign: 'center',
-            fontWeight: 'bold',
-            color: '#98BF63',
-            fontSize: 20,
-        },
-
-    logo_text:
-        {
-            textAlign: 'center',
-            color: '#98BF63',
-            fontSize: 36,
-        },
-
-    intro_text:
-        {
-            textAlign: 'center',
-            color: '#98BF63',
-            fontSize: 20,
-            lineHeight:22,
-            letterSpacing: 0.05,
-        },
-
-    logo:
+    pic:
         {
             justifyContent: 'center',
-            display: "flex",
-            width: 410,
-            height: 410,
+            width: Dimensions.get('window').width*1,
+            height: Dimensions.get('window').width*1.5,
         },
-    buttonOnTop:
+
+        loginbox:
         {
-            marginTop: -155,
+            marginTop: -Dimensions.get('window').width*0.7,
+            width: Dimensions.get('window').width*0.9,
+        },
+
+        background:
+        {
+            justifyContent: 'center',
+            width: Dimensions.get('window').width*1,
+            height: Dimensions.get('window').width*0.3,
+
         }
 });
 

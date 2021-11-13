@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {Profiler, useState} from 'react';
+import LoginProvider, { useLogin } from '../context/LoginProvider';
 import Box from '../components/boxes';
 import post from 'axios';
-import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
+import { Text, View, Dimensions, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 
 const notificationscreen = () =>
 {
@@ -9,7 +10,7 @@ const notificationscreen = () =>
         <ScrollView>
             <View style={styles.flexbox}>
             <View style={styles.helloView}>
-            <Text style={styles.txtHello}>Witaj 'name'!</Text>
+            <Text style={styles.txtHello}>Witaj {}!</Text>
             <Image style={styles.hello} source={require('../assets/hello4.png')}/>
             <Image style={styles.hello} source={require('../assets/brakczynnosci.png')}/>
             </View>
@@ -34,8 +35,8 @@ const styles = StyleSheet.create({
     },
     hello:
     {
-      width: 332,
-      height: 228,
+        width: Dimensions.get('window').width*0.9,
+      height: Dimensions.get('window').width*0.6,
       marginVertical:30,
       zIndex: 1,
     },

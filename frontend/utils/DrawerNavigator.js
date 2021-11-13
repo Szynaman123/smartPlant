@@ -10,6 +10,15 @@ import {
     DrawerItemList,
 } from '@react-navigation/drawer';
 import { useLogin } from './../context/LoginProvider';
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+
+const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: 'white'
+    },
+  };
 
 const Drawer = createDrawerNavigator();
 
@@ -26,8 +35,7 @@ const CustomDrawer = props => {
                         padding: 20,
                         backgroundColor: '#EAF2E0',
                         marginBottom: 20,
-                    }}
-                >
+                    }}>
                     <View>
                         <Text>{profile.firstname} {profile.surname}</Text>
                         <Text>{profile.mail}</Text>
@@ -69,7 +77,10 @@ const DrawerNavigator = () => {
             drawerContent={props => <CustomDrawer {...props} />}
         >
             <Drawer.Screen name="notificationscreen" component={notificationscreen}
-                           options={{
+                          options={{
+                               drawerActiveBackgroundColor:'#F9F9F9',
+                               drawerActiveTintColor:'#777777',
+                               drawerInactiveTintColor: '#777777',
                                title: 'Powiadomienia',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
@@ -78,9 +89,16 @@ const DrawerNavigator = () => {
                                headerTitleStyle: {
                                    fontWeight: 'bold',
                                },
+                               cardStyle: {
+                                   backgroundColor:'#ffffff',
+                               },
+                                                           
                            }}/>
             <Drawer.Screen name="MojeRosliny" component={MojeRosliny}
                            options={{
+                            drawerActiveBackgroundColor:'#F9F9F9',
+                            drawerActiveTintColor:'#777777',
+                            drawerInactiveTintColor: '#777777',
                                title: 'Moje Rosliny',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
@@ -92,6 +110,9 @@ const DrawerNavigator = () => {
                            }}/>
                            <Drawer.Screen name="Gatunki" component={Gatunki}
                            options={{
+                            drawerActiveBackgroundColor:'#F9F9F9',
+                            drawerActiveTintColor:'#777777',
+                            drawerInactiveTintColor: '#777777',
                                title: 'Gatunki',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
@@ -103,15 +124,22 @@ const DrawerNavigator = () => {
                            }}/>
                            <Drawer.Screen name="PrzegladGatunku" component={PrzegladGatunku}
                            options={{
+                            drawerActiveBackgroundColor:'#F9F9F9',
+                            drawerActiveTintColor:'#777777',
+                            drawerInactiveTintColor: '#777777',
                                title: 'Przegląd gatunku',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
                                },
+                               cardStyle: {
+                                backgroundColor: "#ffffff",
+                            },
                                headerTintColor: '#fff',
                                headerTitleStyle: {
                                    fontWeight: 'bold',
                                },
                            }}/>
+                           
         </Drawer.Navigator>
 
     );

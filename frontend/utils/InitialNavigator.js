@@ -19,6 +19,9 @@ const StackNavigator =() =>{
                           headerStyle: {
                               backgroundColor: '#98BF63',
                           },
+                          cardStyle: {
+                            backgroundColor: "#ffffff",
+                        },
                           headerTintColor: '#fff',
                           headerTitleStyle: {
                               fontWeight: 'bold',
@@ -30,6 +33,9 @@ const StackNavigator =() =>{
                           headerStyle: {
                               backgroundColor: '#98BF63',
                           },
+                          cardStyle: {
+                            backgroundColor: "#ffffff",
+                        },
                           headerTintColor: '#fff',
                           headerTitleStyle: {
                               fontWeight: 'bold',
@@ -41,6 +47,9 @@ const StackNavigator =() =>{
                           headerStyle: {
                               backgroundColor: '#98BF63',
                           },
+                          cardStyle: {
+                            backgroundColor: "#ffffff",
+                        },
                           headerTintColor: '#fff',
                           headerTitleStyle: {
                               fontWeight: 'bold',

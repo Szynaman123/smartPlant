@@ -7,7 +7,8 @@ import {
     ScrollView,
     Image,
     TextInput,
-    TouchableOpacity, Alert
+    TouchableOpacity, Alert,
+    Dimensions,
 } from 'react-native';
 import {default as axios} from "axios";
 
@@ -23,8 +24,7 @@ const MojeRosliny = () =>
                         <Text style={styles.text2}>Gatunek</Text>
                     </View>
                 </View>
-                <Text style={styles.dash}>_____________________________________________________________________</Text>
-                <View style={styles.dash}></View>
+                <Image style={styles.dash} source={require('../assets/dash.png')}/>
             </View>
         </ScrollView>
     )
@@ -71,16 +71,14 @@ const styles =StyleSheet.create({
     },
 
     dash: {
-        flex:1,
-        borderTopWidth: 1,
-        borderColor: "#B9B9B9",
-        color: '#ffffff',
+        width: Dimensions.get('window').width*1,
+        height: 1,
       },
 
     logo: {
         borderRadius: 25,
-        width: 150,
-        height: 150,
+        width: Dimensions.get('window').width*0.3,
+        height: Dimensions.get('window').width*0.3,
         paddingHorizontal: 0,
         paddingTop:0,
         marginBottom: 0,

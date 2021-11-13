@@ -7,7 +7,7 @@ import {
     ScrollView,
     Image,
     TextInput,
-    TouchableOpacity, Alert
+    TouchableOpacity, Alert, Dimensions
 } from 'react-native';
 import {default as axios} from "axios";
 
@@ -22,27 +22,27 @@ const PrzegladGatunku = () =>
                 </View>
                 <View style={styles.flexbox3}>
                     <Text style={styles.plantPropertiesTitle}>Stanowisko</Text>
-                    <Text style={styles.dash}>______________________________________________________</Text>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Temperatura pomieszczenia</Text>
-                    <Text style={styles.dash}>______________________________________________________</Text>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Podlewanie</Text>
-                    <Text style={styles.dash}>______________________________________________________</Text>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Nawożenie</Text>
-                    <Text style={styles.dash}>______________________________________________________</Text>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Przesadzanie</Text>
-                    <Text style={styles.dash}>______________________________________________________</Text>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Szkodniki i inne zagrożenia</Text>
-                    <Text style={styles.dash}>_____________________________________________________</Text>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
 
                 </View>
@@ -75,8 +75,9 @@ const styles = StyleSheet.create({
 
     plantPic:
     {
-        height: 203,
-        width: 175,
+        height: Dimensions.get('window').width*0.6,
+        width: Dimensions.get('window').width*0.55,
+        borderRadius: 30,
     },
 
     titleText:
@@ -98,20 +99,20 @@ const styles = StyleSheet.create({
         color: '#777777',
         fontSize: 14,
         paddingTop: 15,
+        paddingBottom:5,
     },
 
     plantProperties:
     {
         color: '#777777',
         fontSize: 12,
+        paddingTop:5,
+        paddingBottom:10,
     },
 
     dash: {
-        flex:1,
-        borderTopWidth: 1,
-        borderColor: "#B9B9B9",
-        color: '#ffffff',
-        marginBottom: -10,
+        width: Dimensions.get('window').width*1,
+        height: 1,
       },
 }
 )

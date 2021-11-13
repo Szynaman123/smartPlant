@@ -7,7 +7,7 @@ import {
     ScrollView,
     Image,
     TextInput,
-    TouchableOpacity, Alert
+    TouchableOpacity, Alert, Dimensions,
 } from 'react-native';
 import {default as axios} from "axios";
 
@@ -51,7 +51,7 @@ const Gatunki = () =>
             <Text style={styles.text2}>Gatunek w łacinie</Text>
             <Image style={styles.arrow} source={require('../assets/Arrow3.png')}/>
         </View>
-        <Text style={styles.dash}>________________________________________________________________________</Text>
+        <Image style={styles.dash} source={require('../assets/dash.png')}/>
         <TouchableOpacity onPress={onLoad}>
                     <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Pokaz gatunki" width={100}></Box>
                 </TouchableOpacity>
@@ -106,11 +106,9 @@ const styles =StyleSheet.create({
     },
 
     dash: {
-        flex:1,
-        borderTopWidth: 1,
-        borderColor: "#B9B9B9",
-        color: '#ffffff',
-      }
+        width: Dimensions.get('window').width*1,
+        height: 1,
+      },
 
 
 });
