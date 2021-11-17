@@ -14,14 +14,21 @@ import {default as axios} from "axios";
 
 const PrzegladGatunku = () =>
 {
-    const axios = require('axios').default;
+    const gettingData = async () =>
+    {
+        const axios = require('axios').default;
     
     const res = await axios.get("http://192.168.0.21:3000/plants").then(resp => {
-    const plants_array =[{}]=resp.data;
+    const plants_array =[{}]=resp.data;});
+
+    return plants_array[2].Nazwapolska;
+
+    };
+    
             
     const [nazwaPL, setNazwaPL] = useState('');
 
-    setNazwaPL(plants_array[2].Nazwapolska);
+    setNazwaPL(gettingData());
 
     /*const onLoad = async () => {
 
