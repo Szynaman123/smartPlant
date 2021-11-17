@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Box from '../components/boxes';
+import Colors from '../constants/colors';
 import {
     Text,
     View,
@@ -13,10 +14,37 @@ import {default as axios} from "axios";
 
 const PrzegladGatunku = () =>
 {
+    const axios = require('axios').default;
+    
+    const res = await axios.get("http://192.168.0.21:3000/plants").then(resp => {
+    const plants_array =[{}]=resp.data;
+            
+    const [nazwaPL, setNazwaPL] = useState('');
+
+    setNazwaPL(plants_array[2].Nazwapolska);
+
+    /*const onLoad = async () => {
+
+        //const [nazwaPL, getNazwaPL] = useState('');
+
+        const axios = require('axios').default;
+    
+            const res = await axios.get("http://192.168.0.21:3000/plants").then(resp => {
+            //console.log(resp.data);
+            //console.log(typeof resp.data);
+            const plants_array =[{}]=resp.data;
+            //console.log(plants_array[2].przesadzanie);
+
+            console.log(plants_array[1].Nazwapolska)
+
+            //nazwaPL = getNazwaPL(plants_array[1].Nazwapolska);
+            //console.log(nazwaPL);
+            ;})}*/
+
     return(
         <ScrollView>
                 <View style={styles.flexbox2}>
-                    <Text style={styles.titleText}>Nazwa gatunku po polsku</Text>
+                    <Text style={styles.titleText}>{nazwaPL}</Text>
                     <Text style={styles.titleSecondText}>Nazwa gatunku po łacinie</Text>
                     <Image style={styles.plantPic} source={require('../assets/plant.png')}/>
                 </View>
@@ -82,13 +110,13 @@ const styles = StyleSheet.create({
 
     titleText:
     {
-        color: '#98BF63',
+        color: Colors.Green,
         fontSize: 20,
     },
 
     titleSecondText:
     {
-        color: '#777777',
+        color: Colors.DarkGrey,
         fontSize: 14,
         fontStyle: 'italic',
         paddingVertical: 10,
@@ -96,7 +124,7 @@ const styles = StyleSheet.create({
 
     plantPropertiesTitle:
     {
-        color: '#777777',
+        color: Colors.DarkGrey,
         fontSize: 14,
         paddingTop: 15,
         paddingBottom:5,
@@ -104,7 +132,7 @@ const styles = StyleSheet.create({
 
     plantProperties:
     {
-        color: '#777777',
+        color: Colors.DarkGrey,
         fontSize: 12,
         paddingTop:5,
         paddingBottom:10,

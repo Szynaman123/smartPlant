@@ -11,9 +11,12 @@ import {
     Dimensions,
 } from 'react-native';
 import {default as axios} from "axios";
+import Colors from '../constants/colors';
 
 const MojeRosliny = () =>
 {
+    
+
     return(
         <ScrollView>
             <View style={styles.flexbox1}>
@@ -64,7 +67,7 @@ const styles =StyleSheet.create({
 
     text2:
     {
-        color: "#777777",
+        color: Colors.DarkGrey,
         fontSize: 10,
         fontStyle: 'italic',
 

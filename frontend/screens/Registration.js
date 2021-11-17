@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Box from '../components/boxes';
 import post, {default as axios} from 'axios';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
-
+import Colors from '../constants/colors';
 
 const Registration = ({navigation}) =>
 {
@@ -184,7 +184,7 @@ const Registration = ({navigation}) =>
       <View style={styles.container2}>
         <TouchableOpacity onPress={showData}>
 
-      <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Załóż konto!"></Box>
+      <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Załóż konto!"></Box>
       </TouchableOpacity>
       </View>
           </ScrollView>
@@ -203,7 +203,7 @@ const styles =StyleSheet.create({
       intro_text:
     {
       textAlign: 'center',
-      color: '#98BF63', 
+      color: Colors.Green, 
       fontSize: 20,
       lineHeight:22,
       letterSpacing: 0.05,
@@ -219,7 +219,7 @@ const styles =StyleSheet.create({
             margin: 12,
             borderWidth: 1,
             padding: 10,
-            borderColor: '#B9B9B9',
+            borderColor: Colors.Grey,
             borderRadius: 10,
           },
 

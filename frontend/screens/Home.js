@@ -1,6 +1,7 @@
 import React from 'react';
 import Box from '../components/boxes';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TouchableOpacity} from 'react-native';
+import Colors from '../constants/colors';
 
 const Home = ( {navigation} ) =>
 {
@@ -25,13 +26,13 @@ const Home = ( {navigation} ) =>
           <View>
              <View>
              <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
-                 <Box colorHex="#EAF2E0" colorTextHex="#98BF63" TextInside="Rejestracja"></Box>
+                 <Box colorHex={Colors.LightGreen} colorTextHex={Colors.Green} TextInside="Rejestracja"></Box>
                  </TouchableOpacity>
          </View>
 
          <View>
          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                 <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Logowanie"></Box>
+                 <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Logowanie"></Box>
                  </TouchableOpacity>
          </View>
          </View>
@@ -70,21 +71,21 @@ const styles = StyleSheet.create({
     {
       textAlign: 'center',
       fontWeight: 'bold',
-      color: '#98BF63', 
+      color: Colors.Green, 
       fontSize: 20,
     },
   
     logo_text:
     {
       textAlign: 'center',
-      color: '#98BF63', 
+      color: Colors.Green, 
       fontSize: 36,
     },
   
     intro_text:
     {
       textAlign: 'center',
-      color: '#608844', 
+      color: Colors.DarkGreen, 
       fontSize: 18,
       lineHeight:22,
       letterSpacing: 0.05,

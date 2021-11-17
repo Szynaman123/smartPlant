@@ -10,6 +10,7 @@ import {
     TouchableOpacity, Alert, Dimensions,
 } from 'react-native';
 import {default as axios} from "axios";
+import Colors from '../constants/colors';
 import { useLogin } from '../context/LoginProvider';
 
 
@@ -100,7 +101,7 @@ const Login = () =>
                        source={require('../assets/loginpic.png')}
                 />
                 <TouchableOpacity style={styles.loginbox} onPress={onPress}>
-                    <Box colorHex="#98BF63" colorTextHex="#F9F9F9" TextInside="Zaloguj" width={100}></Box>
+                    <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Zaloguj" width={100}></Box>
                 </TouchableOpacity>
                 <Image style = {styles.background}
                        source={require('../assets/background.png')}
@@ -125,14 +126,14 @@ const styles =StyleSheet.create({
         margin: 12,
         borderWidth: 1,
         padding: 10,
-        borderColor: '#B9B9B9',
+        borderColor: Colors.Grey,
         borderRadius: 10,
     },
 
     intro_text:
     {
         textAlign: 'center',
-        color: '#98BF63',
+        color: Colors.Green,
         fontSize: 20,
         lineHeight:22,
         letterSpacing: 0.05,
