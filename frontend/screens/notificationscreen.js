@@ -5,13 +5,14 @@ import post from 'axios';
 import Colors from '../constants/colors';
 import { Text, View, Dimensions, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 
-const notificationscreen = () =>
+const notificationscreen = props =>
 {
+    //const {profile} = useLogin();
     return(
         <ScrollView>
             <View style={styles.flexbox}>
             <View style={styles.helloView}>
-            <Text style={styles.txtHello}>Witaj {}!</Text>
+            <Text style={styles.txtHello}>Witaj {/*profile*/}!</Text>
             <Image style={styles.hello} source={require('../assets/hello4.png')}/>
             <Image style={styles.hello} source={require('../assets/brakczynnosci.png')}/>
             </View>

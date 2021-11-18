@@ -14,21 +14,68 @@ import {default as axios} from "axios";
 
 const PrzegladGatunku = () =>
 {
-    const gettingData = async () =>
-    {
-        const axios = require('axios').default;
-    
-    const res = await axios.get("http://192.168.0.21:3000/plants").then(resp => {
-    const plants_array =[{}]=resp.data;});
+    const idGatunku = 400; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
 
-    return plants_array[2].Nazwapolska;
 
-    };
-    
-            
+    ///////Poniżej useStaty, w których zapisujemy informacje z bazy w zależności od wybranego ID//////
     const [nazwaPL, setNazwaPL] = useState('');
+    const [nazwaLac, setNazwaLac] = useState('');
+    const [position, setPosition] = useState('');
+    const [temperature, setTemperature] = useState('');
+    const [watering, setWatering] = useState('');
+    const [fertilization, setFertilization] = useState('');
+    const [replanting, setReplanting] = useState('');
+    const [pests, setPests] = useState('');
 
-    setNazwaPL(gettingData());
+    const [loaded, isLoaded] = useState(true)
+
+    /////Pobieramy dane z bazy, następnie pobrane dane zapisujemy do use State/////
+    axios.get("http://192.168.0.21:3000/plants").then(resp => {
+    const plants_array =[{}]=resp.data;
+    //const plantName = plants_array[idGatunku].Nazwapolska;
+    setNazwaPL(plants_array[idGatunku].Nazwapolska);
+    setNazwaLac(plants_array[idGatunku].Nazwalacina);
+    setPosition(plants_array[idGatunku].stanowisko);
+    setTemperature(plants_array[idGatunku].temperatura);
+    setWatering(plants_array[idGatunku].podlewanie);
+    setFertilization(plants_array[idGatunku].nawozenie);
+    setReplanting(plants_array[idGatunku].przesadzanie);
+    setPests(plants_array[idGatunku].szkodniki);
+});
+
+///Zmienne, które potrzebne są nam do przypisania do nich wartości state'a////
+    let plantname;
+    let plantnamelatin;
+    let plantStanowisko;
+    let plantTemperature;
+    let plantPodlewanie;
+    let plantNawozenie;
+    let plantPrzesadzanie;
+    let plantSzkodniki;
+
+
+    ////Przypisujemy do zmiennych komponenty text, które zawierają w sobie wartości UseStatów, które nadaliśmy powyżej////
+    /// w returnie musimy w odpowiednim miejscu po prostu przekazać te zmienne - np {plantname}////
+    if(loaded)
+    {
+        plantname = 
+          (<Text>{nazwaPL}</Text>);
+        plantnamelatin =
+        (<Text>{nazwaLac}</Text>);
+        plantStanowisko = 
+        (<Text>{position}</Text>);
+        plantTemperature = 
+        (<Text>{temperature}</Text>);
+        plantPodlewanie = 
+        (<Text>{watering}</Text>);
+        plantNawozenie = 
+        (<Text>{fertilization}</Text>);
+        plantPrzesadzanie =
+        (<Text>{replanting}</Text>);
+        plantSzkodniki = 
+        (<Text>{pests}</Text>);
+
+    }
 
     /*const onLoad = async () => {
 
@@ -51,34 +98,34 @@ const PrzegladGatunku = () =>
     return(
         <ScrollView>
                 <View style={styles.flexbox2}>
-                    <Text style={styles.titleText}>{nazwaPL}</Text>
-                    <Text style={styles.titleSecondText}>Nazwa gatunku po łacinie</Text>
+                    <Text style={styles.titleText}>{plantname}</Text>
+                    <Text style={styles.titleSecondText}>{plantnamelatin}</Text>
                     <Image style={styles.plantPic} source={require('../assets/plant.png')}/>
                 </View>
                 <View style={styles.flexbox3}>
                     <Text style={styles.plantPropertiesTitle}>Stanowisko</Text>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
-                    <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
+                    <Text style={styles.plantProperties}>{plantStanowisko}</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Temperatura pomieszczenia</Text>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
-                    <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
+                    <Text style={styles.plantProperties}>{plantTemperature}</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Podlewanie</Text>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
-                    <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
+                    <Text style={styles.plantProperties}>{plantPodlewanie}</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Nawożenie</Text>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
-                    <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
+                    <Text style={styles.plantProperties}>{plantNawozenie}</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Przesadzanie</Text>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
-                    <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
+                    <Text style={styles.plantProperties}>{plantPrzesadzanie}</Text>
 
                     <Text style={styles.plantPropertiesTitle}>Szkodniki i inne zagrożenia</Text>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
-                    <Text style={styles.plantProperties}>Tu będzie wkrótce info o pielęgnacji</Text>
+                    <Text style={styles.plantProperties}>{plantSzkodniki}</Text>
 
                 </View>
 
