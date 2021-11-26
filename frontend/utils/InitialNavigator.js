@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import Home from "../screens/Home";
 import Registration from "../screens/Registration";
 import Login from "../screens/Login";
-import { useLogin } from './../context/LoginProvider';
+import { useLogin, useId } from './../context/LoginProvider';
 import {createStackNavigator} from "@react-navigation/stack";
 import DrawerNavigator from "./DrawerNavigator";
+import SpeciesStackNavigator from "./SpeciesStackNavigator";
 
 
 
@@ -60,7 +61,16 @@ const StackNavigator =() =>{
 };
 const InitialStack = () => {
     const { isLoggedIn } = useLogin();
-    return isLoggedIn ? <DrawerNavigator/> : <StackNavigator />;
+    const { isChosen } = useId();
+
+    if((isLoggedIn === true) && (isChosen === true))
+    {
+        return <SpeciesStackNavigator/>
+    }else if(isLoggedIn === true)
+    {
+       return <DrawerNavigator/>
+    }
+    else return <StackNavigator/>
 };
 
 export default InitialStack;

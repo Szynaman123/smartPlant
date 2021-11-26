@@ -7,12 +7,16 @@ const LoginProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [profile, setProfile] = useState({});
 
+    const [isChosen, setIsChosen] = useState(false);
+    const [idSpecies, setIdSpecies] = useState();
+
    // let profileName;
    //profileName = (<Text>{profile.firstname}</Text>);
 
     return (
         <LoginContext.Provider
-            value={{ isLoggedIn, setIsLoggedIn, profile, setProfile }}
+            value={{ isLoggedIn, setIsLoggedIn, profile, setProfile,
+                isChosen, setIsChosen, idSpecies, setIdSpecies }}
         >
             {children}
         </LoginContext.Provider>
@@ -21,5 +25,6 @@ const LoginProvider = ({ children }) => {
 };
 
 export const useLogin = () => useContext(LoginContext);
+export const useId = () => useContext(LoginContext);
 
 export default LoginProvider;

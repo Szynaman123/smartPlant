@@ -12,10 +12,13 @@ import {
 } from 'react-native';
 import {default as axios} from "axios";
 import IP from '../constants/ip';
+import { useId } from '../context/LoginProvider';
 
 const PrzegladGatunku = () =>
 {
-    const idGatunku = 36; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
+    const { idSpecies, setIsChosen } = useId();
+
+    const idGatunku = idSpecies; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
 
 
     ///////Poniżej useStaty, w których zapisujemy informacje z bazy w zależności od wybranego ID//////
@@ -75,7 +78,6 @@ const PrzegladGatunku = () =>
         (<Text>{replanting}</Text>);
         plantSzkodniki = 
         (<Text>{pests}</Text>);
-
     }
 
     /*const onLoad = async () => {
@@ -101,7 +103,7 @@ const PrzegladGatunku = () =>
                 <View style={styles.flexbox2}>
                     <Text style={styles.titleText}>{plantname}</Text>
                     <Text style={styles.titleSecondText}>{plantnamelatin}</Text>
-                    <Image style={styles.plantPic} source={require('../assets/images/' + idGatunku + '.jpg')}/>
+                    <Image style={styles.plantPic} source={require('../assets/plant.png')}/>
                 </View>
                 <View style={styles.flexbox3}>
                     <Text style={styles.plantPropertiesTitle}>Stanowisko</Text>

@@ -8,16 +8,19 @@ import {
     FlatList,
     Image,
     TextInput,
-    TouchableOpacity, Alert, Dimensions,
+    TouchableOpacity, Alert, Dimensions, ShadowPropTypesIOS,
 } from 'react-native';
 import Colors from '../constants/colors';
 import {default as axios} from "axios";
 import IP from '../constants/ip';
+import { useId } from '../context/LoginProvider';
 
 
 const Gatunki = () =>
 {
     const [loaded, isLoaded] = useState(true)
+
+    const { setIdSpecies, setIsChosen} = useId();
 
     const [plantsArray, setPlantsArray] = useState();
 
@@ -27,15 +30,29 @@ const Gatunki = () =>
 
     let plantList;
 
-    if(loaded)
-    {
+    
+        const onPressStack = (id) =>
+        {
+            setIsChosen(true);
+            setIdSpecies(id);
+
+        }
+
         plantList=(
             <FlatList 
             data={plantsArray}
             renderItem={({ item }) =>
-             (<Text style={styles.text1}>{item.Nazwapolska}</Text>) }/>);
+             (<>
+             <TouchableOpacity onPress={ ()=> onPressStack(item.idgatunku) }>
+            <View>
+             <Text style={styles.text1}>{item.Nazwapolska}</Text>
+             <Text style={styles.text2}>{item.Nazwalacina}</Text>
+             </View>
+             </TouchableOpacity>
+             <Image style={styles.dash} source={require('../assets/dash.png')}/>
+</>) }/>);
 
-    };
+    
 
     
 
