@@ -12,6 +12,7 @@ import {
 import {default as axios} from "axios";
 import Colors from '../constants/colors';
 import { useLogin } from '../context/LoginProvider';
+import IP from '../constants/ip';
 
 
 const Login = () =>
@@ -43,24 +44,24 @@ const Login = () =>
 
     const onPress = async () => {
         const axios = require('axios').default;
-        const res = await axios.get("http://192.168.0.21:3000/users").then(resp => {
+        const res = await axios.get("http://"+ IP.ip +"/users").then(resp => {
 
-            console.log(resp.data);// laduje surowe dane
-            console.log(typeof resp.data);//dane sa typu obiekt
+            //console.log(resp.data);// laduje surowe dane
+            //console.log(typeof resp.data);//dane sa typu obiekt
             const arr =[{},{}]=resp.data;//tablica obiektow zaincludowama zwracanymi danymi
-            console.log(typeof arr); //dane sa nadal typu obiekt
-            console.log(arr[0].firstname);//natalia
-            console.log(arr[0].mail);//porczynska..
-            console.log(arr[0].password);
-            console.log({email});//wprowadzony mail obiekt
-            console.log({haslo});//wprowadzony pass obiekt
+            //console.log(typeof arr); //dane sa nadal typu obiekt
+            //console.log(arr[0].firstname);//natalia
+            //console.log(arr[0].mail);//porczynska..
+            //console.log(arr[0].password);
+            //console.log({email});//wprowadzony mail obiekt
+            //console.log({haslo});//wprowadzony pass obiekt
             const mailObject = {} ={email};//nowy obiekt zaincludowany obiektem mail
             const hasloObject ={}={haslo};
             const wprowadzonyMail =mailObject.email;
-            console.log(wprowadzonyMail);//wprowadzony mail string
+           // console.log(wprowadzonyMail);//wprowadzony mail string
 
             const wprowadzoneHaslo= hasloObject.haslo;
-            console.log(wprowadzoneHaslo);//wprowadzone haslo string
+            //console.log(wprowadzoneHaslo);//wprowadzone haslo string
 
             let czyzaloguje = false;
             for (let i=0; i<arr.length; i++)

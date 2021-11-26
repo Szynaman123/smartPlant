@@ -94,6 +94,11 @@ app.get("/users", async (req, res) => {
   res.json(users);
 });
 
+app.get("/users/:firstname", async (req, res) => {
+  const user = await Plant.find({firstname: req.params.firstname});
+  res.json(user);
+});
+
 app.get("/plants/:idgatunku", async (req, res) => {
   const plant = await Plant.find({idgatunku: req.params.idgatunku});
   res.json(plant);

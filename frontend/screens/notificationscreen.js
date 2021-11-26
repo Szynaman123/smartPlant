@@ -1,18 +1,18 @@
 import React, {Profiler, useState} from 'react';
-import LoginProvider, { useLogin } from '../context/LoginProvider';
-import Box from '../components/boxes';
-import post from 'axios';
+import {profileName, profileName1} from '../context/LoginProvider';
 import Colors from '../constants/colors';
-import { Text, View, Dimensions, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
+import { Text, View, Dimensions, StyleSheet, ScrollView, Image,} from 'react-native';
+import { useLogin } from './../context/LoginProvider';
 
 const notificationscreen = props =>
 {
+    const { setIsLoggedIn, profile } = useLogin();
     //const {profile} = useLogin();
     return(
         <ScrollView>
             <View style={styles.flexbox}>
             <View style={styles.helloView}>
-            <Text style={styles.txtHello}>Witaj {/*profile*/}!</Text>
+            <Text style={styles.txtHello}>Witaj {profile.firstname}!</Text>
             <Image style={styles.hello} source={require('../assets/hello4.png')}/>
             <Image style={styles.hello} source={require('../assets/brakczynnosci.png')}/>
             </View>

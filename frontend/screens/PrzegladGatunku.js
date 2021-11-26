@@ -11,10 +11,11 @@ import {
     TouchableOpacity, Alert, Dimensions
 } from 'react-native';
 import {default as axios} from "axios";
+import IP from '../constants/ip';
 
 const PrzegladGatunku = () =>
 {
-    const idGatunku = 400; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
+    const idGatunku = 36; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
 
 
     ///////Poniżej useStaty, w których zapisujemy informacje z bazy w zależności od wybranego ID//////
@@ -30,7 +31,7 @@ const PrzegladGatunku = () =>
     const [loaded, isLoaded] = useState(true)
 
     /////Pobieramy dane z bazy, następnie pobrane dane zapisujemy do use State/////
-    axios.get("http://192.168.0.21:3000/plants").then(resp => {
+    axios.get("http://"+ IP.ip +"/plants").then(resp => {
     const plants_array =[{}]=resp.data;
     //const plantName = plants_array[idGatunku].Nazwapolska;
     setNazwaPL(plants_array[idGatunku].Nazwapolska);
@@ -100,7 +101,7 @@ const PrzegladGatunku = () =>
                 <View style={styles.flexbox2}>
                     <Text style={styles.titleText}>{plantname}</Text>
                     <Text style={styles.titleSecondText}>{plantnamelatin}</Text>
-                    <Image style={styles.plantPic} source={require('../assets/plant.png')}/>
+                    <Image style={styles.plantPic} source={require('../assets/images/' + idGatunku + '.jpg')}/>
                 </View>
                 <View style={styles.flexbox3}>
                     <Text style={styles.plantPropertiesTitle}>Stanowisko</Text>
@@ -158,7 +159,7 @@ const styles = StyleSheet.create({
     plantPic:
     {
         height: Dimensions.get('window').width*0.6,
-        width: Dimensions.get('window').width*0.55,
+        width: Dimensions.get('window').width*0.6,
         borderRadius: 30,
     },
 

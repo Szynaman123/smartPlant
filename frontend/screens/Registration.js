@@ -3,6 +3,7 @@ import Box from '../components/boxes';
 import post, {default as axios} from 'axios';
 import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
 import Colors from '../constants/colors';
+import IP from '../constants/ip';
 
 const Registration = ({navigation}) =>
 {
@@ -78,7 +79,7 @@ const Registration = ({navigation}) =>
         password: pass,
     };
 
-        const res = await axios.post('http://192.168.0.21:3000/users', newUser)
+        const res = await axios.post("http://"+ IP.ip +"/users", newUser)
             .then((response) => {
                 showSuccessAlert();
                 console.log(response);
@@ -106,7 +107,7 @@ const Registration = ({navigation}) =>
 
       const axios = require('axios').default;
 
-        const re = await axios.get("http://192.168.0.21:3000/users").then(resp => {
+        const re = await axios.get("http://"+ IP.ip +"/users").then(resp => {
 
             console.log(resp.data);// laduje surowe dane
             //console.log(typeof resp.data);//dane sa typu obiekt
