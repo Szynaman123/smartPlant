@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from 'react-native';
 import {
     createStackNavigator,
     StackContentScrollView,
@@ -7,7 +6,7 @@ import {
 } from '@react-navigation/stack';
 import { useId } from './../context/LoginProvider';
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
-import PrzegladGatunku from "../screens/PrzegladGatunku";
+import PrzegladRosliny from "../screens/PrzegladRosliny";
 
 const MyTheme = {
     ...DefaultTheme,
@@ -21,10 +20,9 @@ const Stack = createStackNavigator();
 
 const StackNavigator = props =>
 {
-    const { setIsChosen, idSpecies} = useId();
     return(
         <Stack.Navigator>
-            <Stack.Screen name="przegladgatunku" component={PrzegladGatunku}
+            <Stack.Screen name="przegladrosliny" component={PrzegladRosliny}
             options={{
                 title: '',
                 headerStyle: {

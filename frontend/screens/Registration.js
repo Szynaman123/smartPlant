@@ -109,7 +109,7 @@ const Registration = ({navigation}) =>
 
         const re = await axios.get("http://"+ IP.ip +"/users").then(resp => {
 
-            console.log(resp.data);// laduje surowe dane
+            //console.log(resp.data);// laduje surowe dane
             //console.log(typeof resp.data);//dane sa typu obiekt
             const arr =[{},{}]=resp.data;//tablica obiektow zaincludowama zwracanymi danymi
             //console.log(typeof arr); //dane sa nadal typu obiekt
@@ -193,7 +193,7 @@ const Registration = ({navigation}) =>
         );
 };
 
-const styles =StyleSheet.create({
+const styles = StyleSheet.create({
 
     container2: {
         paddingHorizontal: 10,

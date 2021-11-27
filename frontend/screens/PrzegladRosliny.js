@@ -9,16 +9,50 @@ import {
     TouchableOpacity, Alert,
     Dimensions,
 } from 'react-native';
+import {default as axios} from "axios";
+import IP from '../constants/ip'
 
-const Roslina = () =>{
-    return(
-        <ScrollView>
-            <View style={styles.flexbox1}>
-                <View style={styles.flexbox2}>
+
+const PrzegladRosliny = () =>{
+
+    /*const dodajrosline =() =>
+    {
+        
+    const newRoslina1= {
+            'idrosliny': 3,
+            'nazwa': 'Andrzej the plant',
+            'idgatunku': 344,
+            'idczujnika': 3,
+    }
+
+    const axios = require('axios').default;
+    const res = axios.post('http://192.168.0.111:3000/userplants', newRoslina1).then((response) => {
+            console.log(response);})
+}*/
+
+    const idRosliny = 1;
+
+    const [plantName, setPlantName] = useState();
+    const [speciesId, setSpeciesId] = useState();
+    const [sensorId, setSensorId] = useState();
+
+    axios.get("http://"+ IP.ip +"/userplants").then(resp => {
+    const plants_array =[{}]=resp.data;
+
+    setPlantName(plants_array[idRosliny].nazwa);
+    setSpeciesId(plants_array[idRosliny].idgatunku);
+    setSensorId(plants_array[idRosliny].idczujnika);
+});
+
+    let plant;
+
+    plant = (
+        <>
+         <View style={styles.flexbox2}>
                     <Image style={styles.plantPic} source={require('../assets/plant.png')}/>
                     <View style={styles.flexbox1}>
-                        <Text style={styles.plantNameText}>Nazwa rośliny</Text>
-                        <Text style={styles.gatunekText}>Gatunek rośliny</Text>
+                        <Text style={styles.plantNameText}>{plantName}</Text>
+                        <Text style={styles.gatunekText}>{speciesId}</Text>
                     </View>
                 </View>
                 <View style={styles.flexbox4}>
@@ -43,10 +77,17 @@ const Roslina = () =>{
                         <Text style={styles.propertiesTextGreen}>Brak</Text>
                     </View>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
-                    <TouchableOpacity onPress={() => Alert.alert('Soon')}>
+                    <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
                     <Text style={styles.czytajWiecej}>Czytaj więcej o pielęgnacji tego gatunku...</Text>
                     </TouchableOpacity>
                 </View>
+        </>
+    )
+
+    return(
+        <ScrollView>
+            <View style={styles.flexbox1}>
+               
 
             </View>
         </ScrollView>
@@ -141,4 +182,4 @@ const styles = StyleSheet.create(
     }
 )
 
-export default Roslina;
+export default PrzegladRosliny;

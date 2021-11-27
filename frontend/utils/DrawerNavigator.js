@@ -1,7 +1,7 @@
 import notificationscreen from "../screens/notificationscreen";
 import MojeRosliny from "../screens/MojeRosliny";
 import Gatunki from "../screens/Gatunki";
-import PrzegladGatunku from "../screens/PrzegladGatunku";
+import PrzegladRosliny from "../screens/PrzegladRosliny";
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import {
@@ -9,7 +9,7 @@ import {
     DrawerContentScrollView,
     DrawerItemList,
 } from '@react-navigation/drawer';
-import { useLogin } from './../context/LoginProvider';
+import { useLogin, useInitial } from './../context/LoginProvider';
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 
 const MyTheme = {
@@ -63,8 +63,10 @@ const CustomDrawer = props => {
 
 const DrawerNavigator = () => {
 
+    const { setInitial, initial } = useInitial();
     return (
         <Drawer.Navigator
+        initialRouteName= {initial}
             screenOptions={{
                 headerShown: true,
                 headerStyle: {
@@ -74,7 +76,8 @@ const DrawerNavigator = () => {
                 },
                 headerTitle: '',
             }}
-            drawerContent={props => <CustomDrawer {...props} />}
+            drawerContent={props => <CustomDrawer {...props} />
+        }
         >
             <Drawer.Screen name="notificationscreen" component={notificationscreen}
                           options={{
@@ -122,23 +125,22 @@ const DrawerNavigator = () => {
                                    fontWeight: 'bold',
                                },
                            }}/>
-                           <Drawer.Screen name="PrzegladGatunku" component={PrzegladGatunku}
+                           <Drawer.Screen name="PrzegladRosliny" component={PrzegladRosliny}
                            options={{
                             drawerActiveBackgroundColor:'#F9F9F9',
                             drawerActiveTintColor:'#777777',
                             drawerInactiveTintColor: '#777777',
-                               title: 'Przegląd gatunku',
+                               title: 'Roslina',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
                                },
-                               cardStyle: {
-                                backgroundColor: "#ffffff",
-                            },
                                headerTintColor: '#fff',
                                headerTitleStyle: {
                                    fontWeight: 'bold',
                                },
                            }}/>
+                           
+                           
                            
         </Drawer.Navigator>
 

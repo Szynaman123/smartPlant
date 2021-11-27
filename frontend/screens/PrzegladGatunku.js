@@ -13,10 +13,14 @@ import {
 import {default as axios} from "axios";
 import IP from '../constants/ip';
 import { useId } from '../context/LoginProvider';
+import { useInitial } from '../context/LoginProvider';
+import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
+import Gatunki from './Gatunki';
 
 const PrzegladGatunku = () =>
 {
     const { idSpecies, setIsChosen } = useId();
+    const { setInitial } = useInitial();
 
     const idGatunku = idSpecies; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
 
@@ -80,6 +84,12 @@ const PrzegladGatunku = () =>
         (<Text>{pests}</Text>);
     }
 
+    const goBackButton = () =>
+    {
+        setIsChosen(false);
+        setInitial('Gatunki');
+    }
+
     /*const onLoad = async () => {
 
         //const [nazwaPL, getNazwaPL] = useState('');
@@ -100,6 +110,9 @@ const PrzegladGatunku = () =>
 
     return(
         <ScrollView>
+            <TouchableOpacity onPress={goBackButton}>
+                <Text style={styles.plantProperties}> Powrót do listy gatunków</Text>    
+            </TouchableOpacity>
                 <View style={styles.flexbox2}>
                     <Text style={styles.titleText}>{plantname}</Text>
                     <Text style={styles.titleSecondText}>{plantnamelatin}</Text>
