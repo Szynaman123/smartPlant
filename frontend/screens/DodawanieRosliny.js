@@ -4,6 +4,7 @@ import { Text,
     StyleSheet,
     ScrollView,
     TextInput,
+    Button,
     Image,
     TouchableOpacity, Alert,
     Dimensions} from 'react-native';
@@ -11,8 +12,8 @@ import {default as axios} from "axios";
 import IP from '../constants/ip';
 import Colors from '../constants/colors';
 import { Dropdown } from 'react-native-element-dropdown';
-import CalendarPicker from 'react-native-calendar-picker';
-
+import DateTimePicker from '@react-native-community/datetimepicker';
+import Box from '../components/boxes';
 
 const DodawanieRosliny = () =>
 {
@@ -24,7 +25,23 @@ const DodawanieRosliny = () =>
     const [isFocus, setIsFocus] = useState(false);
     const [value, setValue] = useState(null);
 
+    //----------------------------------------------------------------
+   
+    const [isPickerShow, setIsPickerShow] = useState(false);
+  const [date, setDate] = useState(new Date(Date.now()));
 
+  const showPicker = () => {
+    setIsPickerShow(true);
+  };
+
+  const onChange = (event, value) => {
+    setDate(value);
+    if (Platform.OS === 'android') {
+      setIsPickerShow(false);
+    }};
+
+  
+    //----------------------------------------------------------------
 
     const nameInputHandler = (enteredName) => {
         setPlantName(enteredName);
@@ -39,10 +56,8 @@ const DodawanieRosliny = () =>
     setSpecies(plants_array);});
 
 
-
-
     return(
-        <ScrollView>
+        <ScrollView style={styles.container}>
             <Text style={styles.text}>1. Wpisz nazwę swojej rośliny.</Text>
             <TextInput
         style={styles.input}
@@ -80,11 +95,38 @@ const DodawanieRosliny = () =>
         keyboardType = 'numeric'
         maxLength={2}
       />
+      <Text style={styles.text}>4. Dodaj datę ostatniego przesadzania rośliny bądź datę zakupu.</Text>
 
-        <CalendarPicker
-          onDateChange={this.onDateChange}
+      <View>
+      
+      
+      <View style={styles.container}>
+      {/* Display the selected date */}
+      <View style={styles.pickedDateContainer}>
+        <Text style={styles.pickedDate}>{date.toUTCString()}</Text>
+      </View>
+
+      {/* The button that used to trigger the date picker */}
+      {!isPickerShow && (
+        <View style={styles.btnContainer}>
+          <Button title="Show Picker" color="purple" onPress={showPicker} />
+        </View>
+      )}
+
+      {/* The date picker */}
+      {isPickerShow && (
+        <DateTimePicker
+          value={date}
+          mode={'date'}
+          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+          is24Hour={true}
+          onChange={onChange}
+          style={styles.datePicker}
         />
-
+      )}
+    </View>
+      
+    </View>
         </ScrollView>
 
     );
@@ -110,9 +152,39 @@ const styles = StyleSheet.create(
             borderColor: Colors.Grey,
             borderRadius: 10,
           },
+          container: {
+            flex: 1,
+           padding: 20,
+            //height: Dimensions.get('window').width*0.6,
+            //width: Dimensions.get('window').width*0.6,
+          },
+        
+          text: 
+          {
+              fontSize: 15,
+              color: Colors.PastelGreen,
+          },
+          pickedDateContainer: {
+            padding: 20,
+            backgroundColor: '#eee',
+            borderRadius: 10,
+          },
+          pickedDate: {
+            fontSize: 18,
+            color: 'black',
+          },
+          btnContainer: {
+            padding: 30,
+          },
+          // This only works on iOS
+          datePicker: {
+            width: 320,
+            height: 260,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+          },
+        });
 
-
-    }
-)
 
 export default DodawanieRosliny;

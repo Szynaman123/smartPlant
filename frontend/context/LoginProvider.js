@@ -14,6 +14,8 @@ const LoginProvider = ({ children }) => {
     const [plantId, setPlantId] = useState();
 
     const [initial, setInitial] = useState("notificationscreen");
+    const [startDate, setStartDate] = useState(null);
+    const [startDateGlobal, setStartDateGlobal] = useState();
 
 
    // let profileName;
@@ -23,7 +25,9 @@ const LoginProvider = ({ children }) => {
         <LoginContext.Provider
             value={{ isLoggedIn, setIsLoggedIn, profile, setProfile,
                 isChosen, setIsChosen, idSpecies, setIdSpecies, initial, setInitial,
-            plantId, setPlantId, isPlantChosen, setIsPlantChosen }}
+            plantId, setPlantId, isPlantChosen, setIsPlantChosen, startDate, setStartDate,
+            startDateGlobal, setStartDateGlobal
+        }}
         >
             {children}
         </LoginContext.Provider>
@@ -33,6 +37,8 @@ const LoginProvider = ({ children }) => {
 
 export const useLogin = () => useContext(LoginContext);
 export const useId = () => useContext(LoginContext);
+export const useDate = () => useContext(LoginContext);
+export const useDateGlobal = () => useContext(LoginContext);
 export const useInitial = () => useContext(LoginContext);
 
 export default LoginProvider;
