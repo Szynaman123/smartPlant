@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const json=require("./Plants.json")
+
 const app = express();
 
 const Schema = mongoose.Schema;
@@ -37,7 +38,9 @@ const UserPlantsSchema = new Schema({
   idrosliny: Number,
   nazwa: String,
   idgatunku: Number,
-  idczujnika: Number,
+  sensor_id: Number,
+  data_przesadzania: Date,
+  data_nawozenia: Date,
 });
 
 const User = mongoose.model("User", UserSchema);
@@ -49,9 +52,9 @@ const UserPlant = mongoose.model("UserPlant", UserPlantsSchema);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/hello-world", function (req, res) {
-  res.send("Siemano");
-});
+// app.get("/hello-world", function (req, res) {
+//   res.send("Siemano");
+// });
 
 //app.post("/plants", (req, res) => {
   //const plants = ["rose", "tuilp"];
@@ -78,14 +81,17 @@ app.post("/userplants", (req,res) =>
   const idrosliny = req.body.idrosliny;
   const nazwa = req.body.nazwa;
   const idgatunku = req.body.idgatunku;
-  const idczujnika = req.body.idczujnika;
-
+  const sensor_id = req.body.sensor_id;
+  const data_przesadzania=req.body.data_przesadzania;
+  const data_nawozenia=req.body.data_nawozenia;
   const roslina = new UserPlant();
 
   roslina.idrosliny = idrosliny;
   roslina.nazwa = nazwa;
   roslina.idgatunku = idgatunku;
-  roslina.idczujnika = idczujnika;
+  roslina.sensor_id = sensor_id;
+  roslina.data_przesadzania=data_przesadzania;
+  roslina.data_nawozenia=data_nawozenia;
 
   roslina.save();
   res.json(req.body);
@@ -134,6 +140,45 @@ app.post("/sensors", async (req, res) => {
   sensor.save();
   res.json(req.body);
     }
+});
+
+app.get("/sensors", async (req, res) => {
+  const sensors = await Sensor.find();
+  res.json(sensors);
+});
+app.get("/sensors/:sensor_id", async (req, res) => {
+  const sensors = await Sensor.find({sensor_id: req.params.sensor_id});
+  res.json(sensors);
+});
+
+app.get("/userplants", async (req, res) => {
+  const userplants = await UserPlant.find();
+  res.json(userplants);
+});
+app.get("/userplants/:idrosliny", async (req, res) => {
+  const userplants = await UserPlant.find({idrosliny: req.params.idrosliny});
+  res.json(userplants);
+});
+
+app.get("/userplants/:nazwa", async (req, res) => {
+  const userplants = await UserPlant.find({nazwa: req.params.nazwa});
+  res.json(userplants);
+});
+app.get("/userplants/:idgatunku", async (req, res) => {
+  const userplants = await UserPlant.find({idgatunku: req.params.idgatunku});
+  res.json(userplants);
+});
+app.get("/userplants/:sensor_id", async (req, res) => {
+  const userplants = await UserPlant.find({sensor_id: req.params.sensor_id});
+  res.json(userplants);
+});
+app.get("/userplants/:data_przesadzania", async (req, res) => {
+  const userplants = await UserPlant.find({data_przesadzania: req.params.data_przesadzania});
+  res.json(userplants);
+});
+app.get("/userplants/:data_nawozenia", async (req, res) => {
+  const userplants = await UserPlant.find({data_nawozenia: req.params.data_nawozenia});
+  res.json(userplants);
 });
 
 app.get("/users", async (req, res) => {
