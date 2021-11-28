@@ -290,6 +290,14 @@ const start = async () => {
   app.listen(3000);
   console.log(await Plant.find({ Nazwapolska: 'Adiantum' }).exec());
   console.log(await User.find({ firstname: 'Natalia' }).exec());
+  // const sensor= new Sensor();
+  //   sensor.sensor_id=1;
+  //   sensor.humidity=25;
+  // sensor.save();
+  // const sensor2= new Sensor();
+  //   sensor2.sensor_id=2;
+  //   sensor2.humidity=30;
+  // sensor2.save();
 };
 
 start();
