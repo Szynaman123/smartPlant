@@ -2,6 +2,7 @@ import notificationscreen from "../screens/notificationscreen";
 import MojeRosliny from "../screens/MojeRosliny";
 import Gatunki from "../screens/Gatunki";
 import PrzegladRosliny from "../screens/PrzegladRosliny";
+import DodawanieRosliny from "../screens/DodawanieRosliny";
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import {
@@ -131,6 +132,20 @@ const DrawerNavigator = () => {
                             drawerActiveTintColor:'#777777',
                             drawerInactiveTintColor: '#777777',
                                title: 'Roslina',
+                               headerStyle: {
+                                   backgroundColor: '#98BF63',
+                               },
+                               headerTintColor: '#fff',
+                               headerTitleStyle: {
+                                   fontWeight: 'bold',
+                               },
+                           }}/>
+                           <Drawer.Screen name="DodawanieRosliny" component={DodawanieRosliny}
+                           options={{
+                            drawerActiveBackgroundColor:'#F9F9F9',
+                            drawerActiveTintColor:'#777777',
+                            drawerInactiveTintColor: '#777777',
+                               title: 'Dodaj roślinę',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
                                },

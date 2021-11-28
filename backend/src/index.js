@@ -14,6 +14,11 @@ const UserSchema = new Schema({
   password: String,
 });
 
+const SensorSchema = new Schema({
+  sensor_id: Number,
+  humidity: Number,
+});
+
 const PlantSchema = new Schema({
   Nazwapolska: String,
   Nazwalacina: String,
@@ -28,8 +33,17 @@ const PlantSchema = new Schema({
   przesadzanie: String,
 });
 
+const UserPlantsSchema = new Schema({
+  idrosliny: Number,
+  nazwa: String,
+  idgatunku: Number,
+  idczujnika: Number,
+});
+
 const User = mongoose.model("User", UserSchema);
 const Plant = mongoose.model("Plant", PlantSchema);
+const Sensor = mongoose.model("Sensor", SensorSchema);
+const UserPlant = mongoose.model("UserPlant", UserPlantsSchema);
 
 
 app.use(bodyParser.json());
@@ -56,6 +70,24 @@ app.post("/users",  (req, res) => {
   user.password = password;
   
   user.save();
+  res.json(req.body);
+});
+
+app.post("/userplants", (req,res) =>
+{
+  const idrosliny = req.body.idrosliny;
+  const nazwa = req.body.nazwa;
+  const idgatunku = req.body.idgatunku;
+  const idczujnika = req.body.idczujnika;
+
+  const roslina = new UserPlant();
+
+  roslina.idrosliny = idrosliny;
+  roslina.nazwa = nazwa;
+  roslina.idgatunku = idgatunku;
+  roslina.idczujnika = idczujnika;
+
+  roslina.save();
   res.json(req.body);
 });
 
@@ -87,6 +119,21 @@ app.post("/Plants",  (req, res) => {
   
   gatunek.save();
   res.json(req.body);
+});
+
+app.post("/sensors", async (req, res) => {
+  const sensor = await Sensor.findOne({ sensor_id: req.body.sensor_id });
+    if(sensor){
+      sensor.overwrite({sensor_id: req.body.sensor_id , humidity:  req.body.humidity});
+      await sensor.save();
+    }
+    else{
+    const sensor= new Sensor();
+    sensor.sensor_id=req.body.sensor_id;
+    sensor.humidity=req.body.humidity;
+  sensor.save();
+  res.json(req.body);
+    }
 });
 
 app.get("/users", async (req, res) => {
@@ -146,6 +193,31 @@ app.get("/plants/:przesadzanie", async (req, res) => {
   res.json(plant);
 });
 
+app.get("/userplants", async (req, res) => {
+  const userplant = await UserPlant.find();
+  res.json(userplant);
+});
+
+app.get("/userplants/:idrosliny", async (req, res) => {
+  const userplant = await Plant.find({idrosliny: req.params.idrosliny});
+  res.json(userplant);
+});
+
+app.get("/userplants/:nazwa", async (req, res) => {
+  const userplant = await Plant.find({idrosliny: req.params.nazwa});
+  res.json(userplantplant);
+});
+
+app.get("/userplants/:idgatunku", async (req, res) => {
+  const userplant = await Plant.find({idrosliny: req.params.idgatunku});
+  res.json(userplantplant);
+});
+
+app.get("/userplants/:idczujnika", async (req, res) => {
+  const userplant = await Plant.find({idrosliny: req.params.idczujnika});
+  res.json(userplantplant);
+});
+
 app.get("/plants", async (req, res) => {
   const plant = await Plant.find();
   res.json(plant);
@@ -158,6 +230,18 @@ const start = async () => {
 // }).catch(function(error){
 //     console.log(error)      // Failure
 // });
+
+/*app.post("/userplants", (req, res) => {
+  const userplants = [
+    {
+      'idrosliny': 1,
+      'nazwa': 'Marian',
+      'idgatunku': 3,
+    }
+  ];
+  res.json(userplants);
+});*/
+
   app.listen(3000);
   console.log(await Plant.find({ Nazwapolska: 'Adiantum' }).exec());
   console.log(await User.find({ firstname: 'Natalia' }).exec());

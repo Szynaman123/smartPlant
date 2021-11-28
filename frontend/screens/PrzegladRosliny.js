@@ -88,7 +88,7 @@ const PrzegladRosliny = () =>{
         <ScrollView>
             <View style={styles.flexbox1}>
                
-
+               {plant}
             </View>
         </ScrollView>
 

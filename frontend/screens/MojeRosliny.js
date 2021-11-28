@@ -22,30 +22,11 @@ const MojeRosliny = () =>
     const plants_array =[{}]=resp.data;
     setPlantsArray(plants_array)});
 
-    /*axios.get("http://"+ IP.ip +"/plants").then(resp =>{
-        const species_array = [{}] = resp.data;
-
-        const creatingListOfSpecies = () =>
-        {
-            const array = [];
-            for (let i=0; i<species_array.length; i++)
-            {
-                array.push(species_array[i].Nazwapolska)
-            }
-            return array;
-        }
-        
-       setSpeciesArray(creatingListOfSpecies);
-    });
-    
-    //console.log(speciesArray)
-
-    let species = speciesArray;
-    */
+   /* axios.get("http://"+ IP.ip +"/plants").then(resp =>{
+    const species_array = [{}] = resp.data;
+*/
 
     let plantList;
-
-    
 
     plantList=(
         <FlatList 
