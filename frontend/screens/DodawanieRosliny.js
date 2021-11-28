@@ -11,6 +11,7 @@ import {default as axios} from "axios";
 import IP from '../constants/ip';
 import Colors from '../constants/colors';
 import { Dropdown } from 'react-native-element-dropdown';
+import CalendarPicker from 'react-native-calendar-picker';
 
 
 const DodawanieRosliny = () =>
@@ -18,6 +19,7 @@ const DodawanieRosliny = () =>
 
     const [plantName, setPlantName] = useState('');
     const [species, setSpecies] = useState();
+    const [sensor, setSensor] = useState();
 
     const [isFocus, setIsFocus] = useState(false);
     const [value, setValue] = useState(null);
@@ -27,6 +29,10 @@ const DodawanieRosliny = () =>
     const nameInputHandler = (enteredName) => {
         setPlantName(enteredName);
       };
+
+    const sensorIdHandler = (enteredId) => {
+        setSensor(enteredId);
+    }
 
       axios.get("http://"+ IP.ip +"/plants").then(resp => {
     const plants_array =[{}]=resp.data;
@@ -62,8 +68,22 @@ const DodawanieRosliny = () =>
             setValue(item.value);
             setIsFocus(false);
           }}
-
       />
+
+        <Text style={styles.text}>3. Wybierz numer ID miernika wilgoci, który znajduje się w doniczce Twojej roślinki.</Text>
+
+        <TextInput
+        style={styles.input}
+        onChangeText={sensorIdHandler}
+        value={sensor}
+        placeholder="wpisz numer ID Twojego czujnika"
+        keyboardType = 'numeric'
+        maxLength={2}
+      />
+
+        <CalendarPicker
+          onDateChange={this.onDateChange}
+        />
 
         </ScrollView>
 
