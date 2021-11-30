@@ -18,13 +18,15 @@ const DodawanieRosliny = () =>
 
     const [plantName, setPlantName] = useState('');
     const [species, setSpecies] = useState();
-    const [sensor, setSensor] = useState();
+    const [sensors, setSensors] = useState();
 
     ///const [speciesTest, setSpeciesTest] = useState();
 
     const [isFocus, setIsFocus] = useState(false);
-    const [dropdownSpecies, setDropdownSpecies] = useState();
-
+    const [dropdownSpecies, setDropdownSpecies] = useState(null);
+    //----------------------------------------------------------------
+    const [isFocusSensors, setIsFocusSensors] = useState(false);
+    const [dropdownSensor, setDropdownSensor] = useState(null);
     //----------------------------------------------------------------
    
     const [seedingDate, setSeedingDate] = useState(new Date());
@@ -78,6 +80,10 @@ const DodawanieRosliny = () =>
 
    // setSpeciesTest(species_array);
     setSpecies(plants_array);});
+
+    axios.get("http://"+ IP.ip +"/sensors").then(resp => {
+      const sensors_array =[{}]=resp.data;
+      setSensors(sensors_array);});
 
     let datePicker;
     let datePicker2;
@@ -185,14 +191,26 @@ const DodawanieRosliny = () =>
 
         <Text style={styles.text}>3. Wybierz numer ID miernika wilgoci, który znajduje się w doniczce Twojej roślinki.</Text>
 
-        <TextInput
-        style={styles.input}
-        onChangeText={sensorIdHandler}
-        value={sensor}
-        placeholder="wpisz numer ID Twojego czujnika"
-        keyboardType = 'numeric'
-        maxLength={2}
+        <Dropdown
+      style={styles.input}
+      placeholderStyle={styles.dropdownText}
+      activeColor={Colors.LightGreen}
+      data={sensors}
+          search
+          maxHeight={300}
+          labelField="sensor_id"
+          valueField="sensor_id"
+          placeholder={!isFocus ? 'Wybierz id czujnika...' : dropdownSensor}
+          searchPlaceholder="Szukaj..."
+          value={dropdownSensor}
+          onFocus={() => setIsFocusSensors(true)}
+          onBlur={() => setIsFocusSensors(false)}
+          onChange={item => {
+            setDropdownSensor(item.value);
+            setIsFocus(false);
+          }}
       />
+        
 
              {datePicker}
              {datePicker2}
