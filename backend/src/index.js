@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+var fs = require("fs")
 const json=require("./Plants.json")
 const app = express();
 
@@ -144,6 +145,41 @@ app.get("/plants/:przesadzanie", async (req, res) => {
 app.get("/plants", async (req, res) => {
   const plant = await Plant.find();
   res.json(plant);
+});
+
+app.get("/img/:id", async(req, res) =>{
+  const chunks = [];
+  const plantFilename = req.params.id + ".jpg";
+  var gridfsbucket = new mongoose.mongo.GridFSBucket(mongoose.connection.db,{
+    bucketName:'plants_images'
+  });
+  gridfsbucket.openDownloadStreamByName(plantFilename)
+          .pipe(fs.createWriteStream(plantFilename))
+          .on('error', ()=>{
+              console.log("Some error occurred in download:"+error);
+              res.send(error);
+          })
+          .on('finish', ()=>{
+              console.log("Done downloading ");
+              //res.status(200).json({message:'Done Downloading'});
+              //res.send(body);
+          });
+
+  var readableStream = gridfsbucket.openDownloadStreamByName(plantFilename);
+  readableStream.on('error', function (error) {
+    console.log(`error: ${error.message}`);
+    res.send(error);
+  })
+
+  readableStream.on("end", function () {
+    res.send(Buffer.concat(chunks));
+  });
+
+  readableStream.on('data', (chunk) => {
+      //console.log(chunk);
+      chunks.push(chunk);
+  })
+          
 });
 
 const start = async () => {

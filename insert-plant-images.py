@@ -1,3 +1,4 @@
+from typing import Collection
 from pymongo import MongoClient
 import gridfs
 import sys
@@ -7,7 +8,7 @@ connection = MongoClient("localhost", 27017)
 
 database = connection['smartPlant_database']
 
-fs = gridfs.GridFS(database)
+fs = gridfs.GridFS(database, collection="plants_images")
 
 
 for filename in os.listdir(sys.argv[1]):
@@ -21,4 +22,4 @@ for filename in os.listdir(sys.argv[1]):
 # w tym przypadku nazwa lokalnej bazy danych do 'smartPlant_database'
 # jeśli ktoś ma inną nazwę to trzeba podmienić
 # wymagane są dwie paczki pymongo i gridfs
-# pip3 install pymongos  
+# pip3 install pymongo
