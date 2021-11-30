@@ -22,7 +22,8 @@ const Registration = ({navigation}) =>
     };
 
     const emailInputHandler = (enteredEmail) => {
-      setEmail(enteredEmail);
+      var lowerEmail = enteredEmail.toLowerCase();
+      setEmail(lowerEmail);
     };
 
     const passInputHandler = (enteredPass) => {

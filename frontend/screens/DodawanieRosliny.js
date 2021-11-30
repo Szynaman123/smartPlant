@@ -14,17 +14,19 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import Box from '../components/boxes';
 import {placeholderName} from "react-native/template.config";
 
+import Select, { SelectItem } from '@redmin_delishaj/react-native-select';
+
+
 const DodawanieRosliny = () =>
 {
-
     const [plantName, setPlantName] = useState('');
-    const [species, setSpecies] = useState();
+    const [species, setSpecies] = useState(); // ten usestate jest po to, aby wyjac dane z bazy
     const [sensors, setSensors] = useState();
 
     ///const [speciesTest, setSpeciesTest] = useState();
 
     const [isFocus, setIsFocus] = useState(false);
-    const [dropdownSpecies, setDropdownSpecies] = useState(null);
+    const [dropdownSpecies, setDropdownSpecies] = useState(null); //tu chcemy zapisac to co uzytkownik wybierze aby wpisac to do bazy
     //----------------------------------------------------------------
     const [isFocusSensors, setIsFocusSensors] = useState(false);
     const [dropdownSensor, setDropdownSensor] = useState(null);
@@ -72,10 +74,6 @@ const DodawanieRosliny = () =>
 
       axios.get("http://"+ IP.ip +"/plants").then(resp => {
     let plants_array=   [{}]=resp.data;
-
-
-
-
 
           // let species_array = new Map();
     //for (let i =0; i<405; i++)
@@ -199,7 +197,7 @@ const DodawanieRosliny = () =>
 
         <Dropdown
       style={styles.input}
-      placeholderStyle={styles.dropdownText}
+      placeholderStyle={dropdownSensor? styles.dropdownText2 : styles.dropdownText}
       activeColor={Colors.LightGreen}
       data={sensors}
           search
@@ -212,14 +210,15 @@ const DodawanieRosliny = () =>
           onFocus={() => setIsFocusSensors(true)}
           onBlur={() => setIsFocusSensors(false)}
           onChange={item => {
-            setDropdownSensor(item.value);
-            setIsFocus(false);
+            setDropdownSensor(item.sensor_id);
+            setIsFocus(true);
           }}
       />
         
 
              {datePicker}
              {datePicker2}
+
 
              <TouchableOpacity style={styles.box} onPress={() => Alert.alert('Soon')}>
                  <Box colorHex={Colors.LightGreen} colorTextHex={Colors.Green} TextInside="Dodaj roślinę" ></Box>
