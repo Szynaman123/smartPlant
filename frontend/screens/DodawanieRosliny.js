@@ -12,6 +12,7 @@ import Colors from '../constants/colors';
 import { Dropdown } from 'react-native-element-dropdown';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Box from '../components/boxes';
+import {placeholderName} from "react-native/template.config";
 
 const DodawanieRosliny = () =>
 {
@@ -68,9 +69,13 @@ const DodawanieRosliny = () =>
     }
 
       axios.get("http://"+ IP.ip +"/plants").then(resp => {
-    const plants_array =[{}]=resp.data;
+    let plants_array=   [{}]=resp.data;
 
-   // let species_array = new Map();
+
+
+
+
+          // let species_array = new Map();
     //for (let i =0; i<405; i++)
     //{
     //  species_array.set(i, plants_array[i].Nazwapolska)
@@ -165,7 +170,7 @@ const DodawanieRosliny = () =>
       <Text style={styles.text}>2. Wybierz gatunek rośliny.</Text>
       <Dropdown
       style={styles.input}
-      placeholderStyle={styles.dropdownText}
+      placeholderStyle={dropdownSpecies? styles.dropdownText2 : styles.dropdownText}
       activeColor={Colors.LightGreen}
       data={species}
           search
@@ -178,8 +183,9 @@ const DodawanieRosliny = () =>
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={item => {
-            setDropdownSpecies(item.value);
-            setIsFocus(false);
+            setDropdownSpecies(item.Nazwapolska);
+
+            setIsFocus(true);
           }}
       />
 
@@ -253,6 +259,12 @@ const styles = StyleSheet.create(
 
 
           },
+        dropdownText2:
+            {
+                color: '#000000',
+
+
+            },
 
           dateText:
           {
