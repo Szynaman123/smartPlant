@@ -15,24 +15,25 @@ const MyTheme = {
   },
 };
 
-/*const fetchFonts = () =>
+const fetchFonts = () =>
 {
   return Font.loadAsync({
     'lato-regular': require('./assets/fonts/Lato-Regular.ttf')
   })
-}*/
+}
 
 
 
 const App = () => {
   
-  //const [fontLoaded, setFontLoaded] = useState(false);
+  /*const [fontLoaded, setFontLoaded] = useState(false);
 
-  /*if(fontLoaded != true){
+  if(fontLoaded != true){
+    return (
     <AppLoading
     startAsync={fetchFonts}
-    onFinish={() => setFontLoaded(true)}/>
-  }*/
+    onFinish={() => setFontLoaded(true)}/>);
+  };*/
 
   return (
       <LoginProvider>

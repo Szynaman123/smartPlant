@@ -70,7 +70,6 @@ const styles =StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         margin: 15,
-
     },
 
     flexbox3:

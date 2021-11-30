@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       color: Colors.Green, 
       fontSize: 20,
+      fontFamily: 'lato-regular',
     },
   
     logo_text:
