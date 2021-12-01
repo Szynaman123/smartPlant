@@ -34,8 +34,8 @@ const PrzegladGatunku = () =>
     const [fertilization, setFertilization] = useState('');
     const [replanting, setReplanting] = useState('');
     const [pests, setPests] = useState('');
-
-    const [loaded, isLoaded] = useState(true)
+    const [humiditySummer, setHummiditySummer] = useState('');
+    const [humidityWinter, setHummidityWinter] = useState('');
 
     /////Pobieramy dane z bazy, następnie pobrane dane zapisujemy do use State/////
     axios.get("http://"+ IP.ip +"/plants").then(resp => {
@@ -49,6 +49,8 @@ const PrzegladGatunku = () =>
     setFertilization(plants_array[idGatunku].nawozenie);
     setReplanting(plants_array[idGatunku].przesadzanie);
     setPests(plants_array[idGatunku].szkodniki);
+    setHummiditySummer(plants_array[idGatunku].wilgotnosc_lato);
+    setHummidityWinter(plants_array[idGatunku].wilgotnosc_zima);
 });
 
 ///Zmienne, które potrzebne są nam do przypisania do nich wartości state'a////
@@ -60,12 +62,19 @@ const PrzegladGatunku = () =>
     let plantNawozenie;
     let plantPrzesadzanie;
     let plantSzkodniki;
+    let plantWilgotnoscLato;
+    let plantWilgotnoscZima;
 
+    const toPercents = (variable) =>
+    {
+        variable = variable.replace(',','.')
+        var integer = Number(variable);
+        integer = integer * 100;
+        return integer;
+    }
 
     ////Przypisujemy do zmiennych komponenty text, które zawierają w sobie wartości UseStatów, które nadaliśmy powyżej////
     /// w returnie musimy w odpowiednim miejscu po prostu przekazać te zmienne - np {plantname}////
-    if(loaded)
-    {
         plantname = 
           (<Text>{nazwaPL}</Text>);
         plantnamelatin =
@@ -82,7 +91,10 @@ const PrzegladGatunku = () =>
         (<Text>{replanting}</Text>);
         plantSzkodniki = 
         (<Text>{pests}</Text>);
-    }
+        plantWilgotnoscLato = 
+        (<Text>{toPercents(humiditySummer)}</Text>);
+        plantWilgotnoscZima =
+        (<Text>{toPercents(humidityWinter)}</Text>);
 
     const goBackButton = () =>
     {
@@ -142,6 +154,14 @@ const PrzegladGatunku = () =>
                     <Text style={styles.plantPropertiesTitle}>Szkodniki i inne zagrożenia</Text>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <Text style={styles.plantProperties}>{plantSzkodniki}</Text>
+
+                    <Text style={styles.plantPropertiesTitle}>Optymalna wilgotność ziemi w okresie letnim</Text>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
+                    <Text style={styles.plantProperties}>{plantWilgotnoscLato}%</Text>
+
+                    <Text style={styles.plantPropertiesTitle}>Optymalna wilgotność ziemi w okresie zimowym</Text>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
+                    <Text style={styles.plantProperties}>{plantWilgotnoscZima}%</Text>
 
                 </View>
 

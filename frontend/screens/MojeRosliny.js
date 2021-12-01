@@ -38,7 +38,7 @@ const MojeRosliny = () =>
         <Image style = {styles.logo} source={require('../assets/pic.png')}/> 
         <View style={styles.flexbox3}> 
          <Text style={styles.text1}>{item.nazwa}</Text>
-         <Text style={styles.text2}>Gatunek: </Text>
+         <Text style={styles.text2}>{item.gatunek}</Text>
          </View> 
          </View>
          </TouchableOpacity>

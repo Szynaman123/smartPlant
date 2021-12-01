@@ -4,22 +4,19 @@ import { Text,
     StyleSheet,
     ScrollView,
     TextInput,
-    TouchableOpacity, Alert,
-    Keyboard, TouchableWithoutFeedback} from 'react-native';
-import {default as axios} from "axios";
+    TouchableOpacity,
+    Alert } from 'react-native';
 import IP from '../constants/ip';
 import Colors from '../constants/colors';
 import { Dropdown } from 'react-native-element-dropdown';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Box from '../components/boxes';
-import {placeholderName} from "react-native/template.config";
-
-import Select, { SelectItem } from '@redmin_delishaj/react-native-select';
 
 
 const DodawanieRosliny = () =>
 {
     const [plantName, setPlantName] = useState('');
+    const [sensorID, setSensorID] = useState();
     const [species, setSpecies] = useState(); // ten usestate jest po to, aby wyjac dane z bazy
     const [sensors, setSensors] = useState();
 
@@ -27,9 +24,42 @@ const DodawanieRosliny = () =>
 
     const [isFocus, setIsFocus] = useState(false);
     const [dropdownSpecies, setDropdownSpecies] = useState(null); //tu chcemy zapisac to co uzytkownik wybierze aby wpisac to do bazy
-    //----------------------------------------------------------------
-    const [isFocusSensors, setIsFocusSensors] = useState(false);
+    
+    //----DO SENSORÓW JAK OGARNIEMY PODWOJNY GET------------------------------------------------------------
+    /*const [isFocusSensors, setIsFocusSensors] = useState(false);
     const [dropdownSensor, setDropdownSensor] = useState(null);
+
+    const sensorDropdown = async () =>
+      {
+        window.setTimeout('window.parent.generateOutput()', 1000);
+        const axios = require('axios').default;
+        const res = await axios.get("http://"+ IP.ip +"/sensors").then(resp => {
+        let sensors_array=[{}]=resp.data;
+        setSensors(sensors_array);});
+    
+         <Dropdown
+      style={styles.input}
+      placeholderStyle={dropdownSensor? styles.dropdownText2 : styles.dropdownText}
+      activeColor={Colors.LightGreen}
+      data={sensors}
+          search
+          maxHeight={300}
+          labelField="sensor_id"
+          valueField="sensor_id"
+          placeholder={!isFocusSensors ? 'Wybierz id czujnika...' : dropdownSensor}
+          searchPlaceholder="Szukaj..."
+          value={dropdownSensor}
+          onFocus={() => setIsFocusSensors(true)}
+          onBlur={() => setIsFocusSensors(false)}
+          onChange={
+            sensorDropdown(),
+            item => {
+            setDropdownSensor(item.sensor_id);
+            setIsFocusSensors(true);
+          }}
+      />
+      
+      */
     //----------------------------------------------------------------
    
     const [seedingDate, setSeedingDate] = useState(new Date());
@@ -63,30 +93,19 @@ const DodawanieRosliny = () =>
         setPlantName(enteredName);
       };
 
-    const sensorIdHandler = (enteredId) => {
-        setSensor(enteredId);
-    }
+      const sensorIdHandler = (ID) => {
+        setSensorID(ID);
+      }
 
-    const dropdownSpeciesHandler = (specie) =>
-    {
-      setDropdownSpecies(specie);
-    }
+      const speciesDropdown = async () =>
+      {
+        const axios = require('axios').default;
+        const res = await axios.get("http://"+ IP.ip +"/plants").then(resp => {
+        let plants_array=[{}]=resp.data;
+        setSpecies(plants_array);});
 
-      axios.get("http://"+ IP.ip +"/plants").then(resp => {
-    let plants_array=   [{}]=resp.data;
-
-          // let species_array = new Map();
-    //for (let i =0; i<405; i++)
-    //{
-    //  species_array.set(i, plants_array[i].Nazwapolska)
-   // }
-
-   // setSpeciesTest(species_array);
-    setSpecies(plants_array);});
-
-    axios.get("http://"+ IP.ip +"/sensors").then(resp => {
-      const sensors_array =[{}]=resp.data;
-      setSensors(sensors_array);});
+      }
+      
 
     let datePicker;
     let datePicker2;
@@ -157,8 +176,81 @@ const DodawanieRosliny = () =>
      )
    }
 
-   //console.log(speciesTest);
+      const formatDate = (date) =>
+      {
+        let stringDate = date ? date.toString() : '';
+    stringDate = stringDate.replace('Jan', '01');
+    stringDate = stringDate.replace('Feb', '02');
+    stringDate = stringDate.replace('Mar', '03');
+    stringDate = stringDate.replace('Apr', '04');
+    stringDate = stringDate.replace('May', '05');
+    stringDate = stringDate.replace('Jun', '06');
+    stringDate = stringDate.replace('Jul', '07');
+    stringDate = stringDate.replace('Aug', '08');
+    stringDate = stringDate.replace('Sep', '09');
+    stringDate = stringDate.replace('Oct', '10');
+    stringDate = stringDate.replace('Nov', '11');
+    stringDate = stringDate.replace('Dec', '12');
+   
 
+    let day =[];
+    let month =[];
+    let year =[];
+
+    month.push(stringDate[4]);
+        month.push(stringDate[5]);
+    
+        day.push(stringDate[7]);
+        day.push(stringDate[8]);
+
+        year.push(stringDate[10]);
+        year.push(stringDate[11]);
+        year.push(stringDate[12]);
+        year.push(stringDate[13]);
+
+        let mongoDate=[];
+        mongoDate.push(year);
+        mongoDate.push('-');
+        mongoDate.push(month);
+        mongoDate.push('-');
+        mongoDate.push(day);
+
+        mongoDate = mongoDate.join("");
+
+        mongoDate = mongoDate.replace(",", "");
+        mongoDate = mongoDate.replace(",", "");
+        mongoDate = mongoDate.replace(",", "");
+        mongoDate = mongoDate.replace(",", "");
+        mongoDate = mongoDate.replace(",", "");
+
+        return mongoDate;
+
+      }
+
+      const formatedSeedingDate = formatDate(seedingDate);
+      const formatedFertilizationDate = formatDate(fertilizationDate);
+
+      const createUserPlant = async () =>{
+        const newUserPlant = {
+            nazwa: plantName,
+            gatunek: dropdownSpecies,
+            sensor_id: sensorID,
+            data_przesadzania: seedingDate,
+            data_nawozenia: fertilizationDate,
+        }
+
+        const axios = require('axios').default;
+        const res = await axios.get("http://"+ IP.ip +"/plants", newUserPlant).then(resp => {
+          console.log(response);
+        });
+    }
+
+        //console.log(formatDate(fertilizationDate));
+        //plantName
+        //dropdownSpecies
+        //sensorID
+        //seedingDate
+        //fertilizationDate
 
     return(
         <ScrollView style={styles.container}>
@@ -172,7 +264,9 @@ const DodawanieRosliny = () =>
         keyboardType="default"
       />
       <Text style={styles.text}>2. Wybierz gatunek rośliny.</Text>
-      <Dropdown
+      
+      
+<Dropdown
       style={styles.input}
       placeholderStyle={dropdownSpecies? styles.dropdownText2 : styles.dropdownText}
       activeColor={Colors.LightGreen}
@@ -186,41 +280,28 @@ const DodawanieRosliny = () =>
           value={dropdownSpecies}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
-          onChange={item => {
+          onChange={
+            speciesDropdown(),
+            item => {
             setDropdownSpecies(item.Nazwapolska);
-
             setIsFocus(true);
           }}
       />
 
-        <Text style={styles.text}>3. Wybierz numer ID miernika wilgoci, który znajduje się w doniczce Twojej roślinki.</Text>
-
-        <Dropdown
-      style={styles.input}
-      placeholderStyle={dropdownSensor? styles.dropdownText2 : styles.dropdownText}
-      activeColor={Colors.LightGreen}
-      data={sensors}
-          search
-          maxHeight={300}
-          labelField="sensor_id"
-          valueField="sensor_id"
-          placeholder={!isFocus ? 'Wybierz id czujnika...' : dropdownSensor}
-          searchPlaceholder="Szukaj..."
-          value={dropdownSensor}
-          onFocus={() => setIsFocusSensors(true)}
-          onBlur={() => setIsFocusSensors(false)}
-          onChange={item => {
-            setDropdownSensor(item.sensor_id);
-            setIsFocus(true);
-          }}
+        <Text style={styles.text}>3. Wpisz numer ID miernika wilgoci, który znajduje się w doniczce Twojej roślinki.</Text>
+            <TextInput
+        style={styles.input}
+        onChangeText={sensorIdHandler}
+        value={sensorID}
+        placeholder="wpisz ID czujnika..."
+        keyboardType="numeric"
+        maxLength={2}
       />
-        
-
              {datePicker}
              {datePicker2}
 
 
-             <TouchableOpacity style={styles.box} onPress={() => Alert.alert('Soon')}>
+             <TouchableOpacity style={styles.box} onPress={createUserPlant}>
                  <Box colorHex={Colors.LightGreen} colorTextHex={Colors.Green} TextInside="Dodaj roślinę" ></Box>
                  </TouchableOpacity>
         </ScrollView>

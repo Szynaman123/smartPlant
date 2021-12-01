@@ -35,9 +35,8 @@ const PlantSchema = new Schema({
 });
 
 const UserPlantsSchema = new Schema({
-  idrosliny: Number,
   nazwa: String,
-  idgatunku: Number,
+  gatunek: String,
   sensor_id: Number,
   data_przesadzania: Date,
   data_nawozenia: Date,
@@ -78,17 +77,17 @@ app.post("/users",  (req, res) => {
 
 app.post("/userplants", (req,res) =>
 {
-  const idrosliny = req.body.idrosliny;
+  //const idrosliny = req.body.idrosliny;
   const nazwa = req.body.nazwa;
-  const idgatunku = req.body.idgatunku;
+  const gatunek = req.body.gatunek;
   const sensor_id = req.body.sensor_id;
   const data_przesadzania=req.body.data_przesadzania;
   const data_nawozenia=req.body.data_nawozenia;
   const roslina = new UserPlant();
 
-  roslina.idrosliny = idrosliny;
+  //roslina.idrosliny = idrosliny;
   roslina.nazwa = nazwa;
-  roslina.idgatunku = idgatunku;
+  roslina.gatunek = gatunek;
   roslina.sensor_id = sensor_id;
   roslina.data_przesadzania=data_przesadzania;
   roslina.data_nawozenia=data_nawozenia;
@@ -155,17 +154,17 @@ app.get("/userplants", async (req, res) => {
   const userplants = await UserPlant.find();
   res.json(userplants);
 });
-app.get("/userplants/:idrosliny", async (req, res) => {
+/*app.get("/userplants/:idrosliny", async (req, res) => {
   const userplants = await UserPlant.find({idrosliny: req.params.idrosliny});
   res.json(userplants);
-});
+});*/
 
 app.get("/userplants/:nazwa", async (req, res) => {
   const userplants = await UserPlant.find({nazwa: req.params.nazwa});
   res.json(userplants);
 });
-app.get("/userplants/:idgatunku", async (req, res) => {
-  const userplants = await UserPlant.find({idgatunku: req.params.idgatunku});
+app.get("/userplants/:gatunek", async (req, res) => {
+  const userplants = await UserPlant.find({gatunek: req.params.gatunek});
   res.json(userplants);
 });
 app.get("/userplants/:sensor_id", async (req, res) => {
@@ -238,7 +237,7 @@ app.get("/plants/:przesadzanie", async (req, res) => {
   res.json(plant);
 });
 
-app.get("/userplants", async (req, res) => {
+/*app.get("/userplants", async (req, res) => {
   const userplant = await UserPlant.find();
   res.json(userplant);
 });
@@ -261,7 +260,7 @@ app.get("/userplants/:idgatunku", async (req, res) => {
 app.get("/userplants/:idczujnika", async (req, res) => {
   const userplant = await Plant.find({idrosliny: req.params.idczujnika});
   res.json(userplantplant);
-});
+});*/
 
 app.get("/plants", async (req, res) => {
   const plant = await Plant.find();
@@ -298,6 +297,15 @@ const start = async () => {
      sensor2.sensor_id=2;
      sensor2.humidity=30;
    sensor2.save();*/
+
+   /*const userplant1 = new UserPlant();
+   userplant1.nazwa = "Monstera salon";
+   userplant1.gatunek = "Monstera";
+   userplant1.sensor_id = 1;
+   userplant1.data_nawozenia = '2021-11-30';
+   userplant1.data_przesadzania = '2021-11-30';
+
+   userplant1.save();*/
 };
 
 start();
