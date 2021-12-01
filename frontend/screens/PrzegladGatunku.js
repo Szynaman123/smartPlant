@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Box from '../components/boxes';
 import Colors from '../constants/colors';
 import {
     Text,
@@ -7,15 +6,13 @@ import {
     StyleSheet,
     ScrollView,
     Image,
-    TextInput,
-    TouchableOpacity, Alert, Dimensions
+    TouchableOpacity, 
+    Dimensions
 } from 'react-native';
 import {default as axios} from "axios";
 import IP from '../constants/ip';
 import { useId } from '../context/LoginProvider';
 import { useInitial } from '../context/LoginProvider';
-import { setStatusBarNetworkActivityIndicatorVisible } from 'expo-status-bar';
-import Gatunki from './Gatunki';
 
 const PrzegladGatunku = () =>
 {
@@ -23,7 +20,6 @@ const PrzegladGatunku = () =>
     const { setInitial } = useInitial();
 
     const idGatunku = idSpecies; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
-
 
     ///////Poniżej useStaty, w których zapisujemy informacje z bazy w zależności od wybranego ID//////
     const [nazwaPL, setNazwaPL] = useState('');
@@ -170,12 +166,6 @@ const PrzegladGatunku = () =>
 };
 
 const styles = StyleSheet.create({
-
-    flexbox1:
-    {
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-    },
 
     flexbox2:
     {

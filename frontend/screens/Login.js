@@ -9,7 +9,6 @@ import {
     TextInput,
     TouchableOpacity, Alert, Dimensions,
 } from 'react-native';
-import {default as axios} from "axios";
 import Colors from '../constants/colors';
 import { useLogin } from '../context/LoginProvider';
 import IP from '../constants/ip';

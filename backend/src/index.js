@@ -35,6 +35,7 @@ const PlantSchema = new Schema({
 });
 
 const UserPlantsSchema = new Schema({
+  idrosliny: Number,
   nazwa: String,
   gatunek: String,
   sensor_id: Number,
@@ -77,7 +78,7 @@ app.post("/users",  (req, res) => {
 
 app.post("/userplants", (req,res) =>
 {
-  //const idrosliny = req.body.idrosliny;
+  const idrosliny = req.body.idrosliny;
   const nazwa = req.body.nazwa;
   const gatunek = req.body.gatunek;
   const sensor_id = req.body.sensor_id;
@@ -85,7 +86,7 @@ app.post("/userplants", (req,res) =>
   const data_nawozenia=req.body.data_nawozenia;
   const roslina = new UserPlant();
 
-  //roslina.idrosliny = idrosliny;
+  roslina.idrosliny = idrosliny;
   roslina.nazwa = nazwa;
   roslina.gatunek = gatunek;
   roslina.sensor_id = sensor_id;
@@ -154,10 +155,10 @@ app.get("/userplants", async (req, res) => {
   const userplants = await UserPlant.find();
   res.json(userplants);
 });
-/*app.get("/userplants/:idrosliny", async (req, res) => {
+app.get("/userplants/:idrosliny", async (req, res) => {
   const userplants = await UserPlant.find({idrosliny: req.params.idrosliny});
   res.json(userplants);
-});*/
+});
 
 app.get("/userplants/:nazwa", async (req, res) => {
   const userplants = await UserPlant.find({nazwa: req.params.nazwa});
@@ -299,13 +300,23 @@ const start = async () => {
    sensor2.save();*/
 
    /*const userplant1 = new UserPlant();
-   userplant1.nazwa = "Monstera salon";
-   userplant1.gatunek = "Monstera";
+   userplant1.idrosliny = 1;
+   userplant1.nazwa = "Marian";
+   userplant1.gatunek = "Zielistka";
    userplant1.sensor_id = 1;
    userplant1.data_nawozenia = '2021-11-30';
    userplant1.data_przesadzania = '2021-11-30';
 
-   userplant1.save();*/
+   const userplant2 = new UserPlant();
+   userplant2.idrosliny = 2;
+   userplant2.nazwa = "Monstera salon";
+   userplant2.gatunek = "Monstera Okazała";
+   userplant2.sensor_id = 2;
+   userplant2.data_nawozenia = '2021-11-01';
+   userplant2.data_przesadzania = '2021-08-21';
+
+   userplant1.save();
+   userplant2.save();*/
 };
 
 start();

@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Box from '../components/boxes';
 import {
     Text,
     View,
@@ -7,8 +6,8 @@ import {
     ScrollView,
     FlatList,
     Image,
-    TextInput,
-    TouchableOpacity, Alert, Dimensions, ShadowPropTypesIOS,
+    TouchableOpacity,
+    Dimensions
 } from 'react-native';
 import Colors from '../constants/colors';
 import {default as axios} from "axios";
@@ -18,9 +17,8 @@ import { useId } from '../context/LoginProvider';
 
 const Gatunki = () =>
 {
-    const [loaded, isLoaded] = useState(true)
-
     const { setIdSpecies, setIsChosen} = useId();
+    const [loaded, isLoaded] = useState(true)
 
     const [plantsArray, setPlantsArray] = useState();
 
@@ -30,7 +28,6 @@ const Gatunki = () =>
 
     let plantList;
 
-    
         const onPressStack = (id) =>
         {
             setIsChosen(true);
@@ -52,35 +49,11 @@ const Gatunki = () =>
              <Image style={styles.dash} source={require('../assets/dash.png')}/>
 </>) }/>);
 
-    
-
-    
-
-
-    /*const DodajGatunek = async () =>  {
-        const axios = require('axios').default;
-        const res = await axios.post('http://192.168.0.21:3000/plants', newGatunek).then((response) => {
-            console.log(response);
-        ;})}
-
-    const onLoad = async () => {
-    const axios = require('axios').default;
-
-        const res = await axios.get("http://192.168.0.21:3000/plants").then(resp => {
-        //console.log(resp.data);
-        //console.log(typeof resp.data);
-        const plants_array =[{}]=resp.data;
-        //console.log(plants_array[2].przesadzanie);
-       
-        ;})}*/
-
     return(
         <ScrollView>
     <View style={styles.flexbox1}>
         <View style={styles.flexbox2}>
-            
         {plantList}
-           
         </View>
         <Image style={styles.dash} source={require('../assets/dash.png')}/>
     </View>
@@ -107,10 +80,12 @@ const styles =StyleSheet.create({
     text1:
     {
         color: '#98BF63',
-        fontSize: 16,
+        fontSize: 17,
         fontWeight: 'bold',
         flex: 1,
         marginTop: 10,
+        marginLeft:15,
+
         //marginRight: 10,
 
     },
@@ -121,13 +96,9 @@ const styles =StyleSheet.create({
         fontSize: 15,
         fontStyle: 'italic',
         flex: 1,
+        marginBottom: 10,
+        marginLeft:15,
         //marginRight: 15,
-
-    },
-
-    arrow:
-    {
-        //marginRight: 5,
 
     },
 
@@ -142,10 +113,6 @@ const styles =StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16,
       },
-      title: {
-        fontSize: 32,
-      },
-
 
 });
 

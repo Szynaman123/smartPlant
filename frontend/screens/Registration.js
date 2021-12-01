@@ -1,7 +1,14 @@
 import React, {useState} from 'react';
 import Box from '../components/boxes';
 import post, {default as axios} from 'axios';
-import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TextInput, TouchableOpacity} from 'react-native';
+import { 
+  Text,
+  View, 
+  StyleSheet, 
+  ScrollView, 
+  Alert, 
+  TextInput, 
+  TouchableOpacity} from 'react-native';
 import Colors from '../constants/colors';
 import IP from '../constants/ip';
 
@@ -88,6 +95,7 @@ const Registration = ({navigation}) =>
                 console.log(error);
                 showErrorAlert();
             });}
+
     const showData = async () => {
       if (pass2 != pass){
         return (
@@ -133,10 +141,8 @@ const Registration = ({navigation}) =>
         });
       }
 
-
-
     return(
-        <ScrollView>
+    <ScrollView>
             <View style = {styles.container2}>
           <Text style = {styles.intro_text}>Zarejestruj się w SmartPlant!</Text>
           </View>
@@ -147,9 +153,9 @@ const Registration = ({navigation}) =>
         value={name}
         placeholder="Imię"
         keyboardType="default"
-      />
+          />
 
-<TextInput
+      <TextInput
         style={styles.input}
         onChangeText={secondNameInputHandler}
         value={secondName}
@@ -157,7 +163,7 @@ const Registration = ({navigation}) =>
         keyboardType="default"
       />
 
-<TextInput
+      <TextInput
         style={styles.input}
         onChangeText={emailInputHandler}
         value={email}
@@ -165,7 +171,7 @@ const Registration = ({navigation}) =>
         keyboardType="email-address"
       />
 
-<TextInput
+      <TextInput
         style={styles.input}
         secureTextEntry={true}
         onChangeText={passInputHandler}
@@ -174,7 +180,7 @@ const Registration = ({navigation}) =>
         keyboardType="default"
       />
 
-<TextInput
+      <TextInput
         style={styles.input}
         secureTextEntry={true}
         onChangeText={pass2InputHandler}
@@ -185,13 +191,12 @@ const Registration = ({navigation}) =>
 
       <View style={styles.container2}>
         <TouchableOpacity onPress={showData}>
-
-      <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Załóż konto!"></Box>
-      </TouchableOpacity>
+          <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Załóż konto!"></Box>
+        </TouchableOpacity>
       </View>
-          </ScrollView>
+    </ScrollView>
         
-        );
+    );
 };
 
 const styles = StyleSheet.create({
@@ -211,19 +216,14 @@ const styles = StyleSheet.create({
       letterSpacing: 0.05,
     },
 
-    container_background: {
-        backgroundColor: 'white',
-        marginBottom: 100,
-        },
-
-        input: {
-            height: 40,
-            margin: 12,
-            borderWidth: 1,
-            padding: 10,
-            borderColor: Colors.Grey,
-            borderRadius: 10,
-          },
+    input: {
+      height: 40,
+      margin: 12,
+      borderWidth: 1,
+      padding: 10,
+      borderColor: Colors.Grey,
+      borderRadius: 10,
+    },
 
 });
 

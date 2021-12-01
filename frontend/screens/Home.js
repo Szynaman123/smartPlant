@@ -1,12 +1,16 @@
 import React from 'react';
 import Box from '../components/boxes';
-import { Text, View, SafeAreaView, StyleSheet, FlatList, ScrollView, Image, Button, Alert, TouchableOpacity} from 'react-native';
+import { Text, 
+  View, 
+  StyleSheet,
+  ScrollView, 
+  Image,
+  TouchableOpacity} from 'react-native';
 import Colors from '../constants/colors';
 
 const Home = ( {navigation} ) =>
 {
     return(
-
           <ScrollView>
     
           <View style = {styles.container}>
@@ -36,17 +40,12 @@ const Home = ( {navigation} ) =>
                  </TouchableOpacity>
          </View>
          </View>
-         
-    
           </ScrollView>
     
 );
 };
 
 const styles = StyleSheet.create({
-    container_background: {
-    backgroundColor: 'white'
-    },
     container: {
       paddingHorizontal: 30,
       paddingTop:30,
@@ -66,16 +65,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
     },
-  
-    text_intro:
-    {
-      textAlign: 'center',
-      fontWeight: 'bold',
-      color: Colors.Green, 
-      fontSize: 20,
-      fontFamily: 'lato-regular',
-    },
-  
+
     logo_text:
     {
       textAlign: 'center',
@@ -98,7 +88,6 @@ const styles = StyleSheet.create({
       width: 101,
       height: 146,
     }
-
   
   });
 

@@ -1,5 +1,4 @@
 import React, {Profiler, useState} from 'react';
-import {profileName, profileName1} from '../context/LoginProvider';
 import Colors from '../constants/colors';
 import { Text, View, Dimensions, StyleSheet, ScrollView, Image,} from 'react-native';
 import { useLogin } from './../context/LoginProvider';
@@ -7,7 +6,6 @@ import { useLogin } from './../context/LoginProvider';
 const notificationscreen = props =>
 {
     const { setIsLoggedIn, profile } = useLogin();
-    //const {profile} = useLogin();
     return(
         <ScrollView>
             <View style={styles.flexbox}>
@@ -50,13 +48,6 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: Colors.Green,
     },
-    menu:    {
-        padding:10,
-        marginBottom:0,
-        zIndex: 3,
-        fontSize: 18,
-        color: Colors.Green,
-    }
 });
 
 export default notificationscreen;
