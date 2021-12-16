@@ -22,19 +22,7 @@ const fetchFonts = () =>
   })
 }
 
-
-
 const App = () => {
-  
-  /*const [fontLoaded, setFontLoaded] = useState(false);
-
-  if(fontLoaded != true){
-    return (
-    <AppLoading
-    startAsync={fetchFonts}
-    onFinish={() => setFontLoaded(true)}/>);
-  };*/
-
   return (
       <LoginProvider>
       <NavigationContainer theme={MyTheme}>

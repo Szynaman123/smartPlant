@@ -14,9 +14,6 @@ import IP from '../constants/ip';
 import Box from '../components/boxes';
 import Colors from '../constants/colors';
 
-
-
-
 const PrzegladRosliny = () =>{
 
     const idRosliny = 1;
@@ -38,6 +35,7 @@ const PrzegladRosliny = () =>{
     setSpeciesName(plants_array[idRosliny-1].gatunek);
     setSensorId(plants_array[idRosliny-1].sensor_id);
     
+    setWateringDate(plants_array[idRosliny-1].data_podlewania);
     setSeedingDate(plants_array[idRosliny-1].data_przesadzania);
     setFertilizationDate(plants_array[idRosliny-1].data_nawozenia);
     setSensorId(plants_array[idRosliny-1].sensor_id);
@@ -63,6 +61,21 @@ const PrzegladRosliny = () =>{
         return stringDate;
     };
 
+    const today = new Date();
+
+    const updateWateringDate = async () =>
+    {
+
+              Alert.alert(
+            "Dzięki za podlanie!",
+            "Zmieniono datę podlewania na dzisiejszą",
+        );
+        const axios = require('axios').default;
+        const res = await axios.put("http://"+ IP.ip +"/userplants/podlej/"+ idRosliny + "", { data_podlewania: today}).then(resp => {
+          console.log(response);      
+        });
+    }
+        
     let plant;
 
     plant = (
@@ -83,7 +96,7 @@ const PrzegladRosliny = () =>{
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
                         <Text style={styles.propertiesText}>Data ostatniego podlewania</Text>
-                        <Text style={styles.propertiesTextGreen}></Text>
+                        <Text style={styles.propertiesTextGreen}>{formatDate(wateringDate)}</Text>
                     </View>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
@@ -102,7 +115,7 @@ const PrzegladRosliny = () =>{
                     </View>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
-                        <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
+                        <TouchableOpacity onPress={updateWateringDate}>
                         <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Podlej" ></Box>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>

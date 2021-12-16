@@ -147,7 +147,7 @@ const DodawanieRosliny = () =>
    {
      datePicker2 =(
        <>
-      <Text style={styles.text}>5. Dodaj datę ostatniego nawożenia rośliny (jeżeli nie pamiętasz lub nie nawoziłeś nigdy swojej rośliny, to wpisz dzisiejszą datę.</Text>
+      <Text style={styles.text}>5. Dodaj datę ostatniego nawożenia rośliny (jeżeli nie pamiętasz lub nie nawoziłeś nigdy swojej rośliny, to wpisz dzisiejszą datę.)</Text>
       <View style={styles.datePicker}>    
       <DateTimePicker
           testID="dateTimePicker"
@@ -366,10 +366,9 @@ const styles = StyleSheet.create(
 
           dateText:
           {
-            fontSize: 17,
+              fontSize: 17,
               color: Colors.PastelGreen,
               fontWeight: 'bold',
-
           },
 
           datePicker:
