@@ -240,7 +240,7 @@ const DodawanieRosliny = () =>
         }
 
         const axios = require('axios').default;
-        const res = await axios.get("http://"+ IP.ip +"/plants", newUserPlant).then(resp => {
+        const res = await axios.post("http://"+ IP.ip +"/plants", newUserPlant).then(resp => {
           console.log(response);
         });
     }

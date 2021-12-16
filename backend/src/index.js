@@ -39,6 +39,7 @@ const UserPlantsSchema = new Schema({
   nazwa: String,
   gatunek: String,
   sensor_id: Number,
+  data_podlewania: Date,
   data_przesadzania: Date,
   data_nawozenia: Date,
   data_podlewania: Date,
@@ -126,6 +127,7 @@ app.post("/userplants", (req,res) =>
   const nazwa = req.body.nazwa;
   const gatunek = req.body.gatunek;
   const sensor_id = req.body.sensor_id;
+  const data_podlewania = req.body.data_podlewania;
   const data_przesadzania=req.body.data_przesadzania;
   const data_nawozenia=req.body.data_nawozenia;
   const data_podlewania=req.data_podlewania;
@@ -135,6 +137,7 @@ app.post("/userplants", (req,res) =>
   roslina.nazwa = nazwa;
   roslina.gatunek = gatunek;
   roslina.sensor_id = sensor_id;
+  roslina.data_podlewania = data_podlewania;
   roslina.data_przesadzania=data_przesadzania;
   roslina.data_nawozenia=data_nawozenia;
   roslina.data_podlewania=data_podlewania;
@@ -313,6 +316,7 @@ const start = async () => {
    userplant1.nazwa = "Marian";
    userplant1.gatunek = "Zielistka";
    userplant1.sensor_id = 1;
+   userplant1.data_podlewania = '2021-11-30';
    userplant1.data_nawozenia = '2021-11-30';
    userplant1.data_przesadzania = '2021-11-30';
 
@@ -321,6 +325,7 @@ const start = async () => {
    userplant2.nazwa = "Monstera salon";
    userplant2.gatunek = "Monstera Okazała";
    userplant2.sensor_id = 2;
+   userplant1.data_podlewania = '2021-11-30';
    userplant2.data_nawozenia = '2021-11-01';
    userplant2.data_przesadzania = '2021-08-21';
 

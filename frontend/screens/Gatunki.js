@@ -38,6 +38,7 @@ const Gatunki = () =>
         plantList=(
             <FlatList 
             data={plantsArray}
+            keyExtractor={(item) => item.idgatunku}
             renderItem={({ item }) =>
              (<>
              <TouchableOpacity onPress={ ()=> onPressStack(item.idgatunku) }>

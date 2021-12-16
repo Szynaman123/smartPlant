@@ -30,6 +30,7 @@ const MojeRosliny = () =>
     plantList=(
         <FlatList 
         data={plantsArray}
+        keyExtractor={(item) => item.idrosliny}
         renderItem={({ item }) =>
          (<>
          <TouchableOpacity>

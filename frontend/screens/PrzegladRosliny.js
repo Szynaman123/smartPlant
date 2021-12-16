@@ -11,6 +11,10 @@ import {
 } from 'react-native';
 import {default as axios} from "axios";
 import IP from '../constants/ip';
+import Box from '../components/boxes';
+import Colors from '../constants/colors';
+
+
 
 
 const PrzegladRosliny = () =>{
@@ -23,6 +27,7 @@ const PrzegladRosliny = () =>{
     const [sensorHumidity, setSensorHumidity] = useState();
     const [seedingDate, setSeedingDate] = useState();
     const [fertilizationDate, setFertilizationDate] = useState();
+    const [wateringDate, setWateringDate] = useState();
 
     const [sensors, setSensors] = useState();
 
@@ -32,6 +37,7 @@ const PrzegladRosliny = () =>{
     setPlantName(plants_array[idRosliny-1].nazwa);
     setSpeciesName(plants_array[idRosliny-1].gatunek);
     setSensorId(plants_array[idRosliny-1].sensor_id);
+    
     setSeedingDate(plants_array[idRosliny-1].data_przesadzania);
     setFertilizationDate(plants_array[idRosliny-1].data_nawozenia);
     setSensorId(plants_array[idRosliny-1].sensor_id);
@@ -40,7 +46,7 @@ const PrzegladRosliny = () =>{
     axios.get("http://"+ IP.ip +"/sensors").then(resp => {
     const sensors_array =[{}]=resp.data;
 
-    setSensorHumidity(sensors_array[sensorId-1].humidity);
+    setSensorHumidity(sensors_array[sensorId].humidity);
     });
 
     const formatDate = (date) =>
@@ -76,6 +82,11 @@ const PrzegladRosliny = () =>{
                     </View>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
+                        <Text style={styles.propertiesText}>Data ostatniego podlewania</Text>
+                        <Text style={styles.propertiesTextGreen}></Text>
+                    </View>
+                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
+                    <View style={styles.flexbox3}> 
                         <Text style={styles.propertiesText}>Data ostatniego przesadzania</Text>
                         <Text style={styles.propertiesTextGreen}>{formatDate(seedingDate)}</Text>
                     </View>
@@ -90,6 +101,17 @@ const PrzegladRosliny = () =>{
                         <Text style={styles.propertiesTextGreen}>Brak</Text>
                     </View>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
+                    <View style={styles.flexbox3}> 
+                        <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
+                        <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Podlej" ></Box>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
+                        <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Nawieź" ></Box>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
+                        <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Przesadź" ></Box>
+                        </TouchableOpacity>
+                    </View>
                     <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
                     <Text style={styles.czytajWiecej}>Czytaj więcej o pielęgnacji tego gatunku...</Text>
                     </TouchableOpacity>
@@ -125,7 +147,7 @@ const styles = StyleSheet.create(
         flexbox3:
         {
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'space-evenly',
             alignItems: 'flex-start',  
             paddingVertical:10, 
         },
@@ -177,7 +199,7 @@ const styles = StyleSheet.create(
         {
             color: '#777777',
             fontSize: 14,
-            paddingVertical: 50,
+            paddingVertical: 10,
             textDecorationLine: 'underline',
         }
     }
