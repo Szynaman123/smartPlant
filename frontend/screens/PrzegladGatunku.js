@@ -77,6 +77,10 @@ const PrzegladGatunku = () =>
 
     }
 
+    //var base64Image = 'data:image/jpg;base64,'+(axios.get("http://192.168.0.21:3000/img/1"));
+    axios.get("http://192.168.0.21:3000/img/2").then(resp => {
+        console.log("123 "+resp.data[3]+" 123");
+        console.log(typeof resp.data);})
     /*const onLoad = async () => {
 
         //const [nazwaPL, getNazwaPL] = useState('');
@@ -100,7 +104,7 @@ const PrzegladGatunku = () =>
                 <View style={styles.flexbox2}>
                     <Text style={styles.titleText}>{plantname}</Text>
                     <Text style={styles.titleSecondText}>{plantnamelatin}</Text>
-                    <Image style={styles.plantPic} source={require('../assets/plant.png')}/>
+                    <Image style={styles.plantPic} source={require('../assets/0.jpg')}/>
                 </View>
                 <View style={styles.flexbox3}>
                     <Text style={styles.plantPropertiesTitle}>Stanowisko</Text>

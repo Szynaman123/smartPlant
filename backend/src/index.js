@@ -172,7 +172,14 @@ app.get("/img/:id", async(req, res) =>{
   })
 
   readableStream.on("end", function () {
-    res.send(Buffer.concat(chunks));
+    console.log(chunks);
+    console.log(typeof chunks);
+    var bufCon= Buffer.concat(chunks);
+    console.log(typeof bufCon);
+    var bufConToString = Buffer.concat(chunks).toString();
+    console.log(typeof bufConToString);
+    console.log(bufConToString);
+    res.send(bufConToString);
   });
 
   readableStream.on('data', (chunk) => {
