@@ -11,9 +11,14 @@ import {
 import {default as axios} from "axios";
 import Colors from '../constants/colors';
 import IP from '../constants/ip';
+import { useId } from '../context/LoginProvider';
+
 
 const MojeRosliny = () =>
 {
+    const { setPlantId, setIsPlantChosen} = useId();
+
+
     const [plantsArray, setPlantsArray] = useState();
     //const [speciesArray, setSpeciesArray] = useState();
 
@@ -25,6 +30,13 @@ const MojeRosliny = () =>
     const species_array = [{}] = resp.data;
 */
 
+    const onPressStack = (id) =>
+        {
+            setIsPlantChosen(true);
+            setPlantId(id);
+
+        }
+
     let plantList;
 
     plantList=(
@@ -33,7 +45,7 @@ const MojeRosliny = () =>
         keyExtractor={(item) => item.idrosliny}
         renderItem={({ item }) =>
          (<>
-         <TouchableOpacity>
+         <TouchableOpacity onPress={()=> onPressStack(item.idrosliny)}>
         <View style={styles.flexbox2}>
         <Image style = {styles.logo} source={require('../assets/pic.png')}/> 
         <View style={styles.flexbox3}> 

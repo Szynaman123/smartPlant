@@ -20,6 +20,8 @@ const Stack = createStackNavigator();
 
 const StackNavigator = props =>
 {
+    const { setIsPlantChosen, plantId} = useId();
+
     return(
         <Stack.Navigator>
             <Stack.Screen name="przegladrosliny" component={PrzegladRosliny}

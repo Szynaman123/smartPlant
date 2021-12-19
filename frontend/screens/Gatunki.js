@@ -32,7 +32,6 @@ const Gatunki = () =>
         {
             setIsChosen(true);
             setIdSpecies(id);
-
         }
 
         plantList=(

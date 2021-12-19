@@ -6,6 +6,7 @@ import { useLogin, useId, useInitial } from './../context/LoginProvider';
 import {createStackNavigator} from "@react-navigation/stack";
 import DrawerNavigator from "./DrawerNavigator";
 import SpeciesStackNavigator from "./SpeciesStackNavigator";
+import PlantsStackNavigator from "./PlantsStackNavigator";
 import Gatunki from '../screens/Gatunki';
 
 
@@ -62,13 +63,17 @@ const StackNavigator =() =>{
 };
 const InitialStack = () => {
     const { isLoggedIn } = useLogin();
-    const { isChosen } = useId();
+    const { isChosen, isPlantChosen } = useId();
     const { initial } = useInitial();
 
     if((isLoggedIn === true) && (isChosen === true))
     {
         return <SpeciesStackNavigator/>
-    }else if(isLoggedIn === true)
+    }else if((isLoggedIn === true) && (isPlantChosen === true))
+    {
+        return <PlantsStackNavigator/>
+    }
+    else if(isLoggedIn === true)
     {
        return <DrawerNavigator initialRouteName={initial}/>
     } 

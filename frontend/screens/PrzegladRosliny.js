@@ -13,10 +13,17 @@ import {default as axios} from "axios";
 import IP from '../constants/ip';
 import Box from '../components/boxes';
 import Colors from '../constants/colors';
+import { useId } from '../context/LoginProvider';
+import { useInitial } from '../context/LoginProvider';
+
+
 
 const PrzegladRosliny = () =>{
 
-    const idRosliny = 2;
+    const { plantId, setIsPlantChosen } = useId();
+    const { setInitial } = useInitial();
+
+    //const plantId = 2;
 
     const [plantName, setPlantName] = useState();
     const [speciesName, setSpeciesName] = useState();
@@ -31,14 +38,14 @@ const PrzegladRosliny = () =>{
     axios.get("http://"+ IP.ip +"/userplants").then(resp => {
     const plants_array =[{}]=resp.data;
 
-    setPlantName(plants_array[idRosliny-1].nazwa);
-    setSpeciesName(plants_array[idRosliny-1].gatunek);
-    setSensorId(plants_array[idRosliny-1].sensor_id);
+    setPlantName(plants_array[plantId-1].nazwa);
+    setSpeciesName(plants_array[plantId-1].gatunek);
+    setSensorId(plants_array[plantId-1].sensor_id);
     
-    setWateringDate(plants_array[idRosliny-1].data_podlewania);
-    setSeedingDate(plants_array[idRosliny-1].data_przesadzania);
-    setFertilizationDate(plants_array[idRosliny-1].data_nawozenia);
-    setSensorId(plants_array[idRosliny-1].sensor_id);
+    setWateringDate(plants_array[plantId-1].data_podlewania);
+    setSeedingDate(plants_array[plantId-1].data_przesadzania);
+    setFertilizationDate(plants_array[plantId-1].data_nawozenia);
+    setSensorId(plants_array[plantId-1].sensor_id);
     });
 
     axios.get("http://"+ IP.ip +"/sensors").then(resp => {
@@ -71,7 +78,7 @@ const PrzegladRosliny = () =>{
             "Zmieniono datę podlewania na dzisiejszą",
         );
         const axios = require('axios').default;
-        const res = await axios.put("http://"+ IP.ip +"/userplants/podlej/"+ idRosliny + "", { data_podlewania: today}).then(resp => {
+        const res = await axios.put("http://"+ IP.ip +"/userplants/podlej/"+ plantId + "", { data_podlewania: today}).then(resp => {
           console.log(response);  
         });
 
@@ -87,7 +94,7 @@ const PrzegladRosliny = () =>{
             "Zmieniono datę ostatniego przesadzania na dzisiejszą",
         );
         const axios = require('axios').default;
-        const res = await axios.put("http://"+ IP.ip +"/userplants/przesadz/"+ idRosliny + "", { data_przesadzania: today}).then(resp => {
+        const res = await axios.put("http://"+ IP.ip +"/userplants/przesadz/"+ plantId + "", { data_przesadzania: today}).then(resp => {
           console.log(response);      
         });
 
@@ -102,11 +109,17 @@ const PrzegladRosliny = () =>{
             "Zmieniono datę ostatniego nawozenia na dzisiejszą",
         );
         const axios = require('axios').default;
-        const res = await axios.put("http://"+ IP.ip +"/userplants/nawiez/"+ idRosliny + "", { data_nawozenia: today}).then(resp => {
+        const res = await axios.put("http://"+ IP.ip +"/userplants/nawiez/"+ plantId + "", { data_nawozenia: today}).then(resp => {
           console.log(response);      
         });
 
         window.location.reload(false);
+    }
+
+    const goBackButton = () =>
+    {
+        setIsPlantChosen(false);
+        setInitial('MojeRosliny');
     }
         
     let plant;
@@ -167,6 +180,9 @@ const PrzegladRosliny = () =>{
 
     return(
         <ScrollView>
+            <TouchableOpacity onPress={goBackButton}>
+                <Text style={styles.propertiesText}> Powrót do listy gatunków</Text>    
+            </TouchableOpacity>
             <View style={styles.flexbox1}>
                {plant}
             </View>
