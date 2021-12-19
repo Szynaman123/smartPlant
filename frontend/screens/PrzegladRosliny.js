@@ -16,7 +16,7 @@ import Colors from '../constants/colors';
 
 const PrzegladRosliny = () =>{
 
-    const idRosliny = 1;
+    const idRosliny = 2;
 
     const [plantName, setPlantName] = useState();
     const [speciesName, setSpeciesName] = useState();
@@ -72,8 +72,41 @@ const PrzegladRosliny = () =>{
         );
         const axios = require('axios').default;
         const res = await axios.put("http://"+ IP.ip +"/userplants/podlej/"+ idRosliny + "", { data_podlewania: today}).then(resp => {
+          console.log(response);  
+        });
+
+        window.location.reload(false);
+
+    }
+
+    const updateSeedingDate = async () =>
+    {
+
+              Alert.alert(
+            "Dzięki za przesadzenie mnie!",
+            "Zmieniono datę ostatniego przesadzania na dzisiejszą",
+        );
+        const axios = require('axios').default;
+        const res = await axios.put("http://"+ IP.ip +"/userplants/przesadz/"+ idRosliny + "", { data_przesadzania: today}).then(resp => {
           console.log(response);      
         });
+
+        window.location.reload(false);
+    }
+
+    const updateFertilizationDate = async () =>
+    {
+
+              Alert.alert(
+            "Dzięki za nawóz - od razu lepiej!",
+            "Zmieniono datę ostatniego nawozenia na dzisiejszą",
+        );
+        const axios = require('axios').default;
+        const res = await axios.put("http://"+ IP.ip +"/userplants/nawiez/"+ idRosliny + "", { data_nawozenia: today}).then(resp => {
+          console.log(response);      
+        });
+
+        window.location.reload(false);
     }
         
     let plant;
@@ -118,10 +151,10 @@ const PrzegladRosliny = () =>{
                         <TouchableOpacity onPress={updateWateringDate}>
                         <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Podlej" ></Box>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
+                        <TouchableOpacity onPress={updateFertilizationDate}>
                         <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Nawieź" ></Box>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
+                        <TouchableOpacity onPress={updateSeedingDate}>
                         <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Przesadź" ></Box>
                         </TouchableOpacity>
                     </View>
