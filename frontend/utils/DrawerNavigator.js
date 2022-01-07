@@ -126,20 +126,6 @@ const DrawerNavigator = () => {
                                    fontWeight: 'bold',
                                },
                            }}/>
-                           <Drawer.Screen name="PrzegladRosliny" component={PrzegladRosliny}
-                           options={{
-                            drawerActiveBackgroundColor:'#F9F9F9',
-                            drawerActiveTintColor:'#777777',
-                            drawerInactiveTintColor: '#777777',
-                               title: 'Roslina',
-                               headerStyle: {
-                                   backgroundColor: '#98BF63',
-                               },
-                               headerTintColor: '#fff',
-                               headerTitleStyle: {
-                                   fontWeight: 'bold',
-                               },
-                           }}/>
                            <Drawer.Screen name="DodawanieRosliny" component={DodawanieRosliny}
                            options={{
                             drawerActiveBackgroundColor:'#F9F9F9',

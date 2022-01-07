@@ -271,12 +271,10 @@ const DodawanieRosliny = () =>
       placeholderStyle={dropdownSpecies? styles.dropdownText2 : styles.dropdownText}
       activeColor={Colors.LightGreen}
       data={species}
-          search
           maxHeight={300}
           labelField="Nazwapolska"
           valueField="idgatunku"
           placeholder={!isFocus ? 'Wybierz gatunek...' : dropdownSpecies}
-          searchPlaceholder="Szukaj..."
           value={dropdownSpecies}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}

@@ -16,7 +16,7 @@ import { useInitial } from '../context/LoginProvider';
 
 const PrzegladGatunku = () =>
 {
-    const { idSpecies, setIsChosen } = useId();
+    const { idSpecies, setIsChosen, setIsPlantChosen, isLoggedIn, isPlantChosen, isChosen } = useId();
     const { setInitial } = useInitial();
 
     const idGatunku = idSpecies; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
@@ -92,10 +92,35 @@ const PrzegladGatunku = () =>
         plantWilgotnoscZima =
         (<Text>{toPercents(humidityWinter)}</Text>);
 
+        /*let goBackButtonText;
+        const setGoBackButtonText = () =>
+        {
+            if((isLoggedIn === true) && (isPlantChosen === true) && (isChosen === true))
+            {
+                goBackButton = "Powrót do listy moich roślin";
+            }
+            else if((isLoggedIn === true) && (isChosen === true))
+            {
+                goBackButton = "Powrót do listy gatunków";
+            }
+
+        }*/
+
+
     const goBackButton = () =>
     {
+        if((isLoggedIn === true) && (isPlantChosen === true) && (isChosen === true))
+        {
+            setIsChosen(false);
+            setIsPlantChosen(false);
+            setInitial('MojeRosliny');
+
+        }
+        else if((isLoggedIn === true) && (isChosen === true))
+        {
         setIsChosen(false);
         setInitial('Gatunki');
+        }
     }
 
     /*const onLoad = async () => {
@@ -119,7 +144,7 @@ const PrzegladGatunku = () =>
     return(
         <ScrollView>
             <TouchableOpacity onPress={goBackButton}>
-                <Text style={styles.plantProperties}> Powrót do listy gatunków</Text>    
+                <Text style={styles.plantProperties}>Powrót do listy</Text>    
             </TouchableOpacity>
                 <View style={styles.flexbox2}>
                     <Text style={styles.titleText}>{plantname}</Text>

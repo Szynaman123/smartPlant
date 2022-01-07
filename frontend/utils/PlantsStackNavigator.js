@@ -7,6 +7,7 @@ import {
 import { useId } from './../context/LoginProvider';
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import PrzegladRosliny from "../screens/PrzegladRosliny";
+import PrzegladGatunku from "../screens/PrzegladGatunku";
 
 const MyTheme = {
     ...DefaultTheme,

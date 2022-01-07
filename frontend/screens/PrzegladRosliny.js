@@ -18,12 +18,11 @@ import { useInitial } from '../context/LoginProvider';
 
 
 
-const PrzegladRosliny = () =>{
+const PrzegladRosliny = ( {navigation}) =>{
 
-    const { plantId, setIsPlantChosen } = useId();
+    const { plantId, setIsPlantChosen, idSpecies, setIdSpecies, setIsChosen } = useId();
     const { setInitial } = useInitial();
 
-    //const plantId = 2;
 
     const [plantName, setPlantName] = useState();
     const [speciesName, setSpeciesName] = useState();
@@ -121,6 +120,12 @@ const PrzegladRosliny = () =>{
         setIsPlantChosen(false);
         setInitial('MojeRosliny');
     }
+
+    const onPressStack = (id) =>
+    {
+        setIsChosen(true);
+        setIdSpecies(id);
+    }
         
     let plant;
 
@@ -171,7 +176,7 @@ const PrzegladRosliny = () =>{
                         <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Przesadź" ></Box>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => Alert.alert('Soon', 'soon')}>
+                    <TouchableOpacity onPress={() => onPressStack(200)}>
                     <Text style={styles.czytajWiecej}>Czytaj więcej o pielęgnacji tego gatunku...</Text>
                     </TouchableOpacity>
                 </View>
@@ -181,7 +186,7 @@ const PrzegladRosliny = () =>{
     return(
         <ScrollView>
             <TouchableOpacity onPress={goBackButton}>
-                <Text style={styles.propertiesText}> Powrót do listy gatunków</Text>    
+                <Text style={styles.propertiesText}> Powrót do listy</Text>    
             </TouchableOpacity>
             <View style={styles.flexbox1}>
                {plant}
