@@ -85,7 +85,7 @@ const DrawerNavigator = () => {
                                drawerActiveBackgroundColor:'#F9F9F9',
                                drawerActiveTintColor:'#777777',
                                drawerInactiveTintColor: '#777777',
-                               title: 'Powiadomienia',
+                               title: 'Start',
                                headerStyle: {
                                    backgroundColor: '#98BF63',
                                },
