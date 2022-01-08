@@ -366,7 +366,7 @@ const start = async () => {
    userplant2.data_podlewania = '2021-08-21';
    userplant2.user_mail = 'sj@icloud.com';*/
 
-   const userplant2 = new UserPlant();
+   /*const userplant2 = new UserPlant();
    userplant2.idrosliny = 4;
    userplant2.nazwa = "Montera sypialnia";
    userplant2.gatunek = "Monstera Okazała";
@@ -377,7 +377,7 @@ const start = async () => {
    userplant2.user_mail = 'lala@icloud.com';
 
    //userplant1.save();
-   userplant2.save();
+   userplant2.save();*/
 
 };
 

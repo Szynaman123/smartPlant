@@ -16,7 +16,7 @@ import { useId, useLogin } from '../context/LoginProvider';
 
 const MojeRosliny = () =>
 {
-    const { setPlantId, setIsPlantChosen} = useId();
+    const { setPlantId, setIsPlantChosen, sensorId, setSensorId} = useId();
     const { profile } = useLogin();
 
 
@@ -45,10 +45,11 @@ const MojeRosliny = () =>
     //console.log(plantsArray)
 
 
-    const onPressStack = (id) =>
+    const onPressStack = (id, sensorid) =>
         {
             setIsPlantChosen(true);
             setPlantId(id);
+            setSensorId(sensorid);
 
         }
 
@@ -60,7 +61,7 @@ const MojeRosliny = () =>
         keyExtractor={(item) => item.idrosliny}
         renderItem={({ item }) =>
          (<>
-         <TouchableOpacity onPress={()=> onPressStack(item.idrosliny)}>
+         <TouchableOpacity onPress={()=> onPressStack(item.idrosliny, item.sensor_id)}>
         <View style={styles.flexbox2}>
         <Image style = {styles.logo} source={require('../assets/pic.png')}/> 
         <View style={styles.flexbox3}> 

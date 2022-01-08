@@ -12,10 +12,12 @@ const LoginProvider = ({ children }) => {
     
     const [idSpecies, setIdSpecies] = useState();
     const [plantId, setPlantId] = useState();
+    const [sensorId, setSensorId] = useState();
 
     const [initial, setInitial] = useState("notificationscreen");
     const [startDate, setStartDate] = useState(null);
     const [startDateGlobal, setStartDateGlobal] = useState();
+
 
 
    // let profileName;
@@ -26,7 +28,7 @@ const LoginProvider = ({ children }) => {
             value={{ isLoggedIn, setIsLoggedIn, profile, setProfile,
                 isChosen, setIsChosen, idSpecies, setIdSpecies, initial, setInitial,
             plantId, setPlantId, isPlantChosen, setIsPlantChosen, startDate, setStartDate,
-            startDateGlobal, setStartDateGlobal
+            startDateGlobal, setStartDateGlobal, sensorId, setSensorId
         }}
         >
             {children}

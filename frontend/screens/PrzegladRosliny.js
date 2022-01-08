@@ -18,40 +18,42 @@ import { useInitial } from '../context/LoginProvider';
 
 
 
-const PrzegladRosliny = ( {navigation}) =>{
+const PrzegladRosliny = () =>{
 
-    const { plantId, setIsPlantChosen, idSpecies, setIdSpecies, setIsChosen } = useId();
+    const { plantId, setIsPlantChosen, idSpecies, setIdSpecies, setIsChosen, sensorId } = useId();
     const { setInitial } = useInitial();
 
 
     const [plantName, setPlantName] = useState();
     const [speciesName, setSpeciesName] = useState();
-    const [sensorId, setSensorId] = useState();
+    const [speciesId, setSpeciesId] = useState();
     const [sensorHumidity, setSensorHumidity] = useState();
     const [seedingDate, setSeedingDate] = useState();
     const [fertilizationDate, setFertilizationDate] = useState();
     const [wateringDate, setWateringDate] = useState();
 
-    const [sensors, setSensors] = useState();
+    axios.get("http://"+ IP.ip +"/userplants/"+ plantId).then(resp => {
+    const plant = [{}] = resp.data;
 
-    axios.get("http://"+ IP.ip +"/userplants").then(resp => {
-    const plants_array =[{}]=resp.data;
-
-    setPlantName(plants_array[plantId-1].nazwa);
-    setSpeciesName(plants_array[plantId-1].gatunek);
-    setSensorId(plants_array[plantId-1].sensor_id);
+    setPlantName(plant[0].nazwa);
+    setSpeciesName(plant[0].gatunek);
     
-    setWateringDate(plants_array[plantId-1].data_podlewania);
-    setSeedingDate(plants_array[plantId-1].data_przesadzania);
-    setFertilizationDate(plants_array[plantId-1].data_nawozenia);
-    setSensorId(plants_array[plantId-1].sensor_id);
+    setWateringDate(plant[0].data_podlewania);
+    setSeedingDate(plant[0].data_przesadzania);
+    setFertilizationDate(plant[0].data_nawozenia);
     });
 
-    axios.get("http://"+ IP.ip +"/sensors").then(resp => {
-    const sensors_array =[{}]=resp.data;
+    axios.get("http://"+ IP.ip +"/sensors/" + sensorId).then(resp => {
+    const sensor =[{}]=resp.data;
 
-    setSensorHumidity(sensors_array[sensorId].humidity);
+    setSensorHumidity(sensor[0].humidity);
     });
+
+    axios.get("http://"+ IP.ip +"/plants/nazwa/" + speciesName).then(resp => {
+    const id = resp.data;
+    setSpeciesId(id);
+
+});
 
     const formatDate = (date) =>
     {
@@ -182,7 +184,7 @@ const PrzegladRosliny = ( {navigation}) =>{
                         
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => onPressStack(200)}>
+                    <TouchableOpacity onPress={() => onPressStack(speciesId)}>
                     <Text style={styles.czytajWiecej}>Czytaj więcej o pielęgnacji tego gatunku...</Text>
                     </TouchableOpacity>
                 </View>
