@@ -11,12 +11,13 @@ import {
 import {default as axios} from "axios";
 import Colors from '../constants/colors';
 import IP from '../constants/ip';
-import { useId } from '../context/LoginProvider';
+import { useId, useLogin } from '../context/LoginProvider';
 
 
 const MojeRosliny = () =>
 {
     const { setPlantId, setIsPlantChosen} = useId();
+    const { profile } = useLogin();
 
 
     const [plantsArray, setPlantsArray] = useState();
@@ -24,11 +25,25 @@ const MojeRosliny = () =>
 
     axios.get("http://"+ IP.ip +"/userplants").then(resp => {
     const plants_array =[{}]=resp.data;
-    setPlantsArray(plants_array)});
+
+    let user_plants_array = [];
+    for (let i=0; i<plants_array.length; i++)
+            {
+                if(plants_array[i].user_mail === profile.mail)
+                {
+                    user_plants_array.push(plants_array[i]);
+                }
+               
+            };
+    setPlantsArray(user_plants_array)});
 
    /* axios.get("http://"+ IP.ip +"/plants").then(resp =>{
     const species_array = [{}] = resp.data;
 */
+
+    //console.log(profile.mail);
+    //console.log(plantsArray)
+
 
     const onPressStack = (id) =>
         {
