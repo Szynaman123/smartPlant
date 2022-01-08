@@ -262,45 +262,63 @@ app.get("/plants/:idgatunku", async (req, res) => {
   res.json(plant);
 });
 
-app.get("/plants/:Nazwapolska", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.Nazwapolska});
-  res.json(plant);
+app.get("/plants/nazwa/:Nazwapolska", async (req, res) => {
+  const plant = await Plant.find({Nazwapolska: req.params.Nazwapolska});
+  const id=plant[0].idgatunku;
+  res.json(id);
+});
+app.get("/plants/wilgotnosci/:idgatunku", async (req, res) => {
+  const plant = await Plant.find({idgatunku: req.params.idgatunku});
+  const wilgotnosci={
+    wilgotnosc_lato: plant[0].wilgotnosc_lato,
+    wilgotnosc_zima: plant[0].wilgotnosc_zima,
+  };
+  res.json(wilgotnosci);
 });
 
-app.get("/plants/:Nazwalacina", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.Nazwalacina});
+app.get("/plants/wilgotnosci_nazwa/:Nazwapolska", async (req, res) => {
+  const plant = await Plant.find({Nazwapolska: req.params.nazwapolska});
+  const wilgotnosci={
+    wilgotnosc_lato: plant[0].wilgotnosc_lato,
+    wilgotnosc_zima: plant[0].wilgotnosc_zima,
+  };
+  res.json(wilgotnosci);
+});
+
+app.get("/plants/nazwalac/:Nazwalacina", async (req, res) => {
+  const plant = await Plant.find({Nazwalacina: req.params.Nazwalacina});
   res.json(plant);
 });
-app.get("/plants/:nawozenie", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.nawozenie});
+app.get("/plants/nawozenie/:nawozenie", async (req, res) => {
+  const plant = await Plant.find({nawozenie: req.params.nawozenie});
   res.json(plant);
 });
-app.get("/plants/:szkodniki", async (req, res) => {
+app.get("/plants/szkodniki/:szkodniki", async (req, res) => {
   const plant = await Plant.find({idgatunku: req.params.szkodniki});
   res.json(plant);
 });
-app.get("/plants/:podlewanie", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.podlewanie});
+app.get("/plants/podlewanie/:podlewanie", async (req, res) => {
+  const plant = await Plant.find({szkodniki: req.params.podlewanie});
   res.json(plant);
 });
-app.get("/plants/:stanowisko", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.stanowisko});
+app.get("/plants/stanowisko/:stanowisko", async (req, res) => {
+  const plant = await Plant.find({stanowisko: req.params.stanowisko});
   res.json(plant);
 });
-app.get("/plants/:temperatura", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.temperatura});
+app.get("/plants/temperatura/:temperatura", async (req, res) => {
+  const plant = await Plant.find({temperatura: req.params.temperatura});
   res.json(plant);
 });
-app.get("/plants/:wilgotnosc_lato", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.wilgotnosc_lato});
+app.get("/plants/wilgotnosc_lato/:wilgotnosc_lato", async (req, res) => {
+  const plant = await Plant.find({wilgotnosc_lato: req.params.wilgotnosc_lato});
   res.json(plant);
 });
-app.get("/plants/:wilgotnosc_zima", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.wilgotnosc_zima});
+app.get("/plants/wilgotnosc_zima/:wilgotnosc_zima", async (req, res) => {
+  const plant = await Plant.find({wilgotnosc_zima: req.params.wilgotnosc_zima});
   res.json(plant);
 });
-app.get("/plants/:przesadzanie", async (req, res) => {
-  const plant = await Plant.find({idgatunku: req.params.przesadzanie});
+app.get("/plants/przesadzanie/:przesadzanie", async (req, res) => {
+  const plant = await Plant.find({przesadzanie: req.params.przesadzanie});
   res.json(plant);
 });
 
