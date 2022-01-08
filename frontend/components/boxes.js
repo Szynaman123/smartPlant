@@ -3,7 +3,6 @@ import {View, Text, StyleSheet} from 'react-native';
 
 const Box = props =>
 {
-    
     const boxColor =
     { 
         backgroundColor: props.colorHex,
@@ -12,16 +11,13 @@ const Box = props =>
     {
         color: props.colorTextHex,
     }
-
     return(
         <View style = {[styles.box, boxColor]}>
       <Text style = {[styles.text, txtColor]}>
       {props.TextInside}
       </Text>
         </View>
-    );
-};
-
+    ); };
 
 const styles = StyleSheet.create(
     {
@@ -36,20 +32,6 @@ const styles = StyleSheet.create(
         text:
         {
           textAlign: 'center',
-          fontSize: 18
-        },
-      
-        green_text:
-        {
-          textAlign: 'center',
-          color: '#98BF63', 
-          fontSize: 18
-        },
-
-        white_text:
-        {
-          textAlign: 'center',
-          color: '#EAF2E0', 
           fontSize: 18
         },
         

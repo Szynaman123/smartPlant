@@ -170,10 +170,16 @@ const PrzegladRosliny = ( {navigation}) =>{
                         <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Podlej" ></Box>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={updateFertilizationDate}>
-                        <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Nawieź" ></Box>
+
+                        <Box
+                        colorHex={Colors.Green}
+                        colorTextHex={Colors.VeryLightGrey}
+                        TextInside="Nawieź" >
+                        </Box>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={updateSeedingDate}>
                         <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Przesadź" ></Box>
+                        
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity onPress={() => onPressStack(200)}>
@@ -253,7 +259,7 @@ const styles = StyleSheet.create(
         {
             color: '#777777',
             fontSize: 15,
-            flex:1,
+            flex:0.8,
         },
         propertiesTextGreen:
         {
