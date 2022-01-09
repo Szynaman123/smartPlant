@@ -123,6 +123,11 @@ app.put("/userplants/nawiez/:_id",async (req,res)=>
 
 });
 
+app.get("/userplants/id/:_id", async (req, res) => {
+  const userplants = await UserPlant.find({_id: req.params._id});
+  res.json(userplants);
+});
+
 app.post("/userplants", (req,res) =>
 {
   const user_mail=req.body.user_mail;
@@ -131,7 +136,7 @@ app.post("/userplants", (req,res) =>
   const sensor_id = req.body.sensor_id;
   const data_przesadzania=req.body.data_przesadzania;
   const data_nawozenia=req.body.data_nawozenia;
-  const data_podlewania=req.data_podlewania;
+  const data_podlewania=req.body.data_podlewania;
   const roslina = new UserPlant();
 
   roslina.user_mail=user_mail;

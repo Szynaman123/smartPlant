@@ -32,7 +32,7 @@ const PrzegladRosliny = () =>{
     const [fertilizationDate, setFertilizationDate] = useState();
     const [wateringDate, setWateringDate] = useState();
 
-    axios.get("http://"+ IP.ip +"/userplants/"+ plantId).then(resp => {
+    axios.get("http://"+ IP.ip +"/userplants/id/"+ plantId).then(resp => {
     const plant = [{}] = resp.data;
 
     setPlantName(plant[0].nazwa);
@@ -41,6 +41,8 @@ const PrzegladRosliny = () =>{
     setWateringDate(plant[0].data_podlewania);
     setSeedingDate(plant[0].data_przesadzania);
     setFertilizationDate(plant[0].data_nawozenia);
+
+    console.log(plant[0].nazwa);
     });
 
     axios.get("http://"+ IP.ip +"/sensors/" + sensorId).then(resp => {

@@ -16,7 +16,7 @@ import { useId, useLogin } from '../context/LoginProvider';
 
 const MojeRosliny = () =>
 {
-    const { setPlantId, setIsPlantChosen, sensorId, setSensorId} = useId();
+    const { setPlantId, setIsPlantChosen, plantId, sensorId, setSensorId} = useId();
     const { profile } = useLogin();
 
 
@@ -33,8 +33,11 @@ const MojeRosliny = () =>
                 {
                     user_plants_array.push(plants_array[i]);
                 }
-               
             };
+
+    
+    //console.log(user_plants_array[1]._id);
+
     setPlantsArray(user_plants_array)});
 
    /* axios.get("http://"+ IP.ip +"/plants").then(resp =>{
@@ -50,18 +53,18 @@ const MojeRosliny = () =>
             setIsPlantChosen(true);
             setPlantId(id);
             setSensorId(sensorid);
-
         }
 
     let plantList;
+    console.log(plantId);
 
     plantList=(
         <FlatList 
         data={plantsArray}
-        keyExtractor={(item) => item.idrosliny}
+        keyExtractor={(item) => item._id}
         renderItem={({ item }) =>
          (<>
-         <TouchableOpacity onPress={()=> onPressStack(item.idrosliny, item.sensor_id)}>
+         <TouchableOpacity onPress={()=> onPressStack(item._id, item.sensor_id)}>
         <View style={styles.flexbox2}>
         <Image style = {styles.logo} source={require('../assets/pic.png')}/> 
         <View style={styles.flexbox3}> 
@@ -89,7 +92,6 @@ const styles =StyleSheet.create({
     {
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-
     },
 
     flexbox2:
