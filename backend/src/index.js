@@ -36,7 +36,6 @@ const PlantSchema = new Schema({
 });
 
 const UserPlantsSchema = new Schema({
-  idrosliny: Number,
   nazwa: String,
   gatunek: String,
   sensor_id: Number,
@@ -69,57 +68,54 @@ app.post("/users", async  (req, res) => {
   res.json(user);
 });
 
-app.put("/userplants/podlej/:idrosliny",async (req,res)=>
+app.put("/userplants/podlej/:_id",async (req,res)=>
 {
-  const userplant = await UserPlant.findOne({ idrosliny: req.params.idrosliny });
+  const userplant = await UserPlant.findOne({ _id: req.params._id });
   if(userplant){
-    idrosliny=userplant.idrosliny;
     nazwa=userplant.nazwa;
     user_mail=userplant.user_mail;
     gatunek=userplant.gatunek;
     sensor_id=userplant.sensor_id;
     data_przesadzania=userplant.data_przesadzania;
     data_nawozenia=userplant.data_nawozenia;
-    user_id=userplant.user_id;
-    userplant.overwrite({idrosliny: idrosliny , nazwa:  nazwa,user_mail: user_mail ,gatunek:gatunek, sensor_id:sensor_id,data_przesadzania:data_przesadzania,data_nawozenia:data_nawozenia,data_podlewania:req.body.data_podlewania,user_id:user_id});
+    
+    userplant.overwrite({nazwa:  nazwa,user_mail: user_mail ,gatunek:gatunek, sensor_id:sensor_id,data_przesadzania:data_przesadzania,data_nawozenia:data_nawozenia,data_podlewania:req.body.data_podlewania});
       await userplant.save();
   }else{
     res.status(404).send();
   }
 
 });
-app.put("/userplants/przesadz/:idrosliny",async (req,res)=>
+app.put("/userplants/przesadz/:_id",async (req,res)=>
 {
-  const userplant = await UserPlant.findOne({ idrosliny: req.params.idrosliny });
+  const userplant = await UserPlant.findOne({_id: req.params._id });
   if(userplant){
-    idrosliny=userplant.idrosliny;
     nazwa=userplant.nazwa;
     user_mail=userplant.user_mail;
     gatunek=userplant.gatunek;
     sensor_id=userplant.sensor_id;
     data_podlewania=userplant.data_podlewania;
     data_nawozenia=userplant.data_nawozenia;
-    user_id=userplant.user_id;
-    userplant.overwrite({idrosliny: idrosliny , nazwa:  nazwa,user_mail: user_mail, gatunek:gatunek, sensor_id:sensor_id,data_przesadzania:req.body.data_przesadzania,data_nawozenia:data_nawozenia,data_podlewania:data_podlewania,user_id:user_id});
+    
+    userplant.overwrite({nazwa:  nazwa,user_mail: user_mail, gatunek:gatunek, sensor_id:sensor_id,data_przesadzania:req.body.data_przesadzania,data_nawozenia:data_nawozenia,data_podlewania:data_podlewania});
       await userplant.save();
   }else{
     res.status(404).send();
   }
 
 });
-app.put("/userplants/nawiez/:idrosliny",async (req,res)=>
+app.put("/userplants/nawiez/:_id",async (req,res)=>
 {
-  const userplant = await UserPlant.findOne({ idrosliny: req.params.idrosliny });
+  const userplant = await UserPlant.findOne({ _id: req.params._id });
   if(userplant){
-    idrosliny=userplant.idrosliny;
     nazwa=userplant.nazwa;
     user_mail=userplant.user_mail;
     gatunek=userplant.gatunek;
     sensor_id=userplant.sensor_id;
     data_przesadzania=userplant.data_przesadzania;
     data_podlewania=userplant.data_podlewania;
-    user_id=userplant.user_id;
-    userplant.overwrite({idrosliny: idrosliny , nazwa:  nazwa, user_mail: user_mail,gatunek:gatunek, sensor_id:sensor_id,data_przesadzania:data_przesadzania,data_nawozenia:req.body.data_nawozenia,data_podlewania:data_podlewania,user_id:user_id});
+    
+    userplant.overwrite({nazwa:  nazwa, user_mail: user_mail,gatunek:gatunek, sensor_id:sensor_id,data_przesadzania:data_przesadzania,data_nawozenia:req.body.data_nawozenia,data_podlewania:data_podlewania});
       await userplant.save();
   }else{
     res.status(404).send();
@@ -129,13 +125,6 @@ app.put("/userplants/nawiez/:idrosliny",async (req,res)=>
 
 app.post("/userplants", (req,res) =>
 {
-  const max_plant_id=UserPlant.find().sort("-idrosliny").limit(1);
-  if(max_plant_id){
-  const rosliny_id=max_plant_id[0].idrosliny+1;}
-  else{
-  const rosliny_id=1;
-  }
-  const idrosliny = rosliny_id;
   const user_mail=req.body.user_mail;
   const nazwa = req.body.nazwa;
   const gatunek = req.body.gatunek;
@@ -145,7 +134,6 @@ app.post("/userplants", (req,res) =>
   const data_podlewania=req.data_podlewania;
   const roslina = new UserPlant();
 
-  roslina.idrosliny = idrosliny;
   roslina.user_mail=user_mail;
   roslina.nazwa = nazwa;
   roslina.gatunek = gatunek;
@@ -154,8 +142,6 @@ app.post("/userplants", (req,res) =>
   roslina.data_nawozenia=data_nawozenia;
   roslina.data_podlewania=data_podlewania;
   
-  
-
   roslina.save();
   res.json(req.body);
 });
