@@ -61,7 +61,7 @@ const MojeRosliny = () =>
     plantList=(
         <FlatList 
         data={plantsArray}
-        keyExtractor={(item) => item._id}
+        keyExtractor={(item) => item.nazwa}
         renderItem={({ item }) =>
          (<>
          <TouchableOpacity onPress={()=> onPressStack(item._id, item.sensor_id)}>
