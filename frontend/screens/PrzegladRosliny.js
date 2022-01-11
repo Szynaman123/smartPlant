@@ -54,23 +54,24 @@ const PrzegladRosliny = () =>{
     });
 
     
-    const settingSpeciesId = async () =>
-   {
-    const axios = require('axios').default;
-    const res = await axios.get("http://"+ IP.ip +"/plants/nazwa/" + speciesName).then(resp => {
+    axios.get("http://"+ IP.ip +"/plants/nazwa/" + speciesName).then(resp => {
     const id = resp.data;
     setSpeciesId(id);
     });
-   }
-   settingSpeciesId();
 
+
+//----------------------------------//KOLORY//-------------------------------------------------------//
+    /*
    axios.get("http://"+ IP.ip +"/plants/" + speciesId).then(resp => {
         const plants =[{}]=resp.data;
     
+        //console.log(plants);
+        console.log(plants[0].wilgotnosc_lato);
         setHumiditySummer(plants[0].wilgotnosc_lato);
         setHumidityWinter(plants[0].wilgotnosc_zima);
         });
-
+*/
+//----------------------------------//ENDKOLORY//-------------------------------------------------------//
 
     const formatDate = (date) =>
     {
@@ -146,33 +147,22 @@ const PrzegladRosliny = () =>{
         setIdSpecies(id);
     }*/
 
-   /* const checkStadiumRosliny = () =>
-    {
-        if((today-wateringDate)<5){setStadiumRosliny('normal');}
-        else if(humiditySummer===humidityWinter)
-        {
-            if (humiditySummer>=sensorHumidity){setStadiumRosliny('dried');}
-            else if (humiditySummer<sensorHumidity){setStadiumRosliny('soaked');}
-        }
-        else (sprawdzic czy jest zima czy lato)
-    };*/
-
+   
+//----------------------------------//KOLORY//-------------------------------------------------------//
+    /*
     const settingHumidityColor = (date, humiditySummer, humidityWinter, sensorHumidity) =>
     {
         const today = new Date();
         const ourDate = new Date(date);
 
-        console.log("gowno");
-        console.log((today.getTime()));
-        console.log(ourDate.getTime()*0.000000015740741);
-        console.log((today.getTime())-(ourDate.getTime()));
+    
 
         if((today.getTime())-(ourDate.getTime())<432000000)
         {
             console.log("f");
             return (<Text style={styles.propertiesTextGreen}>{sensorHumidity}%</Text>)
         }
-        else if((humiditySummer==humidityWinter) | ((today.getMonth+1)>=3 & (today.getMonth+1)<9))
+        else if((humiditySummer===humidityWinter) | ((today.getMonth+1)>=3 & (today.getMonth+1)<9))
         {
             if (humiditySummer>=sensorHumidity){
                 console.log("g");
@@ -189,6 +179,13 @@ const PrzegladRosliny = () =>{
                 return (<Text style={styles.propertiesTextBlue}>{sensorHumidity}%</Text>)}
         }
     }
+
+    TO DO <View>
+
+    {settingHumidityColor(wateringDate, humiditySummer, humidityWinter, sensorHumidity)}
+
+    */
+   //----------------------------------//ENDKOLORY//-------------------------------------------------------//
 
 
         
@@ -207,9 +204,7 @@ const PrzegladRosliny = () =>{
                 <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
                         <Text style={styles.propertiesText}>Wilgotność</Text>
-
-                       {settingHumidityColor(wateringDate, humiditySummer, humidityWinter, sensorHumidity)}
-
+                        <Text style={styles.propertiesTextGreen}>{sensorHumidity}%</Text>
                     </View>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
