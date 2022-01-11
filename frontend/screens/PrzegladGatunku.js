@@ -109,18 +109,8 @@ const PrzegladGatunku = () =>
 
     const goBackButton = () =>
     {
-        if((isLoggedIn === true) && (isPlantChosen === true) && (isChosen === true))
-        {
-            setIsChosen(false);
-            setIsPlantChosen(false);
-            setInitial('MojeRosliny');
-
-        }
-        else if((isLoggedIn === true) && (isChosen === true))
-        {
         setIsChosen(false);
         setInitial('Gatunki');
-        }
     }
 
     /*const onLoad = async () => {

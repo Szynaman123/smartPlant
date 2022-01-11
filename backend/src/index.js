@@ -123,11 +123,6 @@ app.put("/userplants/nawiez/:_id",async (req,res)=>
 
 });
 
-app.get("/userplants/id/:_id", async (req, res) => {
-  const userplants = await UserPlant.find({_id: req.params._id});
-  res.json(userplants);
-});
-
 app.post("/userplants", (req,res) =>
 {
   const user_mail=req.body.user_mail;
@@ -210,6 +205,11 @@ app.get("/userplants", async (req, res) => {
 });
 app.get("/userplants/:idrosliny", async (req, res) => {
   const userplants = await UserPlant.find({idrosliny: req.params.idrosliny});
+  res.json(userplants);
+});
+
+app.get("/userplants/id/:_id", async (req, res) => {
+  const userplants = await UserPlant.find({_id: req.params._id});
   res.json(userplants);
 });
 

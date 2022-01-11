@@ -31,7 +31,9 @@ const PrzegladRosliny = () =>{
     const [seedingDate, setSeedingDate] = useState();
     const [fertilizationDate, setFertilizationDate] = useState();
     const [wateringDate, setWateringDate] = useState();
+    const [stadiumRosliny, setStadiumRosliny] = useState((''));
 
+    
     axios.get("http://"+ IP.ip +"/userplants/id/"+ plantId).then(resp => {
     const plant = [{}] = resp.data;
 
@@ -42,7 +44,7 @@ const PrzegladRosliny = () =>{
     setSeedingDate(plant[0].data_przesadzania);
     setFertilizationDate(plant[0].data_nawozenia);
 
-    console.log(plant[0].nazwa);
+    //console.log(plant[0].nazwa);
     });
 
     axios.get("http://"+ IP.ip +"/sensors/" + sensorId).then(resp => {
@@ -51,11 +53,16 @@ const PrzegladRosliny = () =>{
     setSensorHumidity(sensor[0].humidity);
     });
 
-    axios.get("http://"+ IP.ip +"/plants/nazwa/" + speciesName).then(resp => {
+    const settingSpeciesId = async () =>
+   {
+    const axios = require('axios').default;
+    const res = await axios.get("http://"+ IP.ip +"/plants/nazwa/" + speciesName).then(resp => {
     const id = resp.data;
     setSpeciesId(id);
+    });
+   }
 
-});
+   settingSpeciesId();
 
     const formatDate = (date) =>
     {
@@ -82,7 +89,7 @@ const PrzegladRosliny = () =>{
         );
         const axios = require('axios').default;
         const res = await axios.put("http://"+ IP.ip +"/userplants/podlej/"+ plantId + "", { data_podlewania: today}).then(resp => {
-          console.log(response);  
+          //console.log(response);  
         });
 
         window.location.reload(false);
@@ -98,7 +105,7 @@ const PrzegladRosliny = () =>{
         );
         const axios = require('axios').default;
         const res = await axios.put("http://"+ IP.ip +"/userplants/przesadz/"+ plantId + "", { data_przesadzania: today}).then(resp => {
-          console.log(response);      
+          //console.log(response);      
         });
 
         window.location.reload(false);
@@ -113,7 +120,7 @@ const PrzegladRosliny = () =>{
         );
         const axios = require('axios').default;
         const res = await axios.put("http://"+ IP.ip +"/userplants/nawiez/"+ plantId + "", { data_nawozenia: today}).then(resp => {
-          console.log(response);      
+          //console.log(response);      
         });
 
         window.location.reload(false);
@@ -130,6 +137,25 @@ const PrzegladRosliny = () =>{
         setIsChosen(true);
         setIdSpecies(id);
     }
+
+   /* const checkStadiumRosliny = () =>
+    {
+        if((today-wateringDate)<5){setStadiumRosliny('normal');}
+        else if(humiditySummer===humidityWinter)
+        {
+            if (humiditySummer>=sensorHumidity){setStadiumRosliny('dried');}
+            else if (humiditySummer<sensorHumidity){setStadiumRosliny('soaked');}
+        }
+        else (sprawdzic czy jest zima czy lato)
+    };*/
+
+   /* console.log(today-wateringDate);
+    console.log(today);
+    console.log(formatDate(today));
+    console.log(formatDate(seedingDate));
+    */
+
+
         
     let plant;
 
@@ -186,9 +212,10 @@ const PrzegladRosliny = () =>{
                         
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity onPress={() => onPressStack(speciesId)}>
-                    <Text style={styles.czytajWiecej}>Czytaj więcej o pielęgnacji tego gatunku...</Text>
-                    </TouchableOpacity>
+                    
+
+
+
                 </View>
         </>
     )

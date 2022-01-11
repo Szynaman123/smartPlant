@@ -7,8 +7,6 @@ import {createStackNavigator} from "@react-navigation/stack";
 import DrawerNavigator from "./DrawerNavigator";
 import SpeciesStackNavigator from "./SpeciesStackNavigator";
 import PlantsStackNavigator from "./PlantsStackNavigator";
-import Gatunki from '../screens/Gatunki';
-
 
 
 const Stack = createStackNavigator();
@@ -63,7 +61,7 @@ const StackNavigator =() =>{
 };
 const InitialStack = () => {
     const { isLoggedIn } = useLogin();
-    const { isChosen, isPlantChosen } = useId();
+    const { isChosen, isPlantChosen, isSensorChosen} = useId();
     const { initial } = useInitial();
 
     if((isLoggedIn === true) && (isChosen === true))
