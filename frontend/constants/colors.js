@@ -6,4 +6,6 @@ export default{
     DarkGrey: '#777777',
     VeryLightGrey: '#F9F9F9',
     PastelGreen: '#9DC183',
+    Red: '#e63946',
+    Blue: '#0096c7',
 };

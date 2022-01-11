@@ -111,14 +111,14 @@ const DodawanieRosliny = ({navigation}) =>
    }else{
        datePicker=(
            <>
-               <Text style={styles.text}>4. Wpisz datę ostatniego przesadzania rośliny bądź datę zakupu w formacie RRRRMMMDD np. 20211128.</Text>
+               <Text style={styles.text}>4. Wpisz datę ostatniego przesadzania rośliny bądź datę zakupu w formacie RRRR-MM-DD np. 20211128.</Text>
                <TextInput
                    style={styles.input}
                    onChangeText={onChangeSeedingDateAndroid}
                    value={seedingDateAndroid}
                    placeholder="Wpisz datę we właściwym formacie"
                    keyboardType = 'numeric'
-                   maxLength={8}
+                   maxLength={11}
                />
            </>
        )
@@ -144,14 +144,14 @@ const DodawanieRosliny = ({navigation}) =>
    }else{
        datePicker2=(
            <>
-               <Text style={styles.text}>5. Wpisz datę ostatniego nawożenia rośliny (jeżeli nie pamiętasz lub nie nawoziłeś nigdy swojej rośliny, to wpisz dzisiejszą datę w formacie RRRRMMMDD np. 20211128.</Text>
+               <Text style={styles.text}>5. Wpisz datę ostatniego nawożenia rośliny (jeżeli nie pamiętasz lub nie nawoziłeś nigdy swojej rośliny, to wpisz dzisiejszą datę w formacie RRRR-MM-DD np. 2021-11-28.</Text>
                <TextInput
                    style={styles.input}
                    onChangeText={onChangeFertilizationDateAndroid}
                    value={fertilizationDateAndroid}
                    placeholder="Wpisz datę we właściwym formacie"
                    keyboardType = 'numeric'
-                   maxLength={8}
+                   maxLength={11}
                />
            </>
        )
@@ -177,14 +177,14 @@ const DodawanieRosliny = ({navigation}) =>
    }else{
        datePicker3=(
            <>
-               <Text style={styles.text}>4. Wpisz datę ostatniego podlewania rośliny bądź datę zakupu w formacie RRRRMMMDD np. 20211128.</Text>
+               <Text style={styles.text}>4. Wpisz datę ostatniego podlewania rośliny bądź datę zakupu w formacie RRRR-MM-DD np. 2021-11-28.</Text>
                <TextInput
                    style={styles.input}
                    onChangeText={onChangeWateringDateAndroid}
                    value={wateringDateAndroid}
                    placeholder="Wpisz datę we właściwym formacie"
                    keyboardType = 'numeric'
-                   maxLength={8}
+                   maxLength={11}
                />
            </>
        )
@@ -245,22 +245,45 @@ const DodawanieRosliny = ({navigation}) =>
    const formatedFertilizationDate = formatDate(fertilizationDate);
    const formatedWateringDate = formatDate(wateringDate);
 
+   //console.log(formatedFertilizationDate);
+
    const { profile } = useLogin();
 
    const createUserPlant = async () =>{
-       const newUserPlant = {
-           nazwa: plantName,
-           gatunek: dropdownSpecies,
-           sensor_id: sensorID,
-           data_przesadzania: formatedSeedingDate,
-           data_nawozenia:  formatedFertilizationDate,
-           data_podlewania: formatedWateringDate,
-           user_mail: profile.mail,
-       }
 
-       const axios = require('axios').default;
-       const res = await axios.post("http://"+ IP.ip +"/userplants", newUserPlant).then(resp => { });
-       showSuccessAlert();
+     if( Platform.OS === 'ios')
+     {
+        const newUserPlant = {
+            nazwa: plantName,
+            gatunek: dropdownSpecies,
+            sensor_id: sensorID,
+            data_przesadzania: formatedSeedingDate,
+            data_nawozenia:  formatedFertilizationDate,
+            data_podlewania: formatedWateringDate,
+            user_mail: profile.mail,
+        }
+ 
+        const axios = require('axios').default;
+        const res = await axios.post("http://"+ IP.ip +"/userplants", newUserPlant).then(resp => { });
+        showSuccessAlert();
+     }else{
+
+        const newUserPlant = {
+            nazwa: plantName,
+            gatunek: dropdownSpecies,
+            sensor_id: sensorID,
+            data_przesadzania: seedingDateAndroid,
+            data_nawozenia:  fertilizationDateAndroid,
+            data_podlewania: wateringDateAndroid,
+            user_mail: profile.mail,
+        }
+ 
+        const axios = require('axios').default;
+        const res = await axios.post("http://"+ IP.ip +"/userplants", newUserPlant).then(resp => { });
+        showSuccessAlert();
+
+     }
+       
    }
 
    return(

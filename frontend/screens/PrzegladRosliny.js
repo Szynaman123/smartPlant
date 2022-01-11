@@ -31,8 +31,8 @@ const PrzegladRosliny = () =>{
     const [seedingDate, setSeedingDate] = useState();
     const [fertilizationDate, setFertilizationDate] = useState();
     const [wateringDate, setWateringDate] = useState();
-    const [stadiumRosliny, setStadiumRosliny] = useState((''));
-
+    const [humiditySummer, setHumiditySummer] = useState();
+    const [humidityWinter, setHumidityWinter] = useState();
     
     axios.get("http://"+ IP.ip +"/userplants/id/"+ plantId).then(resp => {
     const plant = [{}] = resp.data;
@@ -53,6 +53,7 @@ const PrzegladRosliny = () =>{
     setSensorHumidity(sensor[0].humidity);
     });
 
+    
     const settingSpeciesId = async () =>
    {
     const axios = require('axios').default;
@@ -61,8 +62,15 @@ const PrzegladRosliny = () =>{
     setSpeciesId(id);
     });
    }
-
    settingSpeciesId();
+
+   axios.get("http://"+ IP.ip +"/plants/" + speciesId).then(resp => {
+        const plants =[{}]=resp.data;
+    
+        setHumiditySummer(plants[0].wilgotnosc_lato);
+        setHumidityWinter(plants[0].wilgotnosc_zima);
+        });
+
 
     const formatDate = (date) =>
     {
@@ -132,11 +140,11 @@ const PrzegladRosliny = () =>{
         setInitial('MojeRosliny');
     }
 
-    const onPressStack = (id) =>
+    /*const onPressStack = (id) =>
     {
         setIsChosen(true);
         setIdSpecies(id);
-    }
+    }*/
 
    /* const checkStadiumRosliny = () =>
     {
@@ -149,11 +157,38 @@ const PrzegladRosliny = () =>{
         else (sprawdzic czy jest zima czy lato)
     };*/
 
-   /* console.log(today-wateringDate);
-    console.log(today);
-    console.log(formatDate(today));
-    console.log(formatDate(seedingDate));
-    */
+    const settingHumidityColor = (date, humiditySummer, humidityWinter, sensorHumidity) =>
+    {
+        const today = new Date();
+        const ourDate = new Date(date);
+
+        console.log("gowno");
+        console.log((today.getTime()));
+        console.log(ourDate.getTime()*0.000000015740741);
+        console.log((today.getTime())-(ourDate.getTime()));
+
+        if((today.getTime())-(ourDate.getTime())<432000000)
+        {
+            console.log("f");
+            return (<Text style={styles.propertiesTextGreen}>{sensorHumidity}%</Text>)
+        }
+        else if((humiditySummer==humidityWinter) | ((today.getMonth+1)>=3 & (today.getMonth+1)<9))
+        {
+            if (humiditySummer>=sensorHumidity){
+                console.log("g");
+                return (<Text style={styles.propertiesTextRed}>{sensorHumidity}%</Text>)}
+            else if (humiditySummer<sensorHumidity){
+                console.log("h");
+                return (<Text style={styles.propertiesTextBlue}>{sensorHumidity}%</Text>)}
+        }else{
+            if (humidityWinter>=sensorHumidity){
+                console.log("i");
+                return (<Text style={styles.propertiesTextRed}>{sensorHumidity}%</Text>)}
+            else if (humidityWinter<sensorHumidity){
+                console.log("j");
+                return (<Text style={styles.propertiesTextBlue}>{sensorHumidity}%</Text>)}
+        }
+    }
 
 
         
@@ -172,7 +207,9 @@ const PrzegladRosliny = () =>{
                 <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
                         <Text style={styles.propertiesText}>Wilgotność</Text>
-                        <Text style={styles.propertiesTextGreen}>{sensorHumidity}%</Text>
+
+                       {settingHumidityColor(wateringDate, humiditySummer, humidityWinter, sensorHumidity)}
+
                     </View>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
@@ -295,6 +332,20 @@ const styles = StyleSheet.create(
         propertiesTextGreen:
         {
             color: '#98BF63',
+            fontSize: 15,
+            fontWeight: 'bold',
+            flex: 1,
+        },
+        propertiesTextRed:
+        {
+            color: Colors.Red,
+            fontSize: 15,
+            fontWeight: 'bold',
+            flex: 1,
+        },
+        propertiesTextBlue:
+        {
+            color: Colors.Blue,
             fontSize: 15,
             fontWeight: 'bold',
             flex: 1,

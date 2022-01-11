@@ -35,17 +35,12 @@ const MojeRosliny = () =>
                 }
             };
 
-    
-    //console.log(user_plants_array[1]._id);
-
     setPlantsArray(user_plants_array)});
 
-   /* axios.get("http://"+ IP.ip +"/plants").then(resp =>{
-    const species_array = [{}] = resp.data;
-*/
 
     //console.log(profile.mail);
     //console.log(plantsArray)
+   
 
 
     const onPressStack = (id, sensorid) =>
@@ -56,7 +51,6 @@ const MojeRosliny = () =>
         }
 
     let plantList;
-    console.log(plantId);
 
     plantList=(
         <FlatList 
