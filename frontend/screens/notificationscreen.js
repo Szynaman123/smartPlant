@@ -1,18 +1,20 @@
-import React, {Profiler, useState} from 'react';
+import React from 'react';
 import Colors from '../constants/colors';
 import { Text, View, Dimensions, StyleSheet, ScrollView, Image,} from 'react-native';
 import { useLogin } from './../context/LoginProvider';
 
 const notificationscreen = props =>
 {
-    const { setIsLoggedIn, profile } = useLogin();
+    //zmienna globalna (hooks useContext) przechowująca dane o zalogowanym użytkowniku (obiekt użytkownik)
+    const { profile } = useLogin();
+
+    //Na ekranie zwracamy imię zalogowanego użytkownika (dzięki zmiennej globalnej profile)
     return(
         <ScrollView>
             <View style={styles.flexbox}>
             <View style={styles.helloView}>
             <Text style={styles.txtHello}>Witaj {profile.firstname}!</Text>
             <Image style={styles.hello} source={require('../assets/hello4.png')}/>
-            <Image style={styles.hello} source={require('../assets/brakczynnosci.png')}/>
             </View>
             </View>
 
@@ -20,6 +22,7 @@ const notificationscreen = props =>
     )
 }
 
+//arkusze stylów
 const styles = StyleSheet.create({
 
     flexbox:

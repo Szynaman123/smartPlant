@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import {Text} from 'react-native';
+//ten plik zawiera wszystkie definiuje globalne (Hooks useContext)
 
 const LoginContext = createContext();
 
@@ -17,11 +17,6 @@ const LoginProvider = ({ children }) => {
     const [initial, setInitial] = useState("notificationscreen");
     const [startDate, setStartDate] = useState(null);
     const [startDateGlobal, setStartDateGlobal] = useState();
-
-
-
-   // let profileName;
-   //profileName = (<Text>{profile.firstname}</Text>);
 
     return (
         <LoginContext.Provider

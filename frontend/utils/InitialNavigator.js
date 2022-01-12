@@ -8,6 +8,8 @@ import DrawerNavigator from "./DrawerNavigator";
 import SpeciesStackNavigator from "./SpeciesStackNavigator";
 import PlantsStackNavigator from "./PlantsStackNavigator";
 
+//Ten plik zawiera początkową nawigację (Stack - opartą o stos), która wyświetla się po uruchomieniu aplikacji
+// na samym dole znajdują się warunki, które odpowiadają za zmianę nawigatora na inny niż początkowy
 
 const Stack = createStackNavigator();
 
@@ -59,9 +61,10 @@ const StackNavigator =() =>{
         />
     </Stack.Navigator>);
 };
+
 const InitialStack = () => {
     const { isLoggedIn } = useLogin();
-    const { isChosen, isPlantChosen, isSensorChosen} = useId();
+    const { isChosen, isPlantChosen} = useId();
     const { initial } = useInitial();
 
     if((isLoggedIn === true) && (isChosen === true))

@@ -34,7 +34,7 @@ const DodawanieRosliny = ({navigation}) =>
    const [wateringDate, setWateringDate] = useState(new Date());
    const [wateringDateAndroid, setWateringDateAndroid] = useState(null);
 
-
+// funkcje odpwiedzialne za zapisywanie wartości w zmiennych hooks zdefiniowanych powyżej
    const onChangeSeedingDate = (event, selectedDate) => {
        const currentDate = selectedDate || date;
        setSeedingDate(currentDate);
@@ -71,12 +71,15 @@ const DodawanieRosliny = ({navigation}) =>
    const sensorIdHandler = (ID) => {
        setSensorID(ID);
    }
+
+   //funkcja odpowiedzialna za wyświetlanie powaidomienia o dodanej roślinie
    const showSuccessAlert = () =>{        Alert.alert(
        "Dodano nowa rosline",
        "Zostales przekierowany do widoku Twoich roslin",
       navigation.navigate('MojeRosliny'),
    );}
 
+   //funkcja pobierająca listę gatunków z bazy
    const speciesDropdown = async () =>
    {
        const axios = require('axios').default;
@@ -86,6 +89,10 @@ const DodawanieRosliny = ({navigation}) =>
 
    }
 
+
+   /* W lini od 101 do 198 znajdują się funkcje warunkowe, które sprawdzają z jakiego urządzenia korzysta uzytkownik
+   Android czy iOS i na tej podstawie przypisuje do zmiennych z linii 97 do 99 odpowiedni format wyboru daty
+   (na iOS datetimepicker a na Andoid zwykły textinput)*/
 
    let datePicker;
    let datePicker2;
@@ -190,6 +197,7 @@ const DodawanieRosliny = ({navigation}) =>
        )
    }
 
+   //funkcja formatująca datę pobieraną z kalendarza 'datetimepicker' na datę w formacie YYYY-MM-DD
    const formatDate = (date) =>
    {
        let stringDate = date ? date.toString() : '';
@@ -241,14 +249,17 @@ const DodawanieRosliny = ({navigation}) =>
 
    }
 
+   //w ponizszych zmiennych zapisujemy sformatowane pobrane z datetimepickera daty
    const formatedSeedingDate = formatDate(seedingDate);
    const formatedFertilizationDate = formatDate(fertilizationDate);
    const formatedWateringDate = formatDate(wateringDate);
 
-   //console.log(formatedFertilizationDate);
 
+   // Hooks useContext, która przechowuje informacje o zalogowanym użytkowniku
    const { profile } = useLogin();
 
+
+   //funkcja zapisująca roślinę użytkownika w bazie danych (z podziałem na urządzenia Android i iOS)
    const createUserPlant = async () =>{
 
      if( Platform.OS === 'ios')
@@ -344,6 +355,8 @@ const DodawanieRosliny = ({navigation}) =>
 
 }
 
+//Arkusze stylów
+
 const styles = StyleSheet.create(
    {
        header:
@@ -374,8 +387,6 @@ const styles = StyleSheet.create(
        container: {
            flex: 1,
            padding: 20,
-           //height: Dimensions.get('window').width*0.6,
-           //width: Dimensions.get('window').width*0.6,
        },
 
        flexbox:

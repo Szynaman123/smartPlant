@@ -1,13 +1,12 @@
 import React from "react";
 import {
-    createStackNavigator,
-    StackContentScrollView,
-    StackItemList,
+    createStackNavigator
 } from '@react-navigation/stack';
-import { useId } from './../context/LoginProvider';
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme } from "@react-navigation/native";
 import PrzegladRosliny from "../screens/PrzegladRosliny";
-import PrzegladGatunku from "../screens/PrzegladGatunku";
+
+//// Stack NAVIGATOR
+/// Ten plik zawiera stos nawigacji, który odpowiedzialny jest za nawigację po wybraniu ekranu 'MojeRosliny'
 
 const MyTheme = {
     ...DefaultTheme,
@@ -21,8 +20,6 @@ const Stack = createStackNavigator();
 
 const StackNavigator = props =>
 {
-    const { setIsPlantChosen, plantId} = useId();
-
     return(
         <Stack.Navigator>
             <Stack.Screen name="przegladrosliny" component={PrzegladRosliny}

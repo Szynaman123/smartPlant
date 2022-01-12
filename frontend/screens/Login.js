@@ -41,31 +41,24 @@ const Login = () =>
             "Zostales przekierowany do swojego konta",
         );
 
-    const onPress = async () => {
+        //funkcja odpowiedzialna za działania po naciśnięciu przycisku (logowanie)
+    const onPressLogin = async () => {
         const axios = require('axios').default;
         const res = await axios.get("http://"+ IP.ip +"/users").then(resp => {
-
-            //console.log(resp.data);// laduje surowe dane
-            //console.log(typeof resp.data);//dane sa typu obiekt
-            const arr =[{},{}]=resp.data;//tablica obiektow zaincludowama zwracanymi danymi
-            //console.log(typeof arr); //dane sa nadal typu obiekt
-            //console.log(arr[0].firstname);//natalia
-            //console.log(arr[0].mail);//porczynska..
-            //console.log(arr[0].password);
-            //console.log({email});//wprowadzony mail obiekt
-            //console.log({haslo});//wprowadzony pass obiekt
-            const mailObject = {} ={email};//nowy obiekt zaincludowany obiektem mail
+            const arr =[{},{}]=resp.data;
+            const mailObject = {} ={email};
             const hasloObject ={}={haslo};
             const wprowadzonyMail =mailObject.email;
-           // console.log(wprowadzonyMail);//wprowadzony mail string
-
             const wprowadzoneHaslo= hasloObject.haslo;
-            //console.log(wprowadzoneHaslo);//wprowadzone haslo string
 
             let czyzaloguje = false;
             for (let i=0; i<arr.length; i++)
             {
-                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo)) {setProfile(arr[i]);czyzaloguje = true;}
+                if ((arr[i].mail === wprowadzonyMail)&&(arr[i].password === wprowadzoneHaslo))
+                {
+                    setProfile(arr[i]);
+                    czyzaloguje = true;
+                }
 
             }
             if(czyzaloguje) {
@@ -74,6 +67,7 @@ const Login = () =>
             } else {showErrorAlert()};
         });
     };
+
         return(
         <ScrollView>
             <View style = {styles.container2}>
@@ -100,7 +94,7 @@ const Login = () =>
                 <Image style = {styles.pic}
                        source={require('../assets/loginpic.png')}
                 />
-                <TouchableOpacity style={styles.loginbox} onPress={onPress}>
+                <TouchableOpacity style={styles.loginbox} onPress={onPressLogin}>
                     <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Zaloguj" width={100}></Box>
                 </TouchableOpacity>
                 <Image style = {styles.background}

@@ -18,21 +18,23 @@ import { useId } from '../context/LoginProvider';
 const Gatunki = () =>
 {
     const { setIdSpecies, setIsChosen} = useId();
-    const [loaded, isLoaded] = useState(true)
 
     const [plantsArray, setPlantsArray] = useState();
 
+    //pobieranie kolekcji gatunków z bazy danych
     axios.get("http://"+ IP.ip +"/plants").then(resp => {
     const plants_array =[{}]=resp.data;
     setPlantsArray(plants_array)});
 
-    let plantList;
-
+    // funkcja zmieniajaca stan globalnych zmiennych (hooks useContext), które są odpowiedzialne za nawigację aplikacji
         const onPressStack = (id) =>
         {
             setIsChosen(true);
             setIdSpecies(id);
         }
+
+        // zmienna plantlist, która zawiera flatlistę z gatunkami (zmienna jest wywoływana w returnie)
+        let plantList;
 
         plantList=(
             <FlatList 
@@ -61,6 +63,8 @@ const Gatunki = () =>
 
     );
 }
+
+// arkusze stylów
 
 const styles =StyleSheet.create({
     flexbox1:

@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image } from 'react-native';
 import {
     createStackNavigator,
-    StackContentScrollView,
-    StackItemList,
-} from '@react-navigation/stack';
+    } from '@react-navigation/stack';
 import { useId } from './../context/LoginProvider';
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme } from "@react-navigation/native";
 import PrzegladGatunku from "../screens/PrzegladGatunku";
+
+//// Stack NAVIGATOR
+/// Ten plik zawiera stos nawigacji, który odpowiedzialny jest za nawigację po wybraniu ekranu 'Gatunki'
 
 const MyTheme = {
     ...DefaultTheme,
@@ -21,7 +21,6 @@ const Stack = createStackNavigator();
 
 const StackNavigator = props =>
 {
-    const { setIsChosen, idSpecies} = useId();
     return(
         <Stack.Navigator>
             <Stack.Screen name="przegladgatunku" component={PrzegladGatunku}

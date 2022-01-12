@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
+//komponent Box używany jako przycisk w aplikacji
+
 const Box = props =>
 {
     const boxColor =

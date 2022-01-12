@@ -1,7 +1,6 @@
 import notificationscreen from "../screens/notificationscreen";
 import MojeRosliny from "../screens/MojeRosliny";
 import Gatunki from "../screens/Gatunki";
-import PrzegladRosliny from "../screens/PrzegladRosliny";
 import DodawanieRosliny from "../screens/DodawanieRosliny";
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
@@ -11,8 +10,12 @@ import {
     DrawerItemList,
 } from '@react-navigation/drawer';
 import { useLogin, useInitial } from './../context/LoginProvider';
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme } from "@react-navigation/native";
 
+//// DRAWER NAVIGATOR
+/// Ten plik zawiera menu rozwijane wyświetlane w lewym górnym rogu aplikacji (tzw. hamburger)
+
+//theme odpowiedzialny za białe tło aplikacji
 const MyTheme = {
     ...DefaultTheme,
     colors: {

@@ -20,7 +20,7 @@ import { useInitial } from '../context/LoginProvider';
 
 const PrzegladRosliny = () =>{
 
-    const { plantId, setIsPlantChosen, idSpecies, setIdSpecies, setIsChosen, sensorId } = useId();
+    const { plantId, setIsPlantChosen, sensorId } = useId();
     const { setInitial } = useInitial();
 
 
@@ -31,9 +31,8 @@ const PrzegladRosliny = () =>{
     const [seedingDate, setSeedingDate] = useState();
     const [fertilizationDate, setFertilizationDate] = useState();
     const [wateringDate, setWateringDate] = useState();
-    const [humiditySummer, setHumiditySummer] = useState();
-    const [humidityWinter, setHumidityWinter] = useState();
     
+    //pobieranie wybranej rośliny użytkownika z bazy po ID
     axios.get("http://"+ IP.ip +"/userplants/id/"+ plantId).then(resp => {
     const plant = [{}] = resp.data;
 
@@ -43,36 +42,21 @@ const PrzegladRosliny = () =>{
     setWateringDate(plant[0].data_podlewania);
     setSeedingDate(plant[0].data_przesadzania);
     setFertilizationDate(plant[0].data_nawozenia);
-
-    //console.log(plant[0].nazwa);
     });
 
+    //pobieranie wartości wilgotności z czujnika po ID
     axios.get("http://"+ IP.ip +"/sensors/" + sensorId).then(resp => {
     const sensor =[{}]=resp.data;
-
     setSensorHumidity(sensor[0].humidity);
     });
 
-    
+    //pobieranie ID gatunku po nazwie gatunku
     axios.get("http://"+ IP.ip +"/plants/nazwa/" + speciesName).then(resp => {
     const id = resp.data;
     setSpeciesId(id);
     });
 
-
-//----------------------------------//KOLORY//-------------------------------------------------------//
-    /*
-   axios.get("http://"+ IP.ip +"/plants/" + speciesId).then(resp => {
-        const plants =[{}]=resp.data;
-    
-        //console.log(plants);
-        console.log(plants[0].wilgotnosc_lato);
-        setHumiditySummer(plants[0].wilgotnosc_lato);
-        setHumidityWinter(plants[0].wilgotnosc_zima);
-        });
-*/
-//----------------------------------//ENDKOLORY//-------------------------------------------------------//
-
+    //funkcja formatująca pobrane z bazy danych na format YYYY-MM-DD
     const formatDate = (date) =>
     {
         let sd = date ? date.toString() : '';
@@ -87,8 +71,10 @@ const PrzegladRosliny = () =>{
         return stringDate;
     };
 
+    //zmienna today przechowująca dzisiejszą, aktualną datę
     const today = new Date();
 
+    //funkcja odpowiedzialna za aktualizację daty podlewania rośliny w bazie danych na dzisiejszą
     const updateWateringDate = async () =>
     {
 
@@ -98,13 +84,11 @@ const PrzegladRosliny = () =>{
         );
         const axios = require('axios').default;
         const res = await axios.put("http://"+ IP.ip +"/userplants/podlej/"+ plantId + "", { data_podlewania: today}).then(resp => {
-          //console.log(response);  
         });
-
-        window.location.reload(false);
 
     }
 
+    //funkcja odpowiedzialna za aktualizację daty przesadzania rośliny w bazie danych na dzisiejszą
     const updateSeedingDate = async () =>
     {
 
@@ -114,12 +98,11 @@ const PrzegladRosliny = () =>{
         );
         const axios = require('axios').default;
         const res = await axios.put("http://"+ IP.ip +"/userplants/przesadz/"+ plantId + "", { data_przesadzania: today}).then(resp => {
-          //console.log(response);      
         });
 
-        window.location.reload(false);
     }
 
+    //funkcja odpowiedzialna za aktualizację daty nawożenia rośliny w bazie danych na dzisiejszą
     const updateFertilizationDate = async () =>
     {
 
@@ -129,66 +112,18 @@ const PrzegladRosliny = () =>{
         );
         const axios = require('axios').default;
         const res = await axios.put("http://"+ IP.ip +"/userplants/nawiez/"+ plantId + "", { data_nawozenia: today}).then(resp => {
-          //console.log(response);      
         });
 
-        window.location.reload(false);
     }
 
+    //funkcja odpowiedzialna za zmianę stanów po naciśnięciu przycisku powrotu (nawigacja)
     const goBackButton = () =>
     {
         setIsPlantChosen(false);
         setInitial('MojeRosliny');
     }
-
-    /*const onPressStack = (id) =>
-    {
-        setIsChosen(true);
-        setIdSpecies(id);
-    }*/
-
-   
-//----------------------------------//KOLORY//-------------------------------------------------------//
-    /*
-    const settingHumidityColor = (date, humiditySummer, humidityWinter, sensorHumidity) =>
-    {
-        const today = new Date();
-        const ourDate = new Date(date);
-
     
-
-        if((today.getTime())-(ourDate.getTime())<432000000)
-        {
-            console.log("f");
-            return (<Text style={styles.propertiesTextGreen}>{sensorHumidity}%</Text>)
-        }
-        else if((humiditySummer===humidityWinter) | ((today.getMonth+1)>=3 & (today.getMonth+1)<9))
-        {
-            if (humiditySummer>=sensorHumidity){
-                console.log("g");
-                return (<Text style={styles.propertiesTextRed}>{sensorHumidity}%</Text>)}
-            else if (humiditySummer<sensorHumidity){
-                console.log("h");
-                return (<Text style={styles.propertiesTextBlue}>{sensorHumidity}%</Text>)}
-        }else{
-            if (humidityWinter>=sensorHumidity){
-                console.log("i");
-                return (<Text style={styles.propertiesTextRed}>{sensorHumidity}%</Text>)}
-            else if (humidityWinter<sensorHumidity){
-                console.log("j");
-                return (<Text style={styles.propertiesTextBlue}>{sensorHumidity}%</Text>)}
-        }
-    }
-
-    TO DO <View>
-
-    {settingHumidityColor(wateringDate, humiditySummer, humidityWinter, sensorHumidity)}
-
-    */
-   //----------------------------------//ENDKOLORY//-------------------------------------------------------//
-
-
-        
+    //wyświetlanie informacji o danej roślinie na ekranie
     let plant;
 
     plant = (
@@ -244,10 +179,6 @@ const PrzegladRosliny = () =>{
                         
                         </TouchableOpacity>
                     </View>
-                    
-
-
-
                 </View>
         </>
     )
@@ -261,10 +192,10 @@ const PrzegladRosliny = () =>{
                {plant}
             </View>
         </ScrollView>
-
     );
 }
 
+//arkusze stylów
 const styles = StyleSheet.create(
     {
         flexbox1:

@@ -16,18 +16,20 @@ import { useId, useLogin } from '../context/LoginProvider';
 
 const MojeRosliny = () =>
 {
-    const { setPlantId, setIsPlantChosen, plantId, sensorId, setSensorId} = useId();
+    //zmienne globalne (hooks useContext)
+    const { setPlantId, setIsPlantChosen, setSensorId} = useId();
     const { profile } = useLogin();
 
-
+    // zmiene stanu (hooks useState)
     const [plantsArray, setPlantsArray] = useState();
-    //const [speciesArray, setSpeciesArray] = useState();
 
+    //pobieranie roślin użytkownika z bazy danych
     axios.get("http://"+ IP.ip +"/userplants").then(resp => {
     const plants_array =[{}]=resp.data;
 
+    //zapisywanie do tablicy user_plants_array tylko roślin do których przypisany jest zalogowany użytkownik
     let user_plants_array = [];
-    for (let i=0; i<plants_array.length; i++)
+    for (let i=0; i< plants_array.length; i++)
             {
                 if(plants_array[i].user_mail === profile.mail)
                 {
@@ -37,12 +39,7 @@ const MojeRosliny = () =>
 
     setPlantsArray(user_plants_array)});
 
-
-    //console.log(profile.mail);
-    //console.log(plantsArray)
-   
-
-
+    // funkcja odpowiedzialna za zmianę stanów, które potrzebne są do nawigacji
     const onPressStack = (id, sensorid) =>
         {
             setIsPlantChosen(true);
@@ -50,8 +47,8 @@ const MojeRosliny = () =>
             setSensorId(sensorid);
         }
 
+        //wyświetlanie pobranych z bazy roślin uzytkownika we flatLiście
     let plantList;
-
     plantList=(
         <FlatList 
         data={plantsArray}
@@ -80,6 +77,8 @@ const MojeRosliny = () =>
     )
 };
 
+
+// arkusze stylów
 const styles =StyleSheet.create({
 
     flexbox1:

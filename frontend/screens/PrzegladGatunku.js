@@ -16,12 +16,10 @@ import { useInitial } from '../context/LoginProvider';
 
 const PrzegladGatunku = () =>
 {
-    const { idSpecies, setIsChosen, setIsPlantChosen, isLoggedIn, isPlantChosen, isChosen } = useId();
+    const { idSpecies, setIsChosen } = useId();
     const { setInitial } = useInitial();
 
-    const idGatunku = idSpecies; //tu wybieram se Id gatunku, o ktorym chce wyświetlać info na ekranie (rozwiązanie chwilowe)
-
-    ///////Poniżej useStaty, w których zapisujemy informacje z bazy w zależności od wybranego ID//////
+    ///////Poniżej useStaty, w których zapisujemy informacje z bazy w zależności od wybranego ID
     const [nazwaPL, setNazwaPL] = useState('');
     const [nazwaLac, setNazwaLac] = useState('');
     const [position, setPosition] = useState('');
@@ -33,23 +31,22 @@ const PrzegladGatunku = () =>
     const [humiditySummer, setHummiditySummer] = useState('');
     const [humidityWinter, setHummidityWinter] = useState('');
 
-    /////Pobieramy dane z bazy, następnie pobrane dane zapisujemy do use State/////
+    /////Pobieramy dane z bazy, następnie pobrane dane zapisujemy do use State
     axios.get("http://"+ IP.ip +"/plants").then(resp => {
     const plants_array =[{}]=resp.data;
-    //const plantName = plants_array[idGatunku].Nazwapolska;
-    setNazwaPL(plants_array[idGatunku].Nazwapolska);
-    setNazwaLac(plants_array[idGatunku].Nazwalacina);
-    setPosition(plants_array[idGatunku].stanowisko);
-    setTemperature(plants_array[idGatunku].temperatura);
-    setWatering(plants_array[idGatunku].podlewanie);
-    setFertilization(plants_array[idGatunku].nawozenie);
-    setReplanting(plants_array[idGatunku].przesadzanie);
-    setPests(plants_array[idGatunku].szkodniki);
-    setHummiditySummer(plants_array[idGatunku].wilgotnosc_lato);
-    setHummidityWinter(plants_array[idGatunku].wilgotnosc_zima);
+    setNazwaPL(plants_array[idSpecies].Nazwapolska);
+    setNazwaLac(plants_array[idSpecies].Nazwalacina);
+    setPosition(plants_array[idSpecies].stanowisko);
+    setTemperature(plants_array[idSpecies].temperatura);
+    setWatering(plants_array[idSpecies].podlewanie);
+    setFertilization(plants_array[idSpecies].nawozenie);
+    setReplanting(plants_array[idSpecies].przesadzanie);
+    setPests(plants_array[idSpecies].szkodniki);
+    setHummiditySummer(plants_array[idSpecies].wilgotnosc_lato);
+    setHummidityWinter(plants_array[idSpecies].wilgotnosc_zima);
 });
 
-///Zmienne, które potrzebne są nam do przypisania do nich wartości state'a////
+///Zmienne, które potrzebne są nam do przypisania do nich wartości z useState'a
     let plantname;
     let plantnamelatin;
     let plantStanowisko;
@@ -61,6 +58,7 @@ const PrzegladGatunku = () =>
     let plantWilgotnoscLato;
     let plantWilgotnoscZima;
 
+    //funkcja formatująca wartość z bazy zapisanej dziesiętnie na wartość procentową (integer)
     const toPercents = (variable) =>
     {
         variable = variable.replace(',','.')
@@ -92,44 +90,12 @@ const PrzegladGatunku = () =>
         plantWilgotnoscZima =
         (<Text>{toPercents(humidityWinter)}</Text>);
 
-        /*let goBackButtonText;
-        const setGoBackButtonText = () =>
-        {
-            if((isLoggedIn === true) && (isPlantChosen === true) && (isChosen === true))
-            {
-                goBackButton = "Powrót do listy moich roślin";
-            }
-            else if((isLoggedIn === true) && (isChosen === true))
-            {
-                goBackButton = "Powrót do listy gatunków";
-            }
-
-        }*/
-
-
+// funkcja odpowiedzialna za nadawanie stanów do zmiennych globalnych odpowiedzialnych za nawigację aplikacji
     const goBackButton = () =>
     {
         setIsChosen(false);
         setInitial('Gatunki');
     }
-
-    /*const onLoad = async () => {
-
-        //const [nazwaPL, getNazwaPL] = useState('');
-
-        const axios = require('axios').default;
-    
-            const res = await axios.get("http://192.168.0.21:3000/plants").then(resp => {
-            //console.log(resp.data);
-            //console.log(typeof resp.data);
-            const plants_array =[{}]=resp.data;
-            //console.log(plants_array[2].przesadzanie);
-
-            console.log(plants_array[1].Nazwapolska)
-
-            //nazwaPL = getNazwaPL(plants_array[1].Nazwapolska);
-            //console.log(nazwaPL);
-            ;})}*/
 
     return(
         <ScrollView>

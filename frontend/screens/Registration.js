@@ -14,12 +14,14 @@ import IP from '../constants/ip';
 
 const Registration = ({navigation}) =>
 {
+  //zmienne stanu (hooks useState) przechiwujące dane z text inputów
     const [name, setName] = useState('');
     const [secondName, setSecondName] = useState('');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [pass2, setPass2] = useState('');
 
+    //funkcje odpowiedzialne za pobieranie danych z inputów
     const nameInputHandler = (enteredName) => {
       setName(enteredName);
     };
@@ -41,6 +43,7 @@ const Registration = ({navigation}) =>
       setPass2(enteredPass2);
     };
 
+    //wyświetlanie alertów na ekranie 
     const showPassAlert = () =>
   Alert.alert(
     "Hasła nie są takie same!",
@@ -51,7 +54,6 @@ const Registration = ({navigation}) =>
   Alert.alert(
     "Wprowadzono niepoprawny mail",
     "Jesteś pewny, że wpisałeś odpowiedni adres email?",
-
   );
 
   const showSuccessAlert = () =>
@@ -67,26 +69,39 @@ const Registration = ({navigation}) =>
     "Konto nie zostało utworzone. Spróbuj ponownie.",
   );
 
-    const showMailErrorAlert = () =>
-        Alert.alert(
-            "Błąd",
-            "Konto o podanym adresie e-mail juz istnieje.",
-        );
+  const showMailErrorAlert = () =>
+    Alert.alert(
+        "Błąd",
+        "Konto o podanym adresie e-mail juz istnieje.",
+    );
 
-        const emptyInputsError = () =>
-        Alert.alert(
-          "Nie uzupełniono wszystkich danych",
-          "Należy uzupełnić wszystkie pola.",
-        );
-        
-    const createAccount = async () =>{
-        const newUser = {
-        firstname: name,
-        surname: secondName,
-        mail: email,
-        password: pass,
-    };
+  const emptyInputsError = () =>
+  Alert.alert(
+    "Nie uzupełniono wszystkich danych",
+    "Należy uzupełnić wszystkie pola.",
+  );
 
+  //funkcja sprawdzająca czy konkretne warunki rejestracji są spełnione np. te same hasła, poprawny format maila itd. (jeśli nei - wyświetlanie odpowiednich alertów)
+  const showData = async () => {
+    if (pass2 != pass){
+      return (
+          showPassAlert()
+      )}
+      if (email.includes("@")==false)
+      {
+        return(
+          showEmailAlert()
+        )
+      }
+      if(name == "" || secondName == "" || email =="" || pass=="")
+      {
+        return(
+          emptyInputsError()
+        )
+      }
+      
+
+    //pobieranie ostniejących użytkowników z bazy
         const res = await axios.post("http://"+ IP.ip +"/users", newUser)
             .then((response) => {
                 showSuccessAlert();
@@ -96,41 +111,25 @@ const Registration = ({navigation}) =>
                 showErrorAlert();
             });}
 
-    const showData = async () => {
-      if (pass2 != pass){
-        return (
-            showPassAlert()
-        )}
-        if (email.includes("@")==false)
-        {
-          return(
-            showEmailAlert()
-          )
-        }
-        if(name == "" || secondName == "" || email =="" || pass=="")
-        {
-          return(
-            emptyInputsError()
-          )
-        }
 
+      //dane nowego użytkownika
+        const createAccount = async () =>{
+          const newUser = {
+          firstname: name,
+          surname: secondName,
+          mail: email,
+          password: pass,
+      };
+
+        //funkcja odpowiedzialna za zapis użytkownika w bazie danych (ze wcześniejszym sprawdzeniem, czy użytkownik o takim mailu nie znajduje się już w bazie)
       const axios = require('axios').default;
 
         const re = await axios.get("http://"+ IP.ip +"/users").then(resp => {
+            const arr =[{},{}]=resp.data;
+            console.log({email});
 
-            //console.log(resp.data);// laduje surowe dane
-            //console.log(typeof resp.data);//dane sa typu obiekt
-            const arr =[{},{}]=resp.data;//tablica obiektow zaincludowama zwracanymi danymi
-            //console.log(typeof arr); //dane sa nadal typu obiekt
-            //console.log(arr[0].firstname);//natalia
-            //console.log(arr[0].mail);//porczynska..
-            //console.log(arr[0].password);
-            console.log({email});//wprowadzony mail obiekt
-
-            const mailObject = {} ={email};//nowy obiekt zaincludowany obiektem mail
-
+            const mailObject = {} ={email};
             const wprowadzonyMail =mailObject.email;
-            //console.log(wprowadzonyMail);//wprowadzony mail string
 
             let czymailistnieje = false;
             for (let i=0; i<arr.length; i++)
@@ -199,6 +198,7 @@ const Registration = ({navigation}) =>
     );
 };
 
+//arkusze stylów
 const styles = StyleSheet.create({
 
     container2: {
