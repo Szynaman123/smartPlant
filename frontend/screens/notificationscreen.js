@@ -2,6 +2,7 @@ import React from 'react';
 import Colors from '../constants/colors';
 import { Text, View, Dimensions, StyleSheet, ScrollView, Image,} from 'react-native';
 import { useLogin } from './../context/LoginProvider';
+import Box from '../components/boxes';
 
 const notificationscreen = props =>
 {
@@ -16,8 +17,12 @@ const notificationscreen = props =>
             <Text style={styles.txtHello}>Witaj {profile.firstname}!</Text>
             <Image style={styles.hello} source={require('../assets/hello4.png')}/>
             </View>
+            <Text style={styles.txt}>Aby rozpocząć dodaj swoją roślinkę w zakładce 'Dodaj Roślinę'!</Text>
+            <Text style={styles.txt}>Połącz roślinę z czujnikiem wilgoci</Text>
+            <Text style={styles.txt}>Wybierz gatunek rośliny</Text>
+            <Text style={styles.txt}>Zajrzyj do naszej encyklopedii gatunków w zakładce, gdzie znajdziesz dokładne informacje na temat pielęgnacji wybranego gatunku!</Text>
             </View>
-
+            
         </ScrollView>
     )
 }
@@ -51,6 +56,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: Colors.Green,
     },
+    txt:
+    {
+        textAlign: 'center',
+        paddingHorizontal:20,
+        paddingVertical: 10,
+        fontSize: 18,
+        color: Colors.Green,
+    }
 });
 
 export default notificationscreen;

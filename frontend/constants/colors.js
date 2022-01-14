@@ -8,4 +8,5 @@ export default{
     PastelGreen: '#9DC183',
     Red: '#e63946',
     Blue: '#0096c7',
+    Pink: '#C295A5',
 };

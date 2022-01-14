@@ -99,6 +99,15 @@ const Registration = ({navigation}) =>
           emptyInputsError()
         )
       }
+
+     //dane nowego użytkownika
+     const createAccount = async () =>{
+      const newUser = {
+      firstname: name,
+      surname: secondName,
+      mail: email,
+      password: pass,
+  };
       
 
     //pobieranie ostniejących użytkowników z bazy
@@ -110,16 +119,6 @@ const Registration = ({navigation}) =>
                 console.log(error);
                 showErrorAlert();
             });}
-
-
-      //dane nowego użytkownika
-        const createAccount = async () =>{
-          const newUser = {
-          firstname: name,
-          surname: secondName,
-          mail: email,
-          password: pass,
-      };
 
         //funkcja odpowiedzialna za zapis użytkownika w bazie danych (ze wcześniejszym sprawdzeniem, czy użytkownik o takim mailu nie znajduje się już w bazie)
       const axios = require('axios').default;
