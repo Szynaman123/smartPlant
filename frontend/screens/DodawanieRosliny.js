@@ -72,8 +72,8 @@ const DodawanieRosliny = ({navigation}) =>
        setSensorID(ID);
    }
    const showSuccessAlert = () =>{        Alert.alert(
-       "Dodano nowa rosline",
-       "Zostales przekierowany do widoku Twoich roslin",
+       "Dodano nową roślinę",
+       "Zostałeś przekierowany do widoku Twoich roślin",
       navigation.navigate('MojeRosliny'),
    );}
 

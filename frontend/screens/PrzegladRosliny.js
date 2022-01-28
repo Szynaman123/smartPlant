@@ -223,11 +223,6 @@ const PrzegladRosliny = () =>{
                     </View>
                     <Image style={styles.dash} source={require('../assets/dash.png')}/>
                     <View style={styles.flexbox3}> 
-                        <Text style={styles.propertiesText}>Konieczne do podjęcia kroki</Text>
-                        <Text style={styles.propertiesTextGreen}>Brak</Text>
-                    </View>
-                    <Image style={styles.dash} source={require('../assets/dash.png')}/>
-                    <View style={styles.flexbox3}> 
                         <TouchableOpacity onPress={updateWateringDate}>
                         <Box colorHex={Colors.Green} colorTextHex={Colors.VeryLightGrey} TextInside="Podlej" ></Box>
                         </TouchableOpacity>
