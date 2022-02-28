@@ -15,12 +15,12 @@ const MyTheme = {
   },
 };
 
-const fetchFonts = () =>
+/*const fetchFonts = () =>
 {
   return Font.loadAsync({
     'lato-regular': require('./assets/fonts/Lato-Regular.ttf')
   })
-}
+}*/
 
 const App = () => {
   return (
